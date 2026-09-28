@@ -90,7 +90,10 @@ Editar `src/data/credibility.ts`. Los bloques solo aparecen en la Home cuando la
 
 ### Logotipo
 
-`src/components/Logo.astro` muestra provisionalmente el nombre en texto. Sustituir por el SVG oficial.
+`src/components/Logo.astro` combina el símbolo (`src/assets/brand/sanitia-symbol.png`) con el nombre en
+texto. El símbolo se extrajo del icono facilitado (`sanitia-icon-original.jpg`, 249×231 px); conviene
+sustituirlo por el original en SVG o PNG de alta resolución. Favicons e imagen Open Graph en `public/`
+se generan a partir del mismo símbolo.
 
 ## Despliegue en docker-server
 

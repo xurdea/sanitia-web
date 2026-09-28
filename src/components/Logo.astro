@@ -1,8 +1,14 @@
 ---
 /**
- * PENDIENTE: sustituir por el logotipo oficial de SanitIA (SVG) cuando esté disponible.
- * Mientras tanto se usa el nombre de marca en texto, sin símbolo gráfico inventado.
+ * Logotipo de SanitIA: símbolo (cruz + circuitos) y nombre en texto.
+ *
+ * El símbolo se extrajo del icono facilitado (src/assets/brand/sanitia-icon-original.jpg,
+ * 249x231 px). PENDIENTE: sustituir por el original en SVG o PNG de alta resolución.
+ * Sobre fondo oscuro va sobre una pastilla blanca: la cruz azul oscura no contrasta con el navy.
  */
+import { Image } from 'astro:assets';
+import symbol from '../assets/brand/sanitia-symbol.png';
+
 interface Props {
   variant?: 'dark' | 'light';
   class?: string;
@@ -11,12 +17,23 @@ interface Props {
 const { variant = 'dark', class: className } = Astro.props;
 ---
 
-<span
-  class:list={[
-    'font-display text-[1.375rem] leading-none font-extrabold tracking-[-0.03em]',
-    variant === 'dark' ? 'text-brand-deep' : 'text-white',
-    className,
-  ]}
->
-  Sanit<span class={variant === 'dark' ? 'text-accent-strong' : 'text-accent'}>IA</span>
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+  <span class:list={['inline-flex shrink-0', variant === 'light' && 'rounded-lg bg-white p-1.5']}>
+    <Image
+      src={symbol}
+      alt=""
+      height={variant === 'light' ? 26 : 32}
+      densities={[1, 2]}
+      loading="eager"
+      class={variant === 'light' ? 'h-[26px] w-auto' : 'h-8 w-auto'}
+    />
+  </span>
+  <span
+    class:list={[
+      'font-display text-[1.375rem] leading-none font-extrabold tracking-[-0.03em]',
+      variant === 'dark' ? 'text-brand-deep' : 'text-white',
+    ]}
+  >
+    Sanit<span class={variant === 'dark' ? 'text-accent-strong' : 'text-accent'}>IA</span>
+  </span>
 </span>

@@ -58,15 +58,15 @@ Docker **se saltan `ufw`**, así que nunca se expone directamente a la red.
 Como la preproducción de Padel. En `.env`:
 
 ```bash
-WEB_PORT=100.96.27.2:8090        # IP del servidor en la tailnet
-SITE_URL=http://100.96.27.2:8090
+WEB_PORT=100.66.67.103:8090        # IP del servidor en la tailnet
+SITE_URL=http://100.66.67.103:8090
 ```
 
 ```bash
 docker compose up -d --build     # --build porque cambió SITE_URL
 ```
 
-Desde cualquier dispositivo con Tailscale: `http://100.96.27.2:8090`.
+Desde cualquier dispositivo con Tailscale: `http://100.66.67.103:8090`.
 
 ### Opción B — Pública con ngrok
 

@@ -12,6 +12,16 @@ import { site, mainNav, legalNav } from '../data/site';
       <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-slate-400">
         {site.descriptor}. Formación práctica para profesionales, equipos y organizaciones del ámbito de la salud.
       </p>
+      {
+        site.contactEmail && (
+          <a
+            href={`mailto:${site.contactEmail}`}
+            class="mt-6 inline-block text-[0.9375rem] text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
+          >
+            {site.contactEmail}
+          </a>
+        )
+      }
     </div>
 
     <nav aria-label="Pie de página" class="md:col-span-4">

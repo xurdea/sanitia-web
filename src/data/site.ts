@@ -13,8 +13,8 @@ export const site = {
   locale: 'es_ES',
   lang: 'es',
   year: 2026,
-  /** PENDIENTE: dirección de correo de contacto definitiva. */
-  contactEmail: null as string | null,
+  /** Correo público de contacto (contacto, pie y páginas legales). */
+  contactEmail: 'info@sanitia.es' as string | null,
   social: {
     /** PENDIENTE: URL del perfil de LinkedIn. */
     linkedin: null as string | null,
@@ -26,7 +26,7 @@ export const site = {
     owner: '[PENDIENTE: nombre o razón social del titular]',
     taxId: '[PENDIENTE: NIF/CIF]',
     address: '[PENDIENTE: domicilio]',
-    email: '[PENDIENTE: correo electrónico de contacto]',
+    email: 'info@sanitia.es',
     registry: '[PENDIENTE: datos registrales, si aplican]',
   },
 } as const;

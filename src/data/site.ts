@@ -16,8 +16,7 @@ export const site = {
   /** Correo público de contacto (contacto, pie y páginas legales). */
   contactEmail: 'info@sanitia.es' as string | null,
   social: {
-    /** PENDIENTE: URL del perfil de LinkedIn. */
-    linkedin: null as string | null,
+    linkedin: 'https://www.linkedin.com/company/sanitia/' as string | null,
     /** PENDIENTE: invitación a Discord cuando proceda. */
     discord: null as string | null,
   },

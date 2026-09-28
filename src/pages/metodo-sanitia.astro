@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import MethodSteps from '../components/MethodSteps.astro';
+import Icon from '../components/Icon.astro';
+import CTASection from '../components/CTASection.astro';
+
+const principles = [
+  {
+    icon: 'target',
+    title: 'Aplicación antes que herramientas',
+    text: 'Las herramientas cambian. Enseñamos a identificar dónde aporta valor la IA y cómo aplicarla, con independencia de la herramienta.',
+  },
+  {
+    icon: 'stethoscope',
+    title: 'Contexto sanitario',
+    text: 'Los ejemplos, ejercicios y casos de uso se plantean desde la realidad del sector salud y de cada perfil.',
+  },
+  {
+    icon: 'pen',
+    title: 'Práctica real',
+    text: 'La mayor parte del tiempo se dedica a trabajar con situaciones, información y problemas del día a día.',
+  },
+  {
+    icon: 'shield',
+    title: 'Uso responsable',
+    text: 'Verificación de la información, protección de datos y respeto a la normativa y a las políticas de cada organización.',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Método SanitIA"
+  description="Aprender, aplicar e integrar: el método de SanitIA para incorporar la inteligencia artificial al trabajo diario en el sector sanitario."
+>
+  <PageHero
+    eyebrow="Método SanitIA"
+    title="Aprender. Aplicar. Integrar."
+    intro="Un proceso sencillo y flexible para pasar de comprender la inteligencia artificial a utilizarla con criterio en el trabajo diario."
+  />
+
+  <section class="section-y" aria-labelledby="fases-title">
+    <div class="container-site">
+      <h2 id="fases-title" class="text-h2">Cuatro fases</h2>
+      <div class="mt-14">
+        <MethodSteps detailed />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-y border-line border-y bg-white" aria-labelledby="principios-title">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <p class="eyebrow mb-4">Principios</p>
+        <h2 id="principios-title" class="text-h2">Lo que guía cada programa</h2>
+      </div>
+      <ul class="mt-12 grid gap-x-10 gap-y-12 md:grid-cols-2">
+        {
+          principles.map((p) => (
+            <li class="flex gap-5">
+              <span class="bg-accent-wash text-brand inline-flex size-12 shrink-0 items-center justify-center rounded-xl">
+                <Icon name={p.icon} size={24} />
+              </span>
+              <div>
+                <h3 class="text-xl font-bold">{p.title}</h3>
+                <p class="text-muted mt-2 leading-relaxed">{p.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    title="Aplica el método a tu trabajo"
+    text="Descubre los programas de SanitIA o cuéntanos qué necesita tu equipo."
+    primary={{ label: 'Explorar formación', href: '/formacion' }}
+    secondary={{ label: 'Contactar', href: '/contacto' }}
+  />
+</BaseLayout>

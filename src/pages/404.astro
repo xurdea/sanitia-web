@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="La página que buscas no existe o ha cambiado de dirección." noindex>
+  <section class="section-y">
+    <div class="container-site max-w-2xl text-center">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="text-h2 mt-4">Página no encontrada</h1>
+      <p class="text-lead text-muted mt-5">La página que buscas no existe o ha cambiado de dirección.</p>
+      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <Button href="/" arrow>Volver al inicio</Button>
+        <Button href="/formacion" variant="secondary">Explorar formación</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

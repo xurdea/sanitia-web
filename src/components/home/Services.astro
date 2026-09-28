@@ -1,0 +1,68 @@
+---
+import Icon from '../Icon.astro';
+
+const services = [
+  {
+    title: 'Formación para profesionales',
+    text: 'Programas prácticos adaptados a funciones y perfiles concretos del ámbito sanitario.',
+    href: '/formacion',
+    cta: 'Ver formación',
+  },
+  {
+    title: 'Formación para organizaciones',
+    text: 'Programas diseñados para equipos, departamentos y organizaciones según sus necesidades.',
+    href: '/empresas',
+    cta: 'Formación para empresas',
+  },
+  {
+    title: 'Conocimiento SanitIA',
+    text: 'Guías, casos prácticos y contenidos sobre aplicaciones reales de IA en salud.',
+    href: '/recursos',
+    cta: 'Ver recursos',
+  },
+];
+---
+
+<section class="section-y" aria-labelledby="servicios-title">
+  <div class="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-4" data-reveal>
+      <div class="lg:sticky lg:top-28">
+        <p class="eyebrow mb-4">Qué hacemos</p>
+        <h2 id="servicios-title" class="text-h2">Convertimos la IA en una herramienta de trabajo</h2>
+      </div>
+    </div>
+
+    <ol class="border-line border-t lg:col-span-8">
+      {
+        services.map((service, i) => (
+          <li class="border-line group border-b" data-reveal>
+            <a
+              href={service.href}
+              class="grid gap-4 py-9 sm:grid-cols-[5rem_1fr_auto] sm:items-start sm:gap-6 md:py-11"
+            >
+              <span class="font-display text-accent-strong text-sm font-bold tracking-[0.1em]" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span>
+                <span class="font-display text-brand-deep group-hover:text-brand block text-2xl font-bold tracking-tight transition-colors md:text-[1.75rem]">
+                  {service.title}
+                </span>
+                <span class="text-muted mt-3 block max-w-lg text-[1.0625rem] leading-relaxed">{service.text}</span>
+                <span class="text-brand mt-5 inline-flex items-center gap-1.5 text-sm font-semibold sm:hidden">
+                  {service.cta}
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </span>
+              <span
+                aria-hidden="true"
+                class="border-line text-brand-deep group-hover:border-brand-deep group-hover:bg-brand-deep hidden size-12 items-center justify-center rounded-full border transition-colors group-hover:text-white sm:inline-flex"
+              >
+                <Icon name="arrow-up-right" size={20} />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

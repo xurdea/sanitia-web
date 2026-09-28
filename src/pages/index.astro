@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Ecosystem from '../components/home/Ecosystem.astro';
+import Differentiation from '../components/home/Differentiation.astro';
+import Services from '../components/home/Services.astro';
+import FeaturedCourse from '../components/home/FeaturedCourse.astro';
+import Method from '../components/home/Method.astro';
+import UseCases from '../components/home/UseCases.astro';
+import Credibility from '../components/home/Credibility.astro';
+import Organizations from '../components/home/Organizations.astro';
+import Resources from '../components/home/Resources.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<BaseLayout>
+  <Hero />
+  <Ecosystem />
+  <Differentiation />
+  <Services />
+  <FeaturedCourse />
+  <Method />
+  <UseCases />
+  <Credibility />
+  <Organizations />
+  <Resources />
+  <CTASection
+    title="La IA ya forma parte del trabajo"
+    subtitle="La diferencia está en saber utilizarla."
+    text="SanitIA te ayuda a convertir la inteligencia artificial en una herramienta útil para tu actividad profesional."
+    primary={{ label: 'Explorar formación', href: '/formacion' }}
+    secondary={{ label: 'Contactar con SanitIA', href: '/contacto' }}
+  />
+</BaseLayout>

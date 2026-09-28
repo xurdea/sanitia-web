@@ -1,0 +1,45 @@
+---
+import Icon from '../Icon.astro';
+import { ecosystem } from '../../data/content';
+---
+
+<section class="section-y" aria-labelledby="ecosistema-title">
+  <div class="container-site">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-4">Ecosistema sanitario</p>
+        <h2 id="ecosistema-title" class="text-h2">La IA puede aportar valor en todo el ecosistema de la salud</h2>
+      </div>
+      <p class="text-lead text-muted lg:col-span-5">
+        SanitIA trabaja con profesionales de diferentes ámbitos y funciones, adaptando la aplicación de la inteligencia
+        artificial a las necesidades reales de cada actividad.
+      </p>
+    </div>
+
+    <ul
+      class="border-line mt-14 grid border-t sm:grid-cols-2 lg:mt-16 lg:grid-cols-5"
+      data-reveal
+    >
+      {
+        ecosystem.map((area) => (
+          <li class="border-line group border-b py-8 sm:odd:pr-8 sm:even:border-l sm:even:pl-8 lg:border-b-0 lg:border-l lg:px-6 lg:py-10 lg:first:border-l-0 lg:first:pl-0 lg:odd:pr-6 lg:even:pl-6">
+            <span class="bg-accent-wash text-brand inline-flex size-12 items-center justify-center rounded-xl">
+              <Icon name={area.icon} size={24} />
+            </span>
+            <h3 class="mt-6 text-xl font-bold">{area.name}</h3>
+            <ul class="text-muted mt-4 space-y-2 text-[0.9375rem]">
+              {area.profiles.map((profile) => (
+                <li>{profile}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="text-muted mt-10 max-w-2xl text-[0.9375rem]" data-reveal>
+      Perfiles asistenciales y no asistenciales. La especialización de SanitIA es la salud, no una profesión concreta.
+    </p>
+  </div>
+</section>
+

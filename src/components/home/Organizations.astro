@@ -1,0 +1,40 @@
+---
+import Button from '../Button.astro';
+import Icon from '../Icon.astro';
+
+const services = [
+  { icon: 'users', title: 'Formación para equipos', text: 'Programas para departamentos y equipos de trabajo.' },
+  { icon: 'sliders', title: 'Programas personalizados', text: 'Contenidos adaptados a perfiles, procesos y objetivos.' },
+  { icon: 'presentation', title: 'Talleres', text: 'Sesiones centradas en un caso de uso o una necesidad concreta.' },
+  { icon: 'pen', title: 'Sesiones prácticas', text: 'Trabajo aplicado sobre situaciones reales del equipo.' },
+] as const;
+---
+
+<section class="section-y bg-surface-alt" aria-labelledby="organizaciones-title">
+  <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+    <div class="lg:col-span-5" data-reveal>
+      <p class="eyebrow mb-4">SanitIA para organizaciones</p>
+      <h2 id="organizaciones-title" class="text-h2">Lleva la IA a tu equipo</h2>
+      <p class="text-lead text-muted mt-6">
+        Diseñamos programas de formación adaptados al perfil de los participantes, sus procesos de trabajo, nivel de
+        conocimiento y objetivos de la organización.
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Button href="/contacto" size="lg" arrow>Solicitar una propuesta</Button>
+        <Button href="/contacto" size="lg" variant="secondary">Hablar con SanitIA</Button>
+      </div>
+    </div>
+
+    <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-6 lg:col-start-7" data-reveal>
+      {
+        services.map((service) => (
+          <li class="border-line rounded-xl border bg-white p-6 sm:p-7">
+            <Icon name={service.icon} size={26} class="text-brand" />
+            <h3 class="mt-5 text-lg font-bold">{service.title}</h3>
+            <p class="text-muted mt-2 text-[0.9375rem] leading-relaxed">{service.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

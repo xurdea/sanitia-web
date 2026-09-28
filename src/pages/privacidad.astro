@@ -1,0 +1,38 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
+const { legal } = site;
+---
+
+<LegalLayout title="Política de privacidad" description="Política de privacidad y protección de datos del sitio web de SanitIA.">
+  <h2>Responsable del tratamiento</h2>
+  <ul>
+    <li><strong>Responsable:</strong> {legal.owner}</li>
+    <li><strong>NIF/CIF:</strong> {legal.taxId}</li>
+    <li><strong>Domicilio:</strong> {legal.address}</li>
+    <li><strong>Correo electrónico:</strong> {legal.email}</li>
+  </ul>
+
+  <h2>Datos que se tratan</h2>
+  <p>
+    Este sitio web no dispone actualmente de formularios ni de áreas de registro, y no utiliza herramientas de analítica
+    ni de publicidad. Solo se tratarán los datos personales que la persona usuaria facilite voluntariamente al contactar
+    con SanitIA a través de los canales indicados.
+  </p>
+
+  <h2>Finalidad y base jurídica</h2>
+  <p>[PENDIENTE: finalidades del tratamiento y base jurídica aplicable a cada una].</p>
+
+  <h2>Conservación</h2>
+  <p>[PENDIENTE: plazos de conservación de los datos].</p>
+
+  <h2>Destinatarios</h2>
+  <p>[PENDIENTE: destinatarios y encargados del tratamiento, incluido el proveedor de alojamiento web].</p>
+
+  <h2>Derechos</h2>
+  <p>
+    Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y
+    portabilidad dirigiéndote a {legal.email}. También tienes derecho a presentar una reclamación ante la Agencia
+    Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">www.aepd.es</a>).
+  </p>
+</LegalLayout>

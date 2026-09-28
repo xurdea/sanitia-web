@@ -1,0 +1,34 @@
+---
+import Button from '../Button.astro';
+import ResourceCard from '../ResourceCard.astro';
+import { getPublishedResources } from '../../lib/resources';
+
+const all = await getPublishedResources();
+const featured = [...all.filter((r) => r.data.featured), ...all.filter((r) => !r.data.featured)].slice(0, 3);
+---
+
+{
+  featured.length > 0 && (
+    <section class="section-y" aria-labelledby="recursos-title">
+      <div class="container-site">
+        <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between" data-reveal>
+          <div class="max-w-2xl">
+            <p class="eyebrow mb-4">Recursos</p>
+            <h2 id="recursos-title" class="text-h2">
+              Conocimiento para aplicar IA a la salud
+            </h2>
+          </div>
+          <Button href="/recursos" variant="secondary" arrow class="self-start md:self-auto">
+            Ver todos los recursos
+          </Button>
+        </div>
+
+        <div class="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10" data-reveal>
+          {featured.map((entry) => (
+            <ResourceCard entry={entry} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

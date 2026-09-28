@@ -1,0 +1,51 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../data/site';
+const { legal } = site;
+---
+
+<LegalLayout title="Aviso legal" description="Aviso legal del sitio web de SanitIA.">
+  <h2>Datos identificativos</h2>
+  <p>
+    En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio
+    Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:
+  </p>
+  <ul>
+    <li><strong>Titular:</strong> {legal.owner}</li>
+    <li><strong>NIF/CIF:</strong> {legal.taxId}</li>
+    <li><strong>Domicilio:</strong> {legal.address}</li>
+    <li><strong>Correo electrónico:</strong> {legal.email}</li>
+    <li><strong>Datos registrales:</strong> {legal.registry}</li>
+  </ul>
+
+  <h2>Objeto</h2>
+  <p>
+    Este sitio web tiene por objeto informar sobre la actividad de SanitIA y sus servicios de formación en inteligencia
+    artificial aplicada al sector sanitario.
+  </p>
+
+  <h2>Condiciones de uso</h2>
+  <p>
+    El acceso a este sitio web implica la aceptación de las presentes condiciones. La persona usuaria se compromete a
+    hacer un uso adecuado de los contenidos, conforme a la ley y a la buena fe.
+  </p>
+
+  <h2>Propiedad intelectual e industrial</h2>
+  <p>
+    Los contenidos de este sitio web, salvo indicación en contrario, son titularidad de {legal.owner}. Las marcas y
+    nombres comerciales de terceros que puedan mencionarse, incluidas herramientas de inteligencia artificial,
+    pertenecen a sus respectivos titulares y se citan únicamente con fines informativos.
+  </p>
+
+  <h2>Responsabilidad</h2>
+  <p>
+    Los contenidos de este sitio web tienen carácter informativo y formativo. No constituyen asesoramiento clínico,
+    jurídico ni de ningún otro tipo profesional.
+  </p>
+
+  <h2>Enlaces externos</h2>
+  <p>El titular no se responsabiliza del contenido de sitios web de terceros a los que se pueda acceder mediante enlaces.</p>
+
+  <h2>Legislación aplicable</h2>
+  <p>[PENDIENTE: legislación y jurisdicción aplicables, a revisar por un profesional jurídico].</p>
+</LegalLayout>

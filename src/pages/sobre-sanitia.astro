@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FounderCard from '../components/FounderCard.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import Icon from '../components/Icon.astro';
+import CTASection from '../components/CTASection.astro';
+
+const values = [
+  { icon: 'shield', title: 'Rigor', text: 'Información contrastada, límites claros y uso responsable de la IA.' },
+  { icon: 'pen', title: 'Utilidad práctica', text: 'Todo lo que enseñamos debe poder aplicarse al trabajo real.' },
+  { icon: 'stethoscope', title: 'Especialización en salud', text: 'Conocimiento del sector y de sus distintos perfiles profesionales.' },
+  { icon: 'users', title: 'Cercanía', text: 'Acompañamiento y comunicación directa con profesionales y equipos.' },
+] as const;
+---
+
+<BaseLayout
+  title="Sobre SanitIA"
+  description="SanitIA es una marca especializada en inteligencia artificial aplicada al sector sanitario: formación práctica para profesionales, equipos y organizaciones de la salud."
+>
+  <PageHero
+    eyebrow="Sobre SanitIA"
+    title="Inteligencia artificial con conocimiento del sector sanitario"
+    intro="SanitIA ayuda a profesionales, equipos y organizaciones del ámbito de la salud a comprender, aplicar e integrar la inteligencia artificial en su actividad diaria mediante formación práctica, casos de uso reales y programas adaptados a cada perfil."
+  />
+
+  <section class="section-y" aria-labelledby="proposito-title">
+    <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+      <div class="lg:col-span-6">
+        <p class="eyebrow mb-4">Propósito</p>
+        <h2 id="proposito-title" class="text-h2">La marca debe sobrevivir al cambio de herramientas</h2>
+        <div class="prose-sanitia text-muted mt-6">
+          <p>
+            La inteligencia artificial avanza deprisa y las herramientas cambian constantemente. Lo que permanece es la
+            capacidad de identificar dónde aporta valor, aplicarla con criterio y hacerlo de forma responsable.
+          </p>
+          <p>
+            SanitIA trabaja con todo el ecosistema sanitario: perfiles asistenciales y no asistenciales, gestión, industria,
+            investigación y tecnología. Su especialización es la salud, no una profesión concreta.
+          </p>
+        </div>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">
+        <MediaFrame
+          alt="Profesionales de distintos ámbitos de la salud en una reunión de trabajo"
+          placeholder="Fotografía: profesionales de distintos ámbitos de la salud"
+          aspect="4 / 5"
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          class="border-line border"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-y border-line border-y bg-white" aria-labelledby="valores-title">
+    <div class="container-site">
+      <p class="eyebrow mb-4">Cómo trabajamos</p>
+      <h2 id="valores-title" class="text-h2">Nuestros principios</h2>
+      <ul class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((v) => (
+            <li>
+              <Icon name={v.icon} size={28} class="text-accent-strong" />
+              <h3 class="mt-5 text-xl font-bold">{v.title}</h3>
+              <p class="text-muted mt-2 leading-relaxed">{v.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-y" aria-labelledby="fundador-title">
+    <div class="container-site grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow mb-4">Fundador</p>
+        <h2 id="fundador-title" class="text-h2">Experiencia detrás de la marca</h2>
+      </div>
+      <div class="lg:col-span-7">
+        <p class="text-lead text-muted">
+          SanitIA nace de la experiencia profesional en tecnología sanitaria, sistemas de información y transformación
+          digital, combinada con la aplicación práctica de herramientas de inteligencia artificial en entornos
+          profesionales.
+        </p>
+        <FounderCard class="mt-8" />
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Hablemos"
+    text="Si quieres saber más sobre SanitIA o sus programas, estaremos encantados de conversar."
+    primary={{ label: 'Contactar con SanitIA', href: '/contacto' }}
+    secondary={{ label: 'Explorar formación', href: '/formacion' }}
+  />
+</BaseLayout>

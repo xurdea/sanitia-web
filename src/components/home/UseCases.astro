@@ -1,0 +1,28 @@
+---
+import Icon from '../Icon.astro';
+import { useCases } from '../../data/content';
+---
+
+<section class="section-y border-line border-y bg-white" aria-labelledby="casos-title">
+  <div class="container-site">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow mb-4">Casos de uso</p>
+      <h2 id="casos-title" class="text-h2">¿Qué puedes hacer con IA?</h2>
+      <p class="text-lead text-muted mt-5">
+        Aplicaciones concretas que se repiten en el día a día de cualquier perfil del sector salud.
+      </p>
+    </div>
+
+    <ul class="bg-line border-line rounded-card mt-14 grid gap-px overflow-hidden border sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+      {
+        useCases.map((useCase) => (
+          <li class="hover:bg-surface bg-white p-8 transition-colors lg:p-10">
+            <Icon name={useCase.icon} size={28} class="text-accent-strong" />
+            <h3 class="mt-6 text-xl font-bold">{useCase.title}</h3>
+            <p class="text-muted mt-3 leading-relaxed">{useCase.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

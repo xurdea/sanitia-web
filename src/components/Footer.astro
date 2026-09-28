@@ -1,0 +1,77 @@
+---
+import Logo from './Logo.astro';
+import { site, mainNav, legalNav } from '../data/site';
+---
+
+<footer class="bg-brand-ink text-slate-300">
+  <div class="container-site grid gap-12 py-16 md:grid-cols-12 md:py-20">
+    <div class="md:col-span-5">
+      <a href="/" class="inline-block rounded" aria-label="SanitIA, ir a inicio">
+        <Logo variant="light" />
+      </a>
+      <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-slate-400">
+        {site.descriptor}. Formación práctica para profesionales, equipos y organizaciones del ámbito de la salud.
+      </p>
+    </div>
+
+    <nav aria-label="Pie de página" class="md:col-span-4">
+      <p class="text-xs font-semibold tracking-[0.14em] text-slate-400 uppercase">SanitIA</p>
+      <ul class="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-[0.9375rem]">
+        {
+          mainNav.map((item) => (
+            <li>
+              <a href={item.href} class="transition-colors hover:text-white">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="md:col-span-3">
+      <p class="text-xs font-semibold tracking-[0.14em] text-slate-400 uppercase">Síguenos</p>
+      <ul class="mt-5 space-y-3 text-[0.9375rem]">
+        <li>
+          {
+            site.social.linkedin ? (
+              <a href={site.social.linkedin} rel="noopener" class="transition-colors hover:text-white">
+                LinkedIn
+              </a>
+            ) : (
+              <span class="text-slate-400">LinkedIn · próximamente</span>
+            )
+          }
+        </li>
+        {
+          site.social.discord && (
+            <li>
+              <a href={site.social.discord} rel="noopener" class="transition-colors hover:text-white">
+                Discord
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="container-site flex flex-col gap-4 py-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {site.year} {site.name}</p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {
+          legalNav.map((item) => (
+            <li>
+              <a href={item.href} class="transition-colors hover:text-white">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>

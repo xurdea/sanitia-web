@@ -1,0 +1,28 @@
+# Contexto de build: solo lo necesario para compilar la web.
+
+node_modules
+dist
+.astro
+.netlify
+
+# Entorno (la web no usa secretos, pero por si acaso)
+.env
+.env.*
+!.env.example
+
+# Control de versiones y utilidades
+.git
+.gitignore
+.vscode
+.claude
+
+# Documentación de la raíz (CLAUDE.md, README…) y despliegue.
+# Los recursos en Markdown de src/content SÍ son necesarios para el build.
+*.md
+!src/**/*.md
+Dockerfile
+docker-compose.yml
+.dockerignore
+scripts
+
+*.log

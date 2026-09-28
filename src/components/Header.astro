@@ -1,0 +1,121 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import { mainNav } from '../data/site';
+import { cleanPath } from '../lib/paths';
+
+const path = cleanPath(Astro.url.pathname);
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+// "Contacto" ya se ofrece como CTA; en escritorio no se duplica en la navegación.
+const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
+---
+
+<header
+  id="site-header"
+  class="border-line/0 bg-surface/95 ease-out-soft sticky top-0 z-50 border-b transition-[border-color,background-color] duration-300 supports-[backdrop-filter]:bg-surface/85 supports-[backdrop-filter]:backdrop-blur-md data-[scrolled=true]:border-line"
+>
+  <div class="container-site flex h-[4.5rem] items-center justify-between gap-6">
+    <a href="/" class="-m-1 rounded p-1" aria-label="SanitIA, ir a inicio">
+      <Logo />
+    </a>
+
+    <nav aria-label="Principal" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          desktopNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="hover:text-brand-deep aria-[current=page]:text-brand-deep relative rounded-md px-3 py-2 text-[0.9375rem] font-medium text-slate-600 transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:scale-x-0 after:bg-accent after:transition-transform aria-[current=page]:after:scale-x-100"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="/contacto"
+        aria-current={isActive('/contacto') ? 'page' : undefined}
+        class="hover:text-brand-deep hidden px-3 py-2 text-[0.9375rem] font-medium text-slate-600 transition-colors lg:inline-block"
+      >
+        Contacto
+      </a>
+      <div class="hidden sm:block"><Button href="/formacion">Explorar formación</Button></div>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="text-brand-deep hover:bg-surface-alt -mr-2 inline-flex size-11 items-center justify-center rounded-lg lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="sr-only">Abrir menú</span>
+        <Icon name="menu" class="nav-icon-open" />
+        <Icon name="x" class="nav-icon-close hidden" />
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="border-line bg-surface hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t lg:hidden">
+    <nav aria-label="Principal móvil" class="container-site py-6">
+      <ul class="divide-line divide-y">
+        {
+          mainNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="font-display text-brand-deep aria-[current=page]:text-accent-strong flex items-center justify-between py-4 text-xl font-semibold"
+              >
+                {item.label}
+                <Icon name="arrow-right" size={20} class="text-muted" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-8 flex flex-col gap-3">
+        <Button href="/formacion" size="lg" arrow>Explorar formación</Button>
+        <Button href="/empresas" size="lg" variant="secondary">Formación para empresas</Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+
+  if (header) {
+    const onScroll = () => header.setAttribute('data-scrolled', String(window.scrollY > 8));
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  if (toggle && panel) {
+    const label = toggle.querySelector('.sr-only');
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('hidden', !open);
+      toggle.querySelector('.nav-icon-open')?.classList.toggle('hidden', open);
+      toggle.querySelector('.nav-icon-close')?.classList.toggle('hidden', !open);
+      if (label) label.textContent = open ? 'Cerrar menú' : 'Abrir menú';
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 64rem)').addEventListener('change', (e) => e.matches && setOpen(false));
+  }
+</script>

@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import CTASection from '../../components/CTASection.astro';
+import { featuredCourse } from '../../data/content';
+
+const audience = [
+  'Visitadores médicos y profesionales de la visita médica.',
+  'Responsables y coordinadores de equipos de visita médica.',
+  'Otros perfiles de la industria farmacéutica que quieran aplicar la IA a tareas similares.',
+];
+
+const objectives = [
+  'Comprender qué puede aportar la IA a la actividad de la visita médica y cuáles son sus límites.',
+  'Aplicar la IA a la preparación de visitas y al análisis de información.',
+  'Preparar presentaciones y materiales de apoyo con más agilidad.',
+  'Organizar y consultar el conocimiento de producto y de cliente.',
+  'Ganar productividad en tareas de organización y seguimiento.',
+  'Utilizar la IA de forma responsable, respetando la normativa y las políticas de cada compañía.',
+];
+
+const methodology = [
+  {
+    icon: 'video',
+    title: 'Sesiones online en directo',
+    text: 'Clases en directo con explicación, demostración y espacio para preguntas.',
+  },
+  {
+    icon: 'pen',
+    title: 'Práctica sobre situaciones reales',
+    text: 'Ejercicios basados en tareas habituales de la visita médica.',
+  },
+  {
+    icon: 'message',
+    title: 'Tutorías personalizadas',
+    text: 'Acompañamiento individual para resolver dudas y aplicar lo aprendido.',
+  },
+  {
+    icon: 'users',
+    title: 'Comunidad de seguimiento',
+    text: 'Un espacio compartido en la Comunidad SanitIA para seguir aprendiendo con otros participantes.',
+  },
+] as const;
+
+/** Programa orientativo. PENDIENTE: confirmar contenido detallado y duración por edición. */
+const program = [
+  { title: 'Fundamentos de IA aplicada a la visita médica', text: 'Qué es la IA generativa, cómo funciona, qué puede hacer y cuáles son sus límites y riesgos.' },
+  { title: 'Preparación de visitas', text: 'Ordenar el contexto, seleccionar la información relevante y estructurar la conversación.' },
+  { title: 'Investigación', text: 'Búsqueda y contraste de información con apoyo de la IA, verificando siempre las fuentes.' },
+  { title: 'Análisis de información', text: 'Resumir, comparar y extraer conclusiones de documentación e información disponible.' },
+  { title: 'Presentaciones', text: 'Preparar presentaciones y materiales de apoyo de forma más ágil y coherente.' },
+  { title: 'Gestión del conocimiento', text: 'Organizar la documentación de producto y las notas de trabajo para consultarlas con facilidad.' },
+  { title: 'Productividad', text: 'Aplicar la IA a tareas de organización, seguimiento y comunicación del día a día.' },
+];
+
+const summary = [
+  { icon: 'video', label: 'Modalidad', value: 'Online en directo' },
+  { icon: 'message', label: 'Acompañamiento', value: 'Tutorías personalizadas' },
+  { icon: 'users', label: 'Comunidad', value: 'Comunidad SanitIA' },
+  { icon: 'play', label: 'Grabaciones', value: 'Disponibles durante un periodo definido en cada edición' },
+  { icon: 'calendar', label: 'Fechas y condiciones', value: 'Se informan en cada edición' },
+] as const;
+---
+
+<BaseLayout
+  title={featuredCourse.title}
+  description="Programa práctico de SanitIA para incorporar la inteligencia artificial a la preparación de visitas, la investigación, el análisis de información, las presentaciones y la productividad del visitador médico."
+>
+  <PageHero
+    eyebrow="Formación destacada"
+    title={featuredCourse.title}
+    intro={featuredCourse.summary}
+    breadcrumb={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Formación', href: '/formacion' },
+    ]}
+  >
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <Button href="/contacto" size="lg" arrow>Solicitar información</Button>
+      <Button href="#programa" size="lg" variant="secondary">Ver programa</Button>
+    </div>
+  </PageHero>
+
+  <div class="container-site grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-12">
+    <div class="space-y-20 lg:col-span-8">
+      <section aria-labelledby="descripcion">
+        <h2 id="descripcion" class="text-3xl font-bold">Descripción</h2>
+        <div class="prose-sanitia text-muted mt-6">
+          <p>
+            La actividad del visitador médico combina preparación, conocimiento del producto, análisis de información y
+            comunicación. Este programa muestra cómo incorporar la inteligencia artificial a cada una de esas tareas de
+            forma práctica y responsable.
+          </p>
+          <p>
+            El enfoque no gira en torno a una herramienta concreta, sino en torno al trabajo: qué tareas se pueden
+            mejorar, cómo hacerlo y con qué criterios.
+          </p>
+        </div>
+        <MediaFrame
+          alt="Profesional de la visita médica revisando información antes de una reunión"
+          placeholder="Fotografía: profesional de la visita médica revisando información"
+          aspect="16 / 9"
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          class="border-line mt-10 border"
+        />
+      </section>
+
+      <section aria-labelledby="destinatarios">
+        <h2 id="destinatarios" class="text-3xl font-bold">Destinatarios</h2>
+        <ul class="mt-6 space-y-3">
+          {
+            audience.map((item) => (
+              <li class="flex gap-3 text-lg">
+                <Icon name="check" size={20} class="text-accent-strong mt-1" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="objetivos">
+        <h2 id="objetivos" class="text-3xl font-bold">Objetivos</h2>
+        <ol class="border-line mt-8 grid gap-px overflow-hidden rounded-xl border bg-[var(--color-line)] sm:grid-cols-2">
+          {
+            objectives.map((item, i) => (
+              <li class="bg-white p-6">
+                <span class="font-display text-accent-strong text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
+                <p class="text-ink mt-2 leading-relaxed">{item}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section aria-labelledby="metodologia">
+        <h2 id="metodologia" class="text-3xl font-bold">Metodología</h2>
+        <p class="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
+          Basada en el <a href="/metodo-sanitia" class="text-brand underline decoration-[var(--color-accent)] underline-offset-4">Método SanitIA</a>: descubrir, aplicar, practicar e integrar.
+        </p>
+        <ul class="mt-8 grid gap-8 sm:grid-cols-2">
+          {
+            methodology.map((item) => (
+              <li>
+                <span class="bg-accent-wash text-brand inline-flex size-11 items-center justify-center rounded-lg">
+                  <Icon name={item.icon} size={22} />
+                </span>
+                <h3 class="mt-4 text-lg font-bold">{item.title}</h3>
+                <p class="text-muted mt-2 leading-relaxed">{item.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="herramientas">
+        <h2 id="herramientas" class="text-3xl font-bold">Herramientas utilizadas</h2>
+        <p class="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
+          Durante el programa se trabaja con herramientas de IA de uso general. Son un medio, no el objetivo: lo que se
+          aprende sigue siendo útil aunque las herramientas cambien.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {
+            featuredCourse.tools.map((tool) => (
+              <li class="border-line text-brand-deep rounded-full border bg-white px-4 py-1.5 text-sm font-medium">{tool}</li>
+            ))
+          }
+        </ul>
+        <p class="text-muted mt-4 text-sm">Las herramientas pueden variar entre ediciones.</p>
+      </section>
+
+      <section aria-labelledby="programa-title" id="programa" class="scroll-mt-28">
+        <h2 id="programa-title" class="text-3xl font-bold">Programa</h2>
+        <ol class="border-line mt-8 border-t">
+          {
+            program.map((mod, i) => (
+              <li class="border-line grid gap-2 border-b py-6 sm:grid-cols-[6.5rem_1fr]">
+                <span class="font-display text-accent-strong pt-0.5 text-sm font-bold tracking-[0.1em] whitespace-nowrap">
+                  Módulo {i + 1}
+                </span>
+                <div>
+                  <h3 class="text-lg font-bold">{mod.title}</h3>
+                  <p class="text-muted mt-1 leading-relaxed">{mod.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="text-muted mt-4 text-sm">Programa orientativo. El contenido detallado y la duración se confirman en cada edición.</p>
+      </section>
+    </div>
+
+    <aside class="lg:col-span-4" aria-label="Resumen del programa">
+      <div class="border-line shadow-soft rounded-card border bg-white p-7 lg:sticky lg:top-28">
+        <p class="font-display text-brand-deep text-lg font-bold">Resumen</p>
+        <dl class="mt-6 space-y-5">
+          {
+            summary.map((item) => (
+              <div class="flex gap-3">
+                <Icon name={item.icon} size={20} class="text-accent-strong mt-0.5" />
+                <div>
+                  <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">{item.label}</dt>
+                  <dd class="text-ink mt-1 text-[0.9375rem]">{item.value}</dd>
+                </div>
+              </div>
+            ))
+          }
+        </dl>
+        <Button href="/contacto" arrow class="mt-8 w-full">Solicitar información</Button>
+      </div>
+    </aside>
+  </div>
+
+  <CTASection
+    title="¿Quieres llevar este programa a tu equipo?"
+    text="El programa puede adaptarse a equipos de visita médica según su nivel de conocimiento, procesos y objetivos."
+    primary={{ label: 'Solicitar una propuesta', href: '/contacto' }}
+    secondary={{ label: 'Formación para empresas', href: '/empresas' }}
+  />
+</BaseLayout>

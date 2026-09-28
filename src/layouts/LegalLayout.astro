@@ -1,0 +1,33 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="Información legal" title={title} />
+  <section class="section-y pt-12!">
+    <div class="container-site">
+      <p
+        class="mb-12 flex max-w-[44rem] gap-3 rounded-lg border border-amber-300 bg-amber-50 px-5 py-4 text-sm text-amber-900"
+        role="note"
+      >
+        <Icon name="file-text" size={18} class="mt-0.5" />
+        <span>
+          Documento provisional. Los datos marcados como <strong>[PENDIENTE]</strong> deben completarse y el texto debe
+          ser revisado por un profesional jurídico antes de la publicación definitiva.
+        </span>
+      </p>
+      <div class="prose-sanitia">
+        <slot />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

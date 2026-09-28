@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import CTASection from '../../components/CTASection.astro';
+import { featuredCourse, ecosystem } from '../../data/content';
+---
+
+<BaseLayout
+  title="Formación"
+  description="Programas prácticos de inteligencia artificial para profesionales del sector sanitario, adaptados a funciones y perfiles concretos."
+>
+  <PageHero
+    eyebrow="Formación"
+    title="Formación práctica en IA para el sector sanitario"
+    intro="Programas adaptados a funciones y perfiles concretos del ámbito de la salud, centrados en tareas reales y en un uso útil y responsable de la inteligencia artificial."
+  />
+
+  <section class="section-y" aria-labelledby="programas-title">
+    <div class="container-site">
+      <h2 id="programas-title" class="text-h2">Programas disponibles</h2>
+
+      <article class="border-line rounded-card mt-10 grid overflow-hidden border bg-white lg:grid-cols-12">
+        <div class="relative lg:col-span-5">
+          <MediaFrame
+            alt="Profesional de la visita médica preparando una reunión con su portátil"
+            placeholder="Fotografía: profesional de la visita médica"
+            aspect="4 / 3"
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            class="rounded-none! lg:absolute! lg:inset-0 lg:aspect-auto!"
+          />
+        </div>
+        <div class="p-7 sm:p-10 lg:col-span-7 lg:p-12">
+          <p class="eyebrow">Formación destacada · Industria farmacéutica</p>
+          <h3 class="mt-4 text-3xl font-bold">{featuredCourse.title}</h3>
+          <p class="text-lead text-muted mt-4">{featuredCourse.summary}</p>
+          <ul class="mt-8 flex flex-wrap gap-2">
+            {
+              featuredCourse.applications.map((item) => (
+                <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
+              ))
+            }
+          </ul>
+          <ul class="text-muted mt-8 grid gap-3 text-[0.9375rem] sm:grid-cols-2">
+            {
+              featuredCourse.features.slice(0, 4).map((item) => (
+                <li class="flex items-center gap-2.5">
+                  <Icon name={item.icon} size={18} class="text-accent-strong" />
+                  {item.label}
+                </li>
+              ))
+            }
+          </ul>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button href={featuredCourse.href} arrow>Ver programa completo</Button>
+            <Button href="/contacto" variant="secondary">Solicitar información</Button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-y border-line border-t bg-white" aria-labelledby="perfiles-title">
+    <div class="container-site grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow mb-4">Por perfil</p>
+        <h2 id="perfiles-title" class="text-h2">Formación para cada perfil del sector salud</h2>
+        <p class="text-lead text-muted mt-5">
+          SanitIA desarrolla programas para distintos ámbitos del ecosistema sanitario. Si no encuentras un programa para
+          tu perfil, cuéntanos qué necesitas.
+        </p>
+        <Button href="/contacto" variant="secondary" arrow class="mt-8">Contactar con SanitIA</Button>
+      </div>
+      <ul class="divide-line border-line divide-y border-y lg:col-span-6 lg:col-start-7">
+        {
+          ecosystem.map((area) => (
+            <li class="flex items-start gap-4 py-6">
+              <Icon name={area.icon} size={24} class="text-brand mt-0.5" />
+              <div>
+                <h3 class="text-lg font-bold">{area.name}</h3>
+                <p class="text-muted mt-1">{area.profiles.join(' · ')}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTASection
+    title="¿Formación para un equipo completo?"
+    text="Diseñamos programas adaptados a los perfiles, procesos y objetivos de cada organización."
+    primary={{ label: 'Formación para empresas', href: '/empresas' }}
+    secondary={{ label: 'Contactar', href: '/contacto' }}
+  />
+</BaseLayout>

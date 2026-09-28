@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+
+/* ---------- Design tokens SanitIA ---------- */
+@theme {
+  --color-brand: #123b6d;
+  --color-brand-deep: #08284a;
+  --color-brand-ink: #061d36;
+  --color-accent: #27c7c9;
+  /* Turquesa oscurecido para texto sobre fondo claro (contraste AA ≥ 4.5:1) */
+  --color-accent-strong: #0a7679;
+  --color-accent-soft: #a8eef0;
+  --color-accent-wash: #e8f8f8;
+  --color-surface: #f7fafc;
+  --color-surface-alt: #eef3f7;
+  --color-ink: #17212b;
+  /* Texto secundario (#64748B de la guía, oscurecido para AA sobre superficies grises) */
+  --color-muted: #5b6b80;
+  --color-line: #dde5ec;
+  --color-line-strong: #c5d2dd;
+
+  --font-display: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: 0.875rem;
+
+  --shadow-soft: 0 1px 2px rgb(8 40 74 / 0.04), 0 4px 16px -8px rgb(8 40 74 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(8 40 74 / 0.04), 0 16px 32px -16px rgb(8 40 74 / 0.18);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-brand-deep;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-brand-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-strong);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ---------- Utilidades de marca ---------- */
+@utility container-site {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility section-y {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+}
+
+@utility text-display {
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+
+@utility text-h2 {
+  font-size: clamp(1.875rem, 1.35rem + 2vw, 2.875rem);
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.65;
+}
+
+/* Contenido editorial largo (recursos, páginas legales) */
+@utility prose-sanitia {
+  color: var(--color-ink);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: 44rem;
+
+  & > * + * {
+    margin-top: 1.25em;
+  }
+
+  & h2 {
+    font-size: 1.625rem;
+    line-height: 1.25;
+    font-weight: 700;
+    margin-top: 2.25em;
+  }
+
+  & h3 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 700;
+    margin-top: 1.75em;
+  }
+
+  & a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 3px;
+  }
+
+  & a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  & ul,
+  & ol {
+    padding-left: 1.25rem;
+  }
+
+  & ul {
+    list-style: disc;
+  }
+
+  & ol {
+    list-style: decimal;
+  }
+
+  & li + li {
+    margin-top: 0.4em;
+  }
+
+  & li::marker {
+    color: var(--color-accent-strong);
+  }
+
+  & strong {
+    color: var(--color-brand-deep);
+    font-weight: 600;
+  }
+
+  & blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.25rem;
+    color: var(--color-muted);
+  }
+
+  & hr {
+    border-color: var(--color-line);
+    margin-block: 2.5em;
+  }
+}
+
+/* ---------- Aparición progresiva (solo si el usuario acepta movimiento) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

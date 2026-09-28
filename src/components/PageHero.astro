@@ -1,0 +1,49 @@
+---
+/** Cabecera de páginas interiores. Contiene el único H1 de la página. */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  breadcrumb?: { label: string; href: string }[];
+}
+
+const { eyebrow, title, intro, breadcrumb } = Astro.props;
+---
+
+<section class="border-line relative overflow-hidden border-b bg-white">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-60 lg:block"
+    style="background-image: radial-gradient(circle at 80% 30%, var(--color-accent-wash), transparent 60%);"
+  >
+  </div>
+  <div class="container-site relative pt-14 pb-16 md:pt-20 md:pb-24">
+    {
+      breadcrumb && (
+        <nav aria-label="Ruta de navegación" class="text-muted mb-8 text-sm">
+          <ol class="flex flex-wrap items-center gap-2">
+            {breadcrumb.map((item) => (
+              <li class="flex items-center gap-2">
+                <a href={item.href} class="hover:text-brand-deep underline-offset-4 hover:underline">
+                  {item.label}
+                </a>
+                <span aria-hidden="true" class="text-line-strong">
+                  /
+                </span>
+              </li>
+            ))}
+            <li aria-current="page" class="text-ink truncate">
+              {title}
+            </li>
+          </ol>
+        </nav>
+      )
+    }
+    <div class="max-w-3xl">
+      {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
+      <h1 class="text-[clamp(2.25rem,1.6rem+2.6vw,3.75rem)] leading-[1.06] font-bold tracking-[-0.032em]">{title}</h1>
+      {intro && <p class="text-lead text-muted mt-6 max-w-2xl">{intro}</p>}
+      <slot />
+    </div>
+  </div>
+</section>

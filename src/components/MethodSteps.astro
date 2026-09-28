@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import { methodSteps } from '../data/content';
+
+interface Props {
+  /** Muestra la descripción ampliada de cada fase. */
+  detailed?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { detailed = false, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<ol class="lg:before:bg-line relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:before:absolute lg:before:inset-x-0 lg:before:top-6 lg:before:h-px lg:before:content-['']">
+  {
+    methodSteps.map((step, i) => (
+      <li class="relative">
+        <div class="flex items-center gap-4">
+          <span class="bg-brand-deep font-display relative z-10 inline-flex size-12 items-center justify-center rounded-full text-sm font-bold text-white ring-8 ring-[var(--step-ring,var(--color-surface))]">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <Icon name={step.icon} size={22} class="text-accent-strong lg:hidden" />
+        </div>
+        <Heading class="mt-6 text-2xl font-bold">{step.name}</Heading>
+        <p class="text-ink mt-3 leading-relaxed font-medium">{step.summary}</p>
+        {detailed && <p class="text-muted mt-3 leading-relaxed">{step.detail}</p>}
+      </li>
+    ))
+  }
+</ol>

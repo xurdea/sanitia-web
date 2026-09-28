@@ -1,0 +1,83 @@
+---
+import Button from '../Button.astro';
+import MediaFrame from '../MediaFrame.astro';
+import Icon from '../Icon.astro';
+import { areas } from '../../data/site';
+
+/**
+ * Para sustituir la imagen: colocar la fotografía en src/assets/home/ e importarla aquí, p. ej.
+ *   import heroImage from '../../assets/home/hero.jpg';
+ * y pasarla como `src={heroImage}` a MediaFrame.
+ */
+const heroImage = undefined;
+---
+
+<section class="border-line relative overflow-hidden border-b bg-white">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0"
+    style="background-image: linear-gradient(rgb(18 59 109 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(18 59 109 / 0.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 80% at 80% 20%, black, transparent 75%);"
+  >
+  </div>
+
+  <div class="container-site relative grid items-center gap-14 pt-14 pb-20 md:pt-20 lg:grid-cols-12 lg:gap-10 lg:pt-24 lg:pb-28">
+    <div class="lg:col-span-7">
+      <p class="eyebrow mb-6 inline-flex items-center gap-3">
+        <span aria-hidden="true" class="bg-accent h-px w-8"></span>
+        Formación en IA para el ámbito de la salud
+      </p>
+
+      <h1 class="text-display max-w-[14ch]">
+        Inteligencia Artificial aplicada al <span class="text-brand">sector sanitario</span>
+      </h1>
+
+      <p class="text-lead text-muted mt-7 max-w-xl">
+        Formación práctica para profesionales, equipos y organizaciones que quieren incorporar la IA a su trabajo real.
+      </p>
+
+      <ul class="text-brand-deep mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-semibold" aria-label="Ámbitos">
+        {
+          areas.map((area, i) => (
+            <li class="flex items-center gap-3">
+              {i > 0 && <span aria-hidden="true" class="bg-accent size-1 rounded-full" />}
+              {area}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Button href="/formacion" size="lg" arrow>Explorar formación</Button>
+        <Button href="/empresas" size="lg" variant="secondary">Formación para empresas</Button>
+      </div>
+    </div>
+
+    <div class="relative lg:col-span-5">
+      <MediaFrame
+        src={heroImage}
+        alt="Profesionales del sector sanitario trabajando con documentación y ordenador"
+        placeholder="Fotografía: equipo sanitario trabajando con documentación y ordenador"
+        aspect="4 / 5"
+        priority
+        captionPosition="top"
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        class="border-line mx-auto max-w-md border lg:max-w-none"
+      />
+      <div
+        class="border-line shadow-lift absolute -bottom-6 left-4 hidden max-w-[17rem] rounded-xl border bg-white p-5 sm:block lg:-left-10"
+      >
+        <p class="text-brand-deep font-display text-sm font-bold">El enfoque SanitIA</p>
+        <ul class="text-muted mt-3 space-y-2 text-sm">
+          {
+            ['Casos de uso reales', 'Programas por perfil', 'Uso responsable'].map((item) => (
+              <li class="flex items-center gap-2">
+                <Icon name="check" size={16} class="text-accent-strong" />
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

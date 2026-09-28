@@ -1,0 +1,93 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import Icon from '../../components/Icon.astro';
+import CTASection from '../../components/CTASection.astro';
+import { getPublishedResources } from '../../lib/resources';
+import { formatDate } from '../../lib/format';
+
+export const getStaticPaths = (async () => {
+  const resources = await getPublishedResources();
+  return resources.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, related: resources.filter((r) => r.id !== entry.id).slice(0, 2) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry, related } = Astro.props;
+const { Content } = await render(entry);
+const { title, summary, category, date, readingTime, image, imageAlt, imagePlaceholder, demo } = entry.data;
+---
+
+<BaseLayout title={title} description={summary} type="article">
+  <article>
+    <header class="border-line border-b bg-white">
+      <div class="container-site pt-12 pb-14 md:pt-16 md:pb-20">
+        <nav aria-label="Ruta de navegación" class="text-muted text-sm">
+          <a href="/recursos" class="hover:text-brand-deep inline-flex items-center gap-1.5">
+            <Icon name="arrow-left" size={16} />
+            Recursos
+          </a>
+        </nav>
+        <div class="mt-8 max-w-3xl">
+          <p class="flex flex-wrap items-center gap-3 text-sm">
+            <span class="text-accent-strong font-semibold">{category}</span>
+            <span aria-hidden="true" class="bg-line-strong size-1 rounded-full"></span>
+            <time datetime={date.toISOString()} class="text-muted">{formatDate(date)}</time>
+            <span aria-hidden="true" class="bg-line-strong size-1 rounded-full"></span>
+            <span class="text-muted">{readingTime} min de lectura</span>
+          </p>
+          <h1 class="mt-5 text-[clamp(2rem,1.5rem+2.2vw,3.25rem)] leading-[1.1] font-bold tracking-[-0.03em]">{title}</h1>
+          <p class="text-lead text-muted mt-6">{summary}</p>
+          {
+            demo && (
+              <p class="border-line bg-accent-wash text-brand-deep mt-8 inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm">
+                <Icon name="pen" size={16} />
+                Contenido inicial de demostración, pendiente de revisión editorial.
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="container-site py-14 md:py-20">
+      <MediaFrame
+        src={image}
+        alt={imageAlt ?? ''}
+        placeholder={imagePlaceholder ?? 'Imagen del recurso'}
+        aspect="21 / 9"
+        sizes="(min-width: 1216px) 1136px, 100vw"
+        class="border-line mb-14 border"
+      />
+      <div class="prose-sanitia mx-auto">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="section-y border-line border-t bg-white" aria-labelledby="relacionados-title">
+        <div class="container-site">
+          <h2 id="relacionados-title" class="text-h2">Otros recursos</h2>
+          <div class="mt-12 grid gap-12 sm:grid-cols-2 lg:max-w-4xl">
+            {related.map((r) => (
+              <ResourceCard entry={r} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CTASection
+    title="De la lectura a la práctica"
+    text="Los programas de SanitIA te ayudan a aplicar la IA a situaciones reales de tu trabajo."
+    primary={{ label: 'Explorar formación', href: '/formacion' }}
+    secondary={{ label: 'Contactar', href: '/contacto' }}
+  />
+</BaseLayout>

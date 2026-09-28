@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import MediaFrame from '../components/MediaFrame.astro';
+import CTASection from '../components/CTASection.astro';
+
+const adaptation = [
+  { icon: 'users', title: 'Perfil de los participantes', text: 'Funciones, responsabilidades y tareas de cada grupo.' },
+  { icon: 'chart', title: 'Nivel de conocimiento', text: 'Desde una primera toma de contacto hasta un uso avanzado.' },
+  { icon: 'workflow', title: 'Procesos de trabajo', text: 'Casos de uso sobre los procesos reales del equipo.' },
+  { icon: 'target', title: 'Objetivos de la organización', text: 'Formación alineada con lo que la organización quiere conseguir.' },
+] as const;
+
+const formats = [
+  {
+    title: 'Formación para equipos',
+    text: 'Programas para departamentos y equipos que necesitan una base común para aplicar la IA en su trabajo.',
+  },
+  {
+    title: 'Programas personalizados',
+    text: 'Itinerarios diseñados a partir de los perfiles, procesos y objetivos de la organización.',
+  },
+  {
+    title: 'Talleres',
+    text: 'Sesiones centradas en un caso de uso o una necesidad concreta, con un resultado práctico.',
+  },
+  {
+    title: 'Sesiones prácticas',
+    text: 'Trabajo aplicado sobre situaciones reales del equipo, con acompañamiento.',
+  },
+];
+
+const steps = [
+  { title: 'Conversación inicial', text: 'Entendemos el contexto, los perfiles y los objetivos.' },
+  { title: 'Propuesta', text: 'Diseñamos un programa ajustado a las necesidades detectadas.' },
+  { title: 'Formación', text: 'Impartimos el programa con un enfoque práctico.' },
+  { title: 'Seguimiento', text: 'Revisamos la aplicación de lo aprendido en el trabajo diario.' },
+];
+---
+
+<BaseLayout
+  title="Formación en IA para empresas y organizaciones sanitarias"
+  description="Programas de formación en inteligencia artificial adaptados a equipos y organizaciones del sector salud: por perfil, nivel de conocimiento, procesos de trabajo y objetivos."
+>
+  <PageHero
+    eyebrow="Empresas y organizaciones"
+    title="Formación en IA adaptada a tu organización"
+    intro="Diseñamos programas de formación para equipos del sector salud, adaptados al perfil de los participantes, sus procesos de trabajo, su nivel de conocimiento y los objetivos de la organización."
+  >
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <Button href="/contacto" size="lg" arrow>Solicitar una propuesta</Button>
+      <Button href="/contacto" size="lg" variant="secondary">Hablar con SanitIA</Button>
+    </div>
+  </PageHero>
+
+  <section class="section-y" aria-labelledby="adaptacion-title">
+    <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+      <div class="lg:col-span-5">
+        <MediaFrame
+          alt="Equipo de una organización sanitaria en una sesión de formación"
+          placeholder="Fotografía: equipo en una sesión de trabajo"
+          aspect="4 / 5"
+          sizes="(min-width: 1024px) 40vw, 100vw"
+          class="border-line border"
+        />
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <p class="eyebrow mb-4">Adaptación</p>
+        <h2 id="adaptacion-title" class="text-h2">Cada equipo parte de un punto distinto</h2>
+        <p class="text-lead text-muted mt-5">
+          Por eso cada programa se diseña a partir de cuatro variables.
+        </p>
+        <ul class="mt-10 grid gap-8 sm:grid-cols-2">
+          {
+            adaptation.map((item) => (
+              <li>
+                <span class="bg-accent-wash text-brand inline-flex size-11 items-center justify-center rounded-lg">
+                  <Icon name={item.icon} size={22} />
+                </span>
+                <h3 class="mt-4 text-lg font-bold">{item.title}</h3>
+                <p class="text-muted mt-2 leading-relaxed">{item.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-y border-line border-y bg-white" aria-labelledby="formatos-title">
+    <div class="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-4">
+        <p class="eyebrow mb-4">Formatos</p>
+        <h2 id="formatos-title" class="text-h2">Qué podemos hacer con tu equipo</h2>
+      </div>
+      <ol class="border-line border-t lg:col-span-8">
+        {
+          formats.map((item, i) => (
+            <li class="border-line grid gap-3 border-b py-8 sm:grid-cols-[5rem_1fr]">
+              <span class="font-display text-accent-strong text-sm font-bold tracking-[0.1em]">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="text-2xl font-bold">{item.title}</h3>
+                <p class="text-muted mt-2 max-w-xl text-[1.0625rem] leading-relaxed">{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-y" aria-labelledby="proceso-title">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <p class="eyebrow mb-4">Cómo trabajamos</p>
+        <h2 id="proceso-title" class="text-h2">De la necesidad a la aplicación</h2>
+      </div>
+      <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step, i) => (
+            <li class="border-brand-deep border-t-2 pt-6">
+              <span class="font-display text-accent-strong text-sm font-bold">Paso {i + 1}</span>
+              <h3 class="mt-2 text-xl font-bold">{step.title}</h3>
+              <p class="text-muted mt-2 leading-relaxed">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <CTASection
+    title="Lleva la IA a tu equipo"
+    text="Cuéntanos qué necesita tu organización y preparamos una propuesta adaptada."
+    primary={{ label: 'Solicitar una propuesta', href: '/contacto' }}
+    secondary={{ label: 'Ver formación', href: '/formacion' }}
+  />
+</BaseLayout>

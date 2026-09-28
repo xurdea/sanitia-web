@@ -1,0 +1,25 @@
+# Despliegue de la web de SanitIA en Docker: un único contenedor nginx con el
+# build estático de Astro. Sin base de datos, sin API, sin secretos.
+#
+# Uso en el servidor:
+#   cp .env.example .env    # y ajustar SITE_URL / WEB_PORT
+#   docker compose up -d --build
+#
+# Tras cambiar SITE_URL o SITE_NOINDEX hay que RECONSTRUIR (--build): se
+# aplican al compilar, no al arrancar.
+
+name: sanitia_web
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-http://localhost:8090}
+        SITE_NOINDEX: ${SITE_NOINDEX:-true}
+    image: sanitia-web:latest
+    restart: unless-stopped
+    # Por defecto solo en localhost: los puertos publicados por Docker se saltan
+    # ufw. Se llega a él por ngrok, Caddy o un túnel/VPN (ver DESPLIEGUE.md).
+    ports:
+      - '${WEB_PORT:-127.0.0.1:8090}:80'

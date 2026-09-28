@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const reasons = [
+  { icon: 'book', title: 'Formación para profesionales', text: 'Información sobre programas, próximas ediciones y condiciones.' },
+  { icon: 'building', title: 'Propuestas para organizaciones', text: 'Formación adaptada a equipos, departamentos y organizaciones.' },
+  { icon: 'message', title: 'Otras consultas', text: 'Colaboraciones, dudas generales o cualquier otra cuestión.' },
+] as const;
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Contacta con SanitIA para solicitar información sobre formación en inteligencia artificial aplicada al sector sanitario o una propuesta para tu organización."
+>
+  <PageHero
+    eyebrow="Contacto"
+    title="Hablemos"
+    intro="Cuéntanos qué necesitas: información sobre un programa, una propuesta para tu equipo o cualquier otra consulta."
+  />
+
+  <section class="section-y">
+    <div class="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-6">
+        <h2 class="text-3xl font-bold">¿En qué podemos ayudarte?</h2>
+        <ul class="divide-line border-line mt-8 divide-y border-y">
+          {
+            reasons.map((r) => (
+              <li class="flex gap-4 py-6">
+                <Icon name={r.icon} size={24} class="text-brand mt-0.5" />
+                <div>
+                  <h3 class="text-lg font-bold">{r.title}</h3>
+                  <p class="text-muted mt-1">{r.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:col-span-5 lg:col-start-8">
+        <div class="border-line shadow-soft rounded-card border bg-white p-8">
+          <span class="bg-accent-wash text-brand inline-flex size-12 items-center justify-center rounded-xl">
+            <Icon name="mail" size={24} />
+          </span>
+          <h2 class="mt-6 text-2xl font-bold">Escríbenos</h2>
+          {
+            site.contactEmail ? (
+              <>
+                <p class="text-muted mt-3">Responderemos lo antes posible.</p>
+                <a
+                  href={`mailto:${site.contactEmail}`}
+                  class="text-brand mt-6 inline-flex items-center gap-2 text-lg font-semibold underline decoration-[var(--color-accent)] underline-offset-4"
+                >
+                  {site.contactEmail}
+                </a>
+              </>
+            ) : (
+              <p class="text-muted mt-3">
+                <strong class="text-brand-deep">[PENDIENTE: canal de contacto]</strong>
+                <br />
+                El correo de contacto y, en su caso, el formulario se publicarán cuando esté definido su destino y el
+                tratamiento de los datos.
+              </p>
+            )
+          }
+          {
+            site.social.linkedin && (
+              <a
+                href={site.social.linkedin}
+                rel="noopener"
+                class="text-brand mt-6 flex items-center gap-2 font-semibold"
+              >
+                LinkedIn <Icon name="arrow-up-right" size={16} />
+              </a>
+            )
+          }
+          <p class="text-muted border-line mt-8 border-t pt-6 text-sm">
+            Consulta nuestra <a href="/privacidad" class="text-brand underline underline-offset-4">política de privacidad</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

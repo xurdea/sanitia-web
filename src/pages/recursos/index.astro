@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import { getPublishedResources } from '../../lib/resources';
+
+const resources = await getPublishedResources();
+---
+
+<BaseLayout
+  title="Recursos"
+  description="Guías, casos prácticos y contenidos de SanitIA sobre aplicaciones reales de la inteligencia artificial en el sector sanitario."
+>
+  <PageHero
+    eyebrow="Recursos"
+    title="Conocimiento para aplicar IA a la salud"
+    intro="Guías, casos prácticos y contenidos sobre aplicaciones reales de la inteligencia artificial en el trabajo del sector sanitario."
+  />
+
+  <section class="section-y" aria-label="Listado de recursos">
+    <div class="container-site">
+      {
+        resources.length > 0 ? (
+          <div class="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            {resources.map((entry) => (
+              <ResourceCard entry={entry} headingLevel="h2" />
+            ))}
+          </div>
+        ) : (
+          <p class="text-muted text-lead">Próximamente publicaremos nuevos recursos.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

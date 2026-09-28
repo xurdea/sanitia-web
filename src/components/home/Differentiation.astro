@@ -1,0 +1,46 @@
+---
+const terms = ['Inteligencia artificial', 'Conocimiento del sector', 'Casos de uso reales'];
+---
+
+<section class="bg-brand-deep section-y relative isolate overflow-hidden" aria-labelledby="diferenciacion-title">
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10"
+    style="background-image: linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to right, transparent, black 60%);"
+  >
+  </div>
+
+  <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+    <div class="lg:col-span-6" data-reveal>
+      <p class="eyebrow text-accent! mb-4">Nuestro enfoque</p>
+      <h2 id="diferenciacion-title" class="text-h2 text-white">Aprender IA no consiste en aprender herramientas</h2>
+      <p class="text-lead mt-6 max-w-xl text-slate-300">
+        Las herramientas evolucionan constantemente. Lo importante es comprender cómo aplicar la inteligencia artificial de
+        forma útil, eficiente y responsable al trabajo cotidiano.
+      </p>
+      <p class="font-display text-accent-soft mt-8 text-xl font-semibold">Ese es el enfoque SanitIA.</p>
+    </div>
+
+    <div class="lg:col-span-6 lg:pl-8" data-reveal>
+      <p class="sr-only">Inteligencia artificial, más conocimiento del sector, más casos de uso reales, es igual a aplicación práctica.</p>
+      <div class="space-y-3" aria-hidden="true">
+        {
+          terms.map((term, i) => (
+            <div>
+              {i > 0 && <span class="font-display text-accent block py-1 pl-6 text-2xl font-light">+</span>}
+              <span class="font-display flex items-center rounded-xl border border-white/12 bg-white/[0.03] px-6 py-5 text-lg font-semibold tracking-wide text-white uppercase sm:text-xl">
+                {term}
+              </span>
+            </div>
+          ))
+        }
+        <div>
+          <span class="font-display text-accent block py-1 pl-6 text-2xl font-light">=</span>
+          <span class="font-display bg-accent text-brand-ink flex items-center rounded-xl px-6 py-5 text-lg font-extrabold tracking-wide uppercase sm:text-xl">
+            Aplicación práctica
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

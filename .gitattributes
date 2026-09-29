@@ -1,5 +1,7 @@
 # Finales de línea LF en el repo: los scripts y la config de nginx se ejecutan en Linux.
 * text=auto eol=lf
+# Salvo los scripts de PowerShell: Windows PowerShell 5.1 los quiere en CRLF (y con BOM).
+*.ps1 text eol=crlf
 *.png binary
 *.jpg binary
 *.webp binary

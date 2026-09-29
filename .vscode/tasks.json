@@ -1,0 +1,31 @@
+{
+  // Flujo de trabajo con dos ordenadores: GitHub es la fuente de verdad.
+  // Terminal > Ejecutar tarea… > "SANITIA-web - EMPEZAR trabajo" / "TERMINAR trabajo".
+  //
+  // "type": "process" lanza powershell directamente, sin pasar por otra shell:
+  // así la ruta del proyecto con espacios (OneDrive - Econocom) no se parte.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "SANITIA-web - EMPEZAR trabajo",
+      "detail": "Trae lo último de GitHub a main (sin tocar cambios locales)",
+      "type": "process",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/dev-start.ps1"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true },
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "SANITIA-web - TERMINAR trabajo",
+      "detail": "Commit de lo pendiente y push a GitHub (pide el mensaje)",
+      "type": "process",
+      "command": "powershell",
+      "args": ["-ExecutionPolicy", "Bypass", "-File", "scripts/dev-finish.ps1"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "focus": true, "panel": "dedicated", "clear": true }
+    }
+  ]
+}

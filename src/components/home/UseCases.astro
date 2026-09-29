@@ -1,25 +1,29 @@
 ---
 import Icon from '../Icon.astro';
-import { useCases } from '../../data/content';
+import { applications } from '../../data/home';
 ---
 
-<section class="section-y border-line border-y bg-white" aria-labelledby="casos-title">
+<section class="py-12 sm:py-16 lg:py-24" aria-labelledby="aplicaciones-title">
   <div class="container-site">
-    <div class="max-w-2xl" data-reveal>
-      <p class="eyebrow mb-4">Casos de uso</p>
-      <h2 id="casos-title" class="text-h2">¿Qué puedes hacer con IA?</h2>
-      <p class="text-lead text-muted mt-5">
-        Aplicaciones concretas que se repiten en el día a día de cualquier perfil del sector salud.
-      </p>
+    <div class="grid gap-5 lg:grid-cols-12 lg:items-end lg:gap-10" data-reveal>
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-4">Aplicaciones</p>
+        <h2 id="aplicaciones-title" class="text-h2">{applications.title}</h2>
+      </div>
+      <p class="text-lead text-muted lg:col-span-5">{applications.intro}</p>
     </div>
 
-    <ul class="bg-line border-line rounded-card mt-14 grid gap-px overflow-hidden border sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+    <ul
+      class="bg-line border-line rounded-card mt-8 grid grid-cols-2 gap-px overflow-hidden border sm:mt-10 lg:mt-12 lg:grid-cols-3"
+      data-reveal
+    >
       {
-        useCases.map((useCase) => (
-          <li class="hover:bg-surface bg-white p-8 transition-colors lg:p-10">
-            <Icon name={useCase.icon} size={28} class="text-accent-strong" />
-            <h3 class="mt-6 text-xl font-bold">{useCase.title}</h3>
-            <p class="text-muted mt-3 leading-relaxed">{useCase.text}</p>
+        applications.items.map((item) => (
+          <li class="flex flex-col gap-3 bg-white p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-6 lg:p-7">
+            <span class="bg-accent-wash text-brand inline-flex size-10 shrink-0 items-center justify-center rounded-lg sm:size-11">
+              <Icon name={item.icon} size={22} />
+            </span>
+            <h3 class="text-[0.9375rem] leading-snug font-bold sm:text-lg">{item.title}</h3>
           </li>
         ))
       }

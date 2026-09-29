@@ -1,34 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import Ecosystem from '../components/home/Ecosystem.astro';
-import Differentiation from '../components/home/Differentiation.astro';
-import Services from '../components/home/Services.astro';
-import FeaturedCourse from '../components/home/FeaturedCourse.astro';
-import Method from '../components/home/Method.astro';
 import UseCases from '../components/home/UseCases.astro';
+import FeaturedCourse from '../components/home/FeaturedCourse.astro';
+import Profiles from '../components/home/Profiles.astro';
 import Credibility from '../components/home/Credibility.astro';
+import Method from '../components/home/Method.astro';
 import Organizations from '../components/home/Organizations.astro';
-import Resources from '../components/home/Resources.astro';
 import CTASection from '../components/CTASection.astro';
+import { homeSeo, finalCta } from '../data/home';
+
+// La sección de recursos (components/home/Resources.astro) no se renderiza
+// mientras sus contenidos están en revisión editorial.
 ---
 
-<BaseLayout>
+<BaseLayout title={homeSeo.title} description={homeSeo.description}>
   <Hero />
-  <Ecosystem />
-  <Differentiation />
-  <Services />
-  <FeaturedCourse />
-  <Method />
   <UseCases />
+  <FeaturedCourse />
+  <Profiles />
   <Credibility />
+  <Method />
   <Organizations />
-  <Resources />
-  <CTASection
-    title="La IA ya forma parte del trabajo"
-    subtitle="La diferencia está en saber utilizarla."
-    text="SanitIA te ayuda a convertir la inteligencia artificial en una herramienta útil para tu actividad profesional."
-    primary={{ label: 'Explorar formación', href: '/formacion' }}
-    secondary={{ label: 'Contactar con SanitIA', href: '/contacto' }}
-  />
+  <CTASection title={finalCta.title} text={finalCta.text} primary={finalCta.primary} />
 </BaseLayout>

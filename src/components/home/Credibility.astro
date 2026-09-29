@@ -1,61 +1,68 @@
 ---
-import FounderCard from '../FounderCard.astro';
-import Icon from '../Icon.astro';
-import { metrics, testimonials } from '../../data/credibility';
+import { Image } from 'astro:assets';
+import { founder, testimonials } from '../../data/credibility';
+import { credibility } from '../../data/home';
 
-const pillars = [
-  { icon: 'building', label: 'Tecnología sanitaria' },
-  { icon: 'workflow', label: 'Sistemas de información' },
-  { icon: 'layers', label: 'Transformación digital' },
-  { icon: 'lightbulb', label: 'IA aplicada en entornos profesionales' },
-] as const;
+// La fotografía se añade en credibility.ts (founder.photo). Sin ella se muestra un monograma decorativo.
+const photo = founder.photo;
 ---
 
-<section class="section-y" aria-labelledby="credibilidad-title">
-  <div class="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
-    <div class="lg:col-span-6" data-reveal>
-      <p class="eyebrow mb-4">Experiencia</p>
-      <h2 id="credibilidad-title" class="text-h2">Tecnología sanitaria, IA y experiencia profesional</h2>
-      <p class="text-lead text-muted mt-6">
-        SanitIA nace de la experiencia profesional en tecnología sanitaria, sistemas de información y transformación
-        digital, combinada con la aplicación práctica de herramientas de inteligencia artificial en entornos profesionales.
-      </p>
-      <FounderCard class="mt-10 max-w-xl" />
-    </div>
+<section class="border-line border-y bg-white py-12 sm:py-16 lg:py-24" aria-labelledby="credibilidad-title">
+  <div class="container-site grid gap-10 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-7" data-reveal>
+      <p class="eyebrow mb-4">Quién está detrás</p>
+      <h2 id="credibilidad-title" class="text-h2">{credibility.title}</h2>
 
-    <div class="lg:col-span-5 lg:col-start-8" data-reveal>
-      <ul class="divide-line border-line divide-y border-y">
+      <div class="mt-8 flex items-center gap-4 sm:gap-5">
         {
-          pillars.map((pillar) => (
-            <li class="flex items-center gap-4 py-5">
-              <span class="bg-accent-wash text-brand inline-flex size-11 items-center justify-center rounded-lg">
-                <Icon name={pillar.icon} size={22} />
-              </span>
-              <span class="font-display text-brand-deep text-lg font-semibold">{pillar.label}</span>
-            </li>
-          ))
+          photo ? (
+            <Image
+              src={photo}
+              alt={`Retrato de ${credibility.founderName}`}
+              width={96}
+              height={96}
+              densities={[1, 2]}
+              class="size-16 shrink-0 rounded-full object-cover sm:size-20"
+            />
+          ) : (
+            <span
+              aria-hidden="true"
+              class="bg-brand-deep font-display text-accent-soft inline-flex size-16 shrink-0 items-center justify-center rounded-full text-xl font-bold sm:size-20 sm:text-2xl"
+            >
+              {credibility.founderInitials}
+            </span>
+          )
         }
-      </ul>
+        <p>
+          <span class="font-display text-brand-deep block text-lg font-bold sm:text-xl">{credibility.founderName}</span>
+          <span class="text-accent-strong mt-0.5 block text-[0.9375rem] font-semibold">{credibility.founderRole}</span>
+        </p>
+      </div>
+
+      <div class="text-muted mt-6 max-w-2xl space-y-4 leading-relaxed sm:text-[1.0625rem]">
+        {credibility.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
     </div>
 
-    {
-      metrics.length > 0 && (
-        <dl class="border-line grid gap-8 border-t pt-10 sm:grid-cols-2 lg:col-span-12 lg:grid-cols-4">
-          {metrics.map((metric) => (
-            <div class="flex flex-col-reverse">
-              <dt class="text-muted mt-1 text-sm">{metric.label}</dt>
-              <dd class="font-display text-brand-deep text-4xl font-bold">{metric.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )
-    }
+    <dl
+      class="divide-line border-line grid divide-y border-y sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:col-span-4 lg:col-start-9 lg:grid-cols-1 lg:divide-x-0 lg:divide-y lg:self-center"
+      data-reveal
+    >
+      {
+        credibility.highlights.map((item) => (
+          <div class="flex flex-col-reverse py-4 sm:px-5 sm:py-6 sm:first:pl-0 lg:px-0 lg:py-7">
+            <dt class="text-muted mt-1 text-[0.9375rem]">{item.label}</dt>
+            <dd class="font-display text-brand-deep text-2xl font-bold tracking-tight sm:text-[1.75rem]">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
 
     {
       testimonials.length > 0 && (
         <div class="grid gap-6 md:grid-cols-2 lg:col-span-12">
           {testimonials.map((t) => (
-            <figure class="border-line rounded-xl border bg-white p-8">
+            <figure class="border-line bg-surface rounded-xl border p-8">
               <blockquote class="text-ink text-lg leading-relaxed">“{t.quote}”</blockquote>
               <figcaption class="mt-6 text-sm">
                 <span class="text-brand-deep font-semibold">{t.name}</span>

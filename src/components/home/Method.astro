@@ -1,23 +1,44 @@
 ---
-import MethodSteps from '../MethodSteps.astro';
 import Button from '../Button.astro';
+import { method } from '../../data/home';
 ---
 
-<section class="section-y" aria-labelledby="metodo-title">
+<section class="bg-brand-deep relative isolate overflow-hidden py-12 sm:py-16 lg:py-24" aria-labelledby="metodo-title">
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10"
+    style="background-image: linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to right, transparent, black 60%);"
+  >
+  </div>
+
   <div class="container-site">
-    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between" data-reveal>
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10" data-reveal>
       <div class="max-w-2xl">
-        <p class="eyebrow mb-4">Método SanitIA</p>
-        <h2 id="metodo-title" class="text-h2">Aprender. Aplicar. Integrar.</h2>
-        <p class="text-lead text-muted mt-5">
-          Un proceso sencillo y flexible que parte de la comprensión y termina en el uso cotidiano de la IA.
-        </p>
+        <p class="eyebrow text-accent! mb-4">Método SanitIA</p>
+        <h2 id="metodo-title" class="text-h2 text-white">{method.title}</h2>
       </div>
-      <Button href="/metodo-sanitia" variant="secondary" arrow class="self-start md:self-auto">Conocer el método</Button>
+      <Button href={method.cta.href} variant="outline-light" arrow class="self-start md:self-auto">
+        {method.cta.label}
+      </Button>
     </div>
 
-    <div class="mt-14 lg:mt-20" data-reveal>
-      <MethodSteps />
-    </div>
+    <ol
+      class="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:mt-14 lg:grid-cols-4 lg:before:absolute lg:before:inset-x-0 lg:before:top-5 lg:before:h-px lg:before:bg-white/15 lg:before:content-[''] relative"
+      data-reveal
+    >
+      {
+        method.steps.map((step, i) => (
+          <li class="flex gap-4 lg:flex-col lg:gap-0">
+            <span class="bg-accent text-brand-ink font-display ring-brand-deep relative z-10 inline-flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold lg:ring-8">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="lg:mt-5">
+              <h3 class="text-xl font-bold text-white">{step.name}</h3>
+              <p class="mt-1.5 leading-relaxed text-slate-300">{step.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>

@@ -33,29 +33,29 @@ export interface MethodStep {
 
 export const methodSteps: MethodStep[] = [
   {
-    name: 'Descubrir',
-    summary: 'Comprender qué puede aportar realmente la IA.',
+    name: 'Comprender',
+    summary: 'Conocer las capacidades, límites y riesgos de la IA.',
     detail:
-      'Partimos de una base común: qué es la inteligencia artificial, qué puede hacer y qué no, y cuáles son sus límites y riesgos en el ámbito de la salud.',
+      'Partimos de una base común: qué puede hacer la inteligencia artificial, qué no, y cuáles son sus límites y riesgos en el ámbito de la salud.',
     icon: 'compass',
   },
   {
-    name: 'Aplicar',
-    summary: 'Identificar casos de uso relacionados con el trabajo cotidiano.',
+    name: 'Seleccionar',
+    summary: 'Elegir la tarea, la herramienta y las fuentes adecuadas.',
     detail:
-      'Analizamos las tareas de cada perfil para detectar dónde la IA puede aportar valor de forma concreta y dónde no tiene sentido utilizarla.',
+      'Analizamos las tareas de cada perfil para decidir en cuáles tiene sentido utilizar la IA, con qué herramienta y a partir de qué fuentes de información.',
     icon: 'target',
   },
   {
     name: 'Practicar',
-    summary: 'Trabajar con situaciones, información y problemas reales.',
+    summary: 'Trabajar con casos y revisar los resultados.',
     detail:
-      'La mayor parte del aprendizaje es práctica: ejercicios basados en situaciones del día a día, con acompañamiento y revisión.',
+      'La mayor parte del aprendizaje es práctica: ejercicios basados en situaciones del día a día, revisando siempre los resultados antes de darlos por buenos.',
     icon: 'pen',
   },
   {
     name: 'Integrar',
-    summary: 'Incorporar la IA de forma sostenible al flujo de trabajo.',
+    summary: 'Aplicar lo aprendido de forma responsable en la actividad profesional.',
     detail:
       'El objetivo final es que la IA forme parte del trabajo habitual con criterio, de forma responsable y sostenible en el tiempo.',
     icon: 'layers',

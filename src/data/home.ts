@@ -1,4 +1,5 @@
 import type { IconName } from '../lib/icons';
+import { methodSteps } from './content';
 
 /**
  * Textos específicos de la Home.
@@ -88,12 +89,8 @@ export const credibility = {
 /* ---------- 6. Método ---------- */
 export const method = {
   title: 'Comprender, practicar e integrar la IA en tu trabajo',
-  steps: [
-    { name: 'Comprender', text: 'Capacidades, límites y riesgos.' },
-    { name: 'Seleccionar', text: 'Elegir la tarea, la herramienta y las fuentes adecuadas.' },
-    { name: 'Practicar', text: 'Trabajar con casos y revisar los resultados.' },
-    { name: 'Integrar', text: 'Aplicar lo aprendido de forma responsable en la actividad profesional.' },
-  ],
+  /** Misma secuencia y definiciones que la página del método (content.ts). */
+  steps: methodSteps.map((step) => ({ name: step.name, text: step.summary })),
   cta: { label: 'Conocer el Método SanitIA', href: '/metodo-sanitia' },
 };
 

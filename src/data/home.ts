@@ -88,7 +88,7 @@ export const credibility = {
 
 /* ---------- 6. Método ---------- */
 export const method = {
-  title: 'Comprender, practicar e integrar la IA en tu trabajo',
+  title: 'Cómo aprenderás a aplicar la IA en tu trabajo',
   /** Misma secuencia y definiciones que la página del método (content.ts). */
   steps: methodSteps.map((step) => ({ name: step.name, text: step.summary })),
   cta: { label: 'Conocer el Método SanitIA', href: '/metodo-sanitia' },

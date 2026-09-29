@@ -288,22 +288,24 @@ Las herramientas concretas pueden mostrarse como herramientas utilizadas, nunca 
 
 ### 8.6 Método SanitIA
 
-Título:
-**Aprender. Aplicar. Integrar.**
+Título de la página del método:
+**Comprender. Seleccionar. Practicar. Integrar.**
 
-Fases iniciales:
+Fases vigentes, aprobadas por el propietario (sustituyen a la secuencia anterior Descubrir / Aplicar / Practicar / Integrar, que no debe restaurarse):
 
-1. **Descubrir**
-   Comprender qué puede aportar realmente la IA.
+1. **Comprender**
+   Conocer las capacidades, límites y riesgos de la IA.
 
-2. **Aplicar**
-   Identificar casos de uso relacionados con el trabajo cotidiano.
+2. **Seleccionar**
+   Elegir la tarea, la herramienta y las fuentes adecuadas.
 
 3. **Practicar**
-   Trabajar con situaciones, información y problemas reales.
+   Trabajar con casos y revisar los resultados.
 
 4. **Integrar**
-   Incorporar la IA de forma sostenible al flujo de trabajo.
+   Aplicar lo aprendido de forma responsable en la actividad profesional.
+
+Fuente única: `methodSteps` en `src/data/content.ts` (nombre, `summary` y `detail` de cada fase). La Home y la página `/metodo-sanitia` deben leer de ahí; no duplicar ni redefinir las fases en otros archivos. Si cambian las definiciones, actualizar `methodSteps` y este apartado a la vez.
 
 Mostrar como proceso visual claro. Evitar presentarlo como metodología académica rígida.
 

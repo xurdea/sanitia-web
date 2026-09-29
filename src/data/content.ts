@@ -50,7 +50,7 @@ export const methodSteps: MethodStep[] = [
     name: 'Practicar',
     summary: 'Trabajar con casos y revisar los resultados.',
     detail:
-      'La mayor parte del aprendizaje es práctica: ejercicios basados en situaciones del día a día, revisando siempre los resultados antes de darlos por buenos.',
+      'Trabajamos con ejercicios basados en tareas profesionales y revisamos los resultados antes de darlos por buenos.',
     icon: 'pen',
   },
   {

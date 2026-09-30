@@ -45,7 +45,7 @@ export const training = {
     badge: 'Programa disponible',
     description:
       'Formación práctica para incorporar herramientas de IA a la preparación de visitas, búsqueda y análisis de información, presentaciones, documentación y trabajo con datos.',
-    facts: ['10 horas', '5 sesiones', 'Online', 'Formación práctica'],
+    facts: ['10 horas', '5 sesiones de 2 horas', 'Online en directo', 'Formación práctica'],
     cta: 'Ver programa',
   },
   custom: {

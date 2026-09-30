@@ -45,7 +45,10 @@ const methodology = [
   },
 ] as const;
 
-/** Programa orientativo. PENDIENTE: confirmar contenido detallado y duración por edición. */
+/**
+ * Programa orientativo. Duración confirmada: 10 horas en 5 sesiones de 2 horas.
+ * PENDIENTE: confirmar contenido detallado y fechas por edición (sin reparto de módulos por sesión definido).
+ */
 const program = [
   { title: 'Fundamentos de IA aplicada a la visita médica', text: 'Qué es la IA generativa, cómo funciona, qué puede hacer y cuáles son sus límites y riesgos.' },
   { title: 'Preparación de visitas', text: 'Ordenar el contexto, seleccionar la información relevante y estructurar la conversación.' },
@@ -57,6 +60,8 @@ const program = [
 ];
 
 const summary = [
+  { icon: 'clock', label: 'Duración', value: '10 horas' },
+  { icon: 'layers', label: 'Sesiones', value: '5 sesiones de 2 horas' },
   { icon: 'video', label: 'Modalidad', value: 'Online en directo' },
   { icon: 'message', label: 'Acompañamiento', value: 'Tutorías personalizadas' },
   { icon: 'users', label: 'Comunidad', value: 'Comunidad SanitIA' },
@@ -189,7 +194,7 @@ const summary = [
             ))
           }
         </ol>
-        <p class="text-muted mt-4 text-sm">Programa orientativo. El contenido detallado y la duración se confirman en cada edición.</p>
+        <p class="text-muted mt-4 text-sm">Programa orientativo. El contenido detallado y las fechas se confirman en cada edición.</p>
       </section>
     </div>
 

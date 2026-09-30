@@ -275,6 +275,7 @@ Aplicaciones:
 - Productividad
 
 Características:
+- Duración: 10 horas, en 5 sesiones de 2 horas
 - Online en directo
 - Tutorías personalizadas
 - Comunidad SanitIA
@@ -283,6 +284,8 @@ Características:
 
 CTA:
 **Ver programa completo**
+
+Duración y modalidad confirmadas por el propietario: 10 horas, 5 sesiones de 2 horas, online en directo. No inventar el reparto de los módulos entre sesiones, fechas ni precio hasta que se confirmen.
 
 Las herramientas concretas pueden mostrarse como herramientas utilizadas, nunca como la propuesta principal de valor.
 

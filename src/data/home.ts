@@ -42,11 +42,8 @@ export const applications = {
 export const training = {
   title: 'Dos cursos disponibles y formación a medida',
   featured: {
-    badge: 'Programa disponible',
     description:
       'Formación práctica para incorporar herramientas de IA a la preparación de visitas, búsqueda y análisis de información, presentaciones, documentación y trabajo con datos.',
-    facts: ['10 horas', '5 sesiones de 2 horas', 'Online en directo'],
-    cta: 'Ver programa',
   },
   custom: {
     title: 'Formación a medida',

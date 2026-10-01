@@ -1,6 +1,7 @@
 ---
 import Button from '../Button.astro';
 import Icon from '../Icon.astro';
+import CourseFacts from '../CourseFacts.astro';
 import { featuredCourse, medicalCourse } from '../../data/content';
 import { training } from '../../data/home';
 
@@ -24,11 +25,7 @@ const courses = [
           <p class="eyebrow">{course.audience}</p>
           <h3 class="mt-4 text-2xl leading-tight font-bold tracking-tight sm:text-[1.75rem]">{course.title}</h3>
           <p class="text-muted mt-3 leading-relaxed sm:text-[1.0625rem]">{course.description}</p>
-          <ul class="mt-5 flex flex-wrap gap-2" aria-label="Datos del programa">
-            {training.featured.facts.map((fact) => (
-              <li class="border-line text-brand-deep rounded-md border bg-white px-2.5 py-1 text-sm font-medium">{fact}</li>
-            ))}
-          </ul>
+          <CourseFacts label={`Datos del curso ${course.title}`} />
           <div class="mt-7 lg:mt-auto lg:pt-8">
             <Button href={course.href} size="lg" arrow class="w-full sm:w-auto">Ver programa</Button>
           </div>
@@ -47,6 +44,5 @@ const courses = [
         <Button href={training.custom.cta.href} variant="light" size="lg" arrow class="w-full sm:w-auto">{training.custom.cta.label}</Button>
       </div>
     </article>
-    <p class="text-muted mt-6 text-[0.9375rem]">Todos los cursos incluyen seis meses de seguimiento y tutoría en el canal de Discord de SanitIA.</p>
   </div>
 </section>

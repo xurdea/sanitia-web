@@ -2,8 +2,9 @@
 import Button from '../Button.astro';
 import MediaFrame from '../MediaFrame.astro';
 import Icon from '../Icon.astro';
+import CourseFacts from '../CourseFacts.astro';
 import { featuredCourse, medicalCourse } from '../../data/content';
-import { hero, training } from '../../data/home';
+import { hero } from '../../data/home';
 
 /**
  * Para añadir una fotografía real: colocarla en src/assets/home/ e importarla aquí, p. ej.
@@ -69,39 +70,24 @@ const heroImage = undefined;
           <div class="border-line rounded-card shadow-lift relative ml-auto max-w-md border bg-white p-8 xl:p-10">
             <div aria-hidden="true" class="bg-accent absolute top-0 left-8 h-1 w-16 xl:left-10" />
             <p class="eyebrow">Cursos disponibles</p>
-            <ul class="mt-5 space-y-5" aria-label="Cursos disponibles">
+            <ul class="mt-5 space-y-6" aria-label="Cursos disponibles">
               <li>
                 <a href={medicalCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">IA para médicos</a>
                 <p class="text-muted mt-1 text-sm">Información clínica, Excel y presentaciones</p>
+                <CourseFacts label="Datos del curso de IA para médicos" compact />
               </li>
-              <li class="border-line border-t pt-5">
+              <li class="border-line border-t pt-6">
                 <a href={featuredCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">{featuredCourse.title}</a>
                 <p class="text-muted mt-1 text-sm">Preparación de visitas y trabajo con información</p>
+                <CourseFacts label="Datos del curso de visita médica" compact />
               </li>
             </ul>
-            <ul class="mt-5 flex flex-wrap gap-2" aria-label="Datos comunes de los cursos">
-              {training.featured.facts.map((fact) => (
-                <li class="bg-accent-wash text-brand-deep rounded-md px-2.5 py-1 text-sm font-medium">{fact}</li>
-              ))}
-            </ul>
-            <div class="border-line mt-7 border-t pt-6">
-              <p class="text-brand-deep font-display text-sm font-bold">El enfoque SanitIA</p>
-              <ul class="text-muted mt-3 space-y-2 text-[0.9375rem]">
-                {hero.approach.map((item) => (
-                  <li class="flex items-center gap-2">
-                    <Icon name="check" size={16} class="text-accent-strong" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div class="border-line mt-7 border-t pt-4">
+              <a href="/formacion" class="text-brand hover:text-brand-deep inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold transition-colors">
+                Ver ambos programas
+                <Icon name="arrow-right" size={18} />
+              </a>
             </div>
-            <a
-              href="/formacion"
-              class="text-brand hover:text-brand-deep mt-7 inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold transition-colors"
-            >
-              Ver ambos programas
-              <Icon name="arrow-right" size={18} />
-            </a>
           </div>
         )
       }

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
+import CourseFacts from '../../components/CourseFacts.astro';
 import CTASection from '../../components/CTASection.astro';
 import FollowUp from '../../components/FollowUp.astro';
 import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
@@ -27,11 +28,10 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
           <p class="eyebrow">Formación para médicos</p>
           <h3 class="mt-4 text-3xl font-bold">{medicalCourse.title}</h3>
           <p class="text-lead text-muted mt-4">{medicalCourse.summary}</p>
+          <CourseFacts label="Datos del curso de IA para médicos" />
         </div>
         <div class="border-line mt-8 border-t pt-8">
-          <p class="text-brand-deep font-semibold">{medicalCourse.duration} · {medicalCourse.modality}</p>
-          <p class="text-muted mt-2 text-sm">Incluye 6 meses de tutoría y novedades en el canal de Discord de SanitIA.</p>
-          <ul class="mt-5 flex flex-wrap gap-2" aria-label="Áreas de práctica del curso">
+          <ul class="flex flex-wrap gap-2" aria-label="Áreas de práctica del curso para médicos">
             {medicalCourse.applications.map((item) => (
               <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
             ))}
@@ -48,28 +48,18 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
           <p class="eyebrow">Visita médica · Industria farmacéutica</p>
           <h3 class="mt-4 text-3xl font-bold">{featuredCourse.title}</h3>
           <p class="text-lead text-muted mt-4">{featuredCourse.summary}</p>
-          <p class="text-muted mt-3 text-sm">10 horas · 5 sesiones de 2 horas · Online en directo · 6 meses de tutoría en Discord.</p>
+          <CourseFacts label="Datos del curso de visita médica" />
         </div>
-        <div class="border-line mt-8 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:gap-10">
-          <ul class="flex flex-wrap content-start gap-2 lg:col-span-7">
+        <div class="border-line mt-8 border-t pt-8">
+          <ul class="flex flex-wrap gap-2" aria-label="Áreas de práctica del curso de visita médica">
             {
               featuredCourse.applications.map((item) => (
                 <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
               ))
             }
           </ul>
-          <ul class="text-muted lg:border-line grid gap-3 text-[0.9375rem] sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:border-l lg:pl-10">
-            {
-              featuredCourse.features.slice(0, 4).map((item) => (
-                <li class="flex items-center gap-2.5">
-                  <Icon name={item.icon} size={18} class="text-accent-strong shrink-0" />
-                  {item.label}
-                </li>
-              ))
-            }
-          </ul>
         </div>
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href={featuredCourse.href} arrow>Ver programa completo</Button>
           <Button href="/contacto" variant="secondary">Solicitar información</Button>
         </div>

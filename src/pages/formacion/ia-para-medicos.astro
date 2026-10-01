@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
+import FollowUp from '../../components/FollowUp.astro';
 import { medicalCourse } from '../../data/content';
 
 const outcomes = [
@@ -68,6 +69,10 @@ const program = [
             ordenar datos en Excel y preparar una presentación. La IA es una ayuda para el proceso; la interpretación de
             la evidencia y las decisiones clínicas siguen bajo responsabilidad profesional.
           </p>
+          <p>
+            Como las herramientas evolucionan, el curso enseña criterios que podrás seguir aplicando al evaluar nuevas
+            opciones. El seguimiento posterior permite resolver dudas cuando intentes incorporarlas a tu trabajo.
+          </p>
         </div>
       </section>
 
@@ -103,6 +108,8 @@ const program = [
           comprender, seleccionar, practicar e integrar.
         </p>
       </section>
+
+      <FollowUp />
 
       <section aria-labelledby="programa-title" id="programa" class="scroll-mt-28">
         <h2 id="programa-title" class="text-3xl font-bold">Programa</h2>
@@ -154,6 +161,10 @@ const program = [
           <div>
             <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Modalidad</dt>
             <dd class="text-ink mt-1">{medicalCourse.modality}</dd>
+          </div>
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Después del curso</dt>
+            <dd class="text-ink mt-1">6 meses de seguimiento y tutoría en Discord</dd>
           </div>
           <div>
             <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Enfoque</dt>

@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section class:list={['border-line rounded-card border bg-accent-wash', compact ? 'p-6' : 'p-6 sm:p-8']} aria-labelledby="seguimiento-title">
+  <div class="flex items-start gap-4">
+    <span class="text-brand inline-flex size-11 shrink-0 items-center justify-center rounded-lg bg-white"><Icon name="message" size={22} /></span>
+    <div>
+      <h2 id="seguimiento-title" class="text-brand-deep text-xl font-bold sm:text-2xl">Seis meses de seguimiento después del curso</h2>
+      <p class="text-muted mt-3 leading-relaxed">La asistencia incluye seis meses de seguimiento y tutoría a través del canal de Discord de SanitIA. Podrás plantear dudas sobre la aplicación de lo aprendido y recibir información sobre novedades relevantes en IA.</p>
+      <p class="text-muted mt-3 text-sm leading-relaxed">El canal complementa la formación; no es un espacio para compartir datos de pacientes ni información confidencial.</p>
+    </div>
+  </div>
+</section>

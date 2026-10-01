@@ -119,8 +119,8 @@ export const featuredCourse = {
   ],
   features: [
     { label: 'Online en directo', icon: 'video' },
-    { label: 'Tutorías personalizadas', icon: 'message' },
-    { label: 'Comunidad SanitIA', icon: 'users' },
+    { label: '6 meses de tutoría en Discord', icon: 'message' },
+    { label: 'Novedades de IA en la comunidad SanitIA', icon: 'users' },
     { label: 'Contenido práctico', icon: 'pen' },
     { label: 'Grabaciones disponibles durante un periodo definido en cada edición', icon: 'play' },
   ] satisfies { label: string; icon: IconName }[],

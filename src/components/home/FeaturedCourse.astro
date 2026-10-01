@@ -3,6 +3,11 @@ import Button from '../Button.astro';
 import Icon from '../Icon.astro';
 import { featuredCourse, medicalCourse } from '../../data/content';
 import { training } from '../../data/home';
+
+const courses = [
+  { title: medicalCourse.title, href: medicalCourse.href, audience: 'Para médicos', description: medicalCourse.summary },
+  { title: featuredCourse.title, href: featuredCourse.href, audience: 'Para visita médica', description: training.featured.description },
+] as const;
 ---
 
 <section class="border-line border-y bg-white py-12 sm:py-16 lg:py-24" aria-labelledby="formacion-title">
@@ -12,54 +17,36 @@ import { training } from '../../data/home';
       <h2 id="formacion-title" class="text-h2">{training.title}</h2>
     </div>
 
-    <div class="mt-8 grid gap-4 sm:mt-10 lg:mt-12 lg:grid-cols-12 lg:gap-6" data-reveal>
-      <!-- A) Programa publicado -->
-      <article class="border-line rounded-card bg-surface relative flex flex-col border p-6 sm:p-8 lg:col-span-7 lg:p-10">
-        <div aria-hidden="true" class="bg-accent absolute top-0 left-6 h-1 w-16 sm:left-8 lg:left-10"></div>
-        <p>
-          <span class="bg-accent-wash text-accent-strong inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold tracking-[0.08em] uppercase">
-            <Icon name="check" size={14} />
-            {training.featured.badge}
-          </span>
-        </p>
-        <h3 class="mt-4 text-2xl leading-tight font-bold tracking-tight sm:text-[1.75rem]">{featuredCourse.title}</h3>
-        <p class="text-muted mt-3 max-w-xl leading-relaxed sm:text-[1.0625rem]">{training.featured.description}</p>
-        <ul class="mt-5 flex flex-wrap gap-2" aria-label="Datos del programa">
-          {
-            training.featured.facts.map((fact) => (
+    <div class="mt-8 grid gap-5 sm:mt-10 lg:mt-12 lg:grid-cols-2 lg:gap-6" data-reveal>
+      {courses.map((course) => (
+        <article class="border-line rounded-card bg-surface relative flex flex-col border p-6 sm:p-8 lg:p-10">
+          <div aria-hidden="true" class="bg-accent absolute top-0 left-6 h-1 w-16 sm:left-8 lg:left-10"></div>
+          <p class="eyebrow">{course.audience}</p>
+          <h3 class="mt-4 text-2xl leading-tight font-bold tracking-tight sm:text-[1.75rem]">{course.title}</h3>
+          <p class="text-muted mt-3 leading-relaxed sm:text-[1.0625rem]">{course.description}</p>
+          <ul class="mt-5 flex flex-wrap gap-2" aria-label="Datos del programa">
+            {training.featured.facts.map((fact) => (
               <li class="border-line text-brand-deep rounded-md border bg-white px-2.5 py-1 text-sm font-medium">{fact}</li>
-            ))
-          }
-        </ul>
-        <div class="mt-7 lg:mt-auto lg:pt-8">
-          <Button href={featuredCourse.href} size="lg" arrow class="w-full sm:w-auto">{training.featured.cta}</Button>
-        </div>
-      </article>
-
-      <!-- B) Formación a medida -->
-      <article class="rounded-card bg-brand-deep relative isolate flex flex-col overflow-hidden p-6 sm:p-8 lg:col-span-5 lg:p-10">
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 -z-10"
-          style="background-image: linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px); background-size: 40px 40px; mask-image: linear-gradient(to left, black, transparent 80%);"
-        >
-        </div>
-        <span class="text-accent inline-flex size-11 items-center justify-center rounded-lg bg-white/[0.06]">
-          <Icon name="sliders" size={22} />
-        </span>
-        <h3 class="mt-5 text-2xl leading-tight font-bold tracking-tight text-white sm:text-[1.75rem]">
-          {training.custom.title}
-        </h3>
-        <p class="mt-3 leading-relaxed text-slate-300 sm:text-[1.0625rem]">{training.custom.text}</p>
-        <div class="mt-7 lg:mt-auto lg:pt-8">
-          <Button href={training.custom.cta.href} variant="light" size="lg" arrow class="w-full sm:w-auto">
-            {training.custom.cta.label}
-          </Button>
-        </div>
-      </article>
+            ))}
+          </ul>
+          <div class="mt-7 lg:mt-auto lg:pt-8">
+            <Button href={course.href} size="lg" arrow class="w-full sm:w-auto">Ver programa</Button>
+          </div>
+        </article>
+      ))}
     </div>
-    <p class="text-muted mt-6 text-[0.9375rem]" data-reveal>
-      ¿Eres médico? Conoce el <a href={medicalCourse.href} class="text-brand font-semibold underline underline-offset-4">curso de IA para médicos</a>, centrado en la búsqueda y verificación de información clínica.
-    </p>
+
+    <article class="rounded-card bg-brand-deep relative isolate mt-5 overflow-hidden p-6 sm:p-8 lg:mt-6 lg:p-10" data-reveal>
+      <div aria-hidden="true" class="absolute inset-0 -z-10" style="background-image: linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px); background-size: 40px 40px; mask-image: linear-gradient(to left, black, transparent 80%);"></div>
+      <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div>
+          <span class="text-accent inline-flex size-11 items-center justify-center rounded-lg bg-white/[0.06]"><Icon name="sliders" size={22} /></span>
+          <h3 class="mt-5 text-2xl font-bold text-white sm:text-[1.75rem]">{training.custom.title}</h3>
+          <p class="mt-3 max-w-3xl leading-relaxed text-slate-300 sm:text-[1.0625rem]">{training.custom.text}</p>
+        </div>
+        <Button href={training.custom.cta.href} variant="light" size="lg" arrow class="w-full sm:w-auto">{training.custom.cta.label}</Button>
+      </div>
+    </article>
+    <p class="text-muted mt-6 text-[0.9375rem]">Todos los cursos incluyen seis meses de seguimiento y tutoría en el canal de Discord de SanitIA.</p>
   </div>
 </section>

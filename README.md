@@ -111,6 +111,11 @@ por correo para el formulario `contacto` dirigida a `info@sanitia.es`. Hacer un 
 comprobar que aparece en **Forms** y que llega el aviso al buzón; revisar también la carpeta de correo no deseado.
 El formulario no procesa envíos en `astro preview` ni en el contenedor Docker, que sirven solo para previsualizarlo.
 
+La oferta formativa anuncia seis meses de seguimiento y tutoría en un canal de Discord. Antes de publicar esa
+promesa, preparar el servidor y el canal privado, definir cómo se invita y se retira el acceso al cumplir seis meses,
+quién responderá las consultas y con qué frecuencia se compartirán novedades. No publicar una invitación abierta.
+Revisar la información sobre Discord en `/privacidad` antes del lanzamiento.
+
 Las consultas sin contratación deben borrarse a los 12 meses del último contacto, tanto del correo como del panel de
 Netlify. La casilla de novedades del formulario es opcional: no añadir a envíos comerciales a quienes no la hayan
 marcado o no hayan dado autorización expresa por otro medio.

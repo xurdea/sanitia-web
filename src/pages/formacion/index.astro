@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
+import FollowUp from '../../components/FollowUp.astro';
 import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
 ---
 
@@ -14,7 +15,7 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
   <PageHero
     eyebrow="Formación"
     title="Cursos de IA para profesionales sanitarios"
-    intro="Programas para médicos y visitadores médicos, además de formación a medida para otros perfiles y equipos del sector salud. Tareas reales, verificación de resultados y uso responsable de la IA."
+    intro="Dos cursos de 10 horas para médicos y visita médica. También diseñamos programas de 10 horas en 5 sesiones para otros perfiles y equipos, a partir de sus tareas y necesidades reales."
   />
 
   <section class="section-y" aria-labelledby="programas-title">
@@ -29,6 +30,7 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
         </div>
         <div class="border-line mt-8 border-t pt-8">
           <p class="text-brand-deep font-semibold">{medicalCourse.duration} · {medicalCourse.modality}</p>
+          <p class="text-muted mt-2 text-sm">Incluye 6 meses de tutoría y novedades en el canal de Discord de SanitIA.</p>
           <ul class="mt-5 flex flex-wrap gap-2" aria-label="Áreas de práctica del curso">
             {medicalCourse.applications.map((item) => (
               <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
@@ -46,6 +48,7 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
           <p class="eyebrow">Visita médica · Industria farmacéutica</p>
           <h3 class="mt-4 text-3xl font-bold">{featuredCourse.title}</h3>
           <p class="text-lead text-muted mt-4">{featuredCourse.summary}</p>
+          <p class="text-muted mt-3 text-sm">10 horas · 5 sesiones de 2 horas · Online en directo · 6 meses de tutoría en Discord.</p>
         </div>
         <div class="border-line mt-8 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:gap-10">
           <ul class="flex flex-wrap content-start gap-2 lg:col-span-7">
@@ -71,6 +74,7 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
           <Button href="/contacto" variant="secondary">Solicitar información</Button>
         </div>
       </article>
+      <div class="mt-8"><FollowUp /></div>
     </div>
   </section>
 
@@ -80,9 +84,11 @@ import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
         <p class="eyebrow mb-4">Por perfil</p>
         <h2 id="perfiles-title" class="text-h2">Formación para cada perfil del sector salud</h2>
         <p class="text-lead text-muted mt-5">
-          SanitIA desarrolla programas para distintos ámbitos del ecosistema sanitario. Si no encuentras un programa para
-          tu perfil, cuéntanos qué necesitas.
+          Además de los dos cursos disponibles, creamos formación a medida para enfermería, farmacia, gestión,
+          administración y otros equipos sanitarios. Trabajamos sobre sus tareas y fuentes habituales, siguiendo las
+          cuatro fases del <a href="/metodo-sanitia" class="text-brand underline underline-offset-4">Método SanitIA</a>.
         </p>
+        <p class="text-muted mt-4 leading-relaxed">El formato propuesto es de 10 horas en 5 sesiones online en directo, con seis meses de seguimiento en Discord después del curso.</p>
         <Button href="/contacto" variant="secondary" arrow class="mt-8">Contactar con SanitIA</Button>
       </div>
       <ul class="divide-line border-line divide-y border-y lg:col-span-6 lg:col-start-7">

@@ -11,13 +11,13 @@ export const homeSeo = {
   /** BaseLayout compone "título | SanitIA". */
   title: 'Cursos de IA para profesionales sanitarios',
   description:
-    'Formación práctica en inteligencia artificial para médicos y otros profesionales sanitarios. Cursos por perfil y programas adaptados a equipos y organizaciones.',
+    'Cursos prácticos de IA para médicos y visita médica, y formación a medida para equipos sanitarios. 10 horas, 5 sesiones y 6 meses de tutoría en Discord.',
 };
 
 /* ---------- 1. Hero ---------- */
 export const hero = {
   eyebrow: 'Formación en IA para profesionales y organizaciones sanitarias',
-  text: 'Formación en inteligencia artificial para médicos, enfermería, farmacia, visita médica y equipos de gestión. Aprende a buscar y contrastar información, trabajar con documentación y preparar materiales con revisión profesional y un uso responsable de las herramientas.',
+  text: 'Dos cursos prácticos para médicos y visita médica, y formación a medida para otros equipos sanitarios. Aprende a incorporar la IA con criterio y mantente al día después del curso con seis meses de tutoría en la comunidad SanitIA.',
   primary: { label: 'Ver formación', href: '/formacion' },
   secondary: { label: 'Formación para organizaciones', href: '/empresas' },
   approach: ['Casos de uso reales', 'Verificación de resultados', 'Uso responsable'],
@@ -40,17 +40,17 @@ export const applications = {
 
 /* ---------- 3. Formación ---------- */
 export const training = {
-  title: 'Formación especializada en IA aplicada a sanidad',
+  title: 'Dos cursos disponibles y formación a medida',
   featured: {
     badge: 'Programa disponible',
     description:
       'Formación práctica para incorporar herramientas de IA a la preparación de visitas, búsqueda y análisis de información, presentaciones, documentación y trabajo con datos.',
-    facts: ['10 horas', '5 sesiones de 2 horas', 'Online en directo', 'Formación práctica'],
+    facts: ['10 horas', '5 sesiones de 2 horas', 'Online en directo'],
     cta: 'Ver programa',
   },
   custom: {
     title: 'Formación a medida',
-    text: 'Diseñamos programas para profesionales, equipos y organizaciones sanitarias a partir de su perfil, nivel y necesidades reales.',
+    text: 'Adaptamos el Método SanitIA a enfermería, farmacia, gestión y personal no asistencial. Partimos de sus tareas reales y diseñamos un programa de 10 horas en 5 sesiones online en directo.',
     cta: { label: 'Cuéntanos qué necesitas', href: '/contacto' },
   },
 };
@@ -58,7 +58,7 @@ export const training = {
 /* ---------- 4. Perfiles ---------- */
 export const profiles = {
   title: 'Una formación pensada para diferentes perfiles del sector sanitario',
-  note: 'Ejemplos de aplicación por perfil. Los contenidos se adaptan a la actividad de cada profesional y equipo.',
+  note: 'Además de los cursos para médicos y visita médica, diseñamos formación a medida de 10 horas en 5 sesiones para estos perfiles, siguiendo el Método SanitIA.',
   items: [
     { name: 'Medicina', text: 'Información científica, documentación, sesiones y tareas profesionales.' },
     { name: 'Enfermería', text: 'Protocolos, materiales educativos y organización de información.' },
@@ -74,7 +74,7 @@ export const credibility = {
   title: 'Experiencia sanitaria aplicada a la formación en IA',
   founderName: 'Jorge Álvarez Rodríguez',
   founderRole: 'Fundador de SanitIA',
-  founderInitials: 'JÁ',
+  founderInitials: 'JA',
   paragraphs: [
     'Ingeniero Informático y consultor especializado en tecnología sanitaria, transformación digital e Inteligencia Artificial aplicada al sector salud. Cuenta con más de 20 años de experiencia profesional en proyectos de tecnología sanitaria, sistemas de información e imagen médica digital.',
     'En SanitIA traslada esa experiencia al ámbito formativo con un objetivo concreto: ayudar a profesionales y organizaciones sanitarias a incorporar la IA de forma práctica, responsable y aplicable a su trabajo real.',
@@ -97,7 +97,7 @@ export const method = {
 /* ---------- 7. Organizaciones ---------- */
 export const organizations = {
   title: 'Formación en IA para organizaciones sanitarias',
-  text: 'Diseñamos programas adaptados a las funciones del equipo, su nivel de conocimiento y las tareas en las que quiere incorporar Inteligencia Artificial.',
+  text: 'Diseñamos programas de 10 horas en 5 sesiones, adaptados a las funciones y necesidades del equipo. El aprendizaje sigue con seis meses de tutoría y actualizaciones a través de la comunidad SanitIA en Discord.',
   types: [
     { label: 'Hospitales', icon: 'building' },
     { label: 'Colegios profesionales', icon: 'shield' },

@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
+import FollowUp from '../../components/FollowUp.astro';
 import { featuredCourse } from '../../data/content';
 
 const audience = [
@@ -34,13 +35,13 @@ const methodology = [
   },
   {
     icon: 'message',
-    title: 'Tutorías personalizadas',
-    text: 'Acompañamiento individual para resolver dudas y aplicar lo aprendido.',
+    title: 'Tutoría durante seis meses',
+    text: 'Un canal de Discord para plantear dudas al aplicar lo aprendido después del curso.',
   },
   {
     icon: 'users',
     title: 'Comunidad de seguimiento',
-    text: 'Un espacio compartido en la Comunidad SanitIA para seguir aprendiendo con otros participantes.',
+    text: 'Novedades relevantes sobre IA compartidas desde SanitIA durante el seguimiento.',
   },
 ] as const;
 
@@ -73,8 +74,7 @@ const summary = [
   { icon: 'layers', label: 'Sesiones', value: '5 sesiones de 2 horas' },
   { icon: 'calendar', label: 'Ritmo', value: '1 sesión por semana · 5 semanas' },
   { icon: 'video', label: 'Modalidad', value: 'Online en directo' },
-  { icon: 'message', label: 'Acompañamiento', value: 'Tutorías personalizadas' },
-  { icon: 'users', label: 'Comunidad', value: 'Comunidad SanitIA' },
+  { icon: 'message', label: 'Acompañamiento', value: '6 meses de tutoría en Discord' },
   { icon: 'play', label: 'Grabaciones', value: 'Disponibles durante un periodo definido en cada edición' },
   { icon: 'calendar', label: 'Fechas y condiciones', value: 'Se informan en cada edición' },
 ] as const;
@@ -112,6 +112,10 @@ const summary = [
           <p>
             El enfoque no gira en torno a una herramienta concreta, sino en torno al trabajo: qué tareas se pueden
             mejorar, cómo hacerlo y con qué criterios.
+          </p>
+          <p>
+            Las herramientas cambian con rapidez. Aprender a valorar sus resultados y mantenerse al día ayuda a
+            incorporarlas al trabajo sin depender de una aplicación concreta.
           </p>
         </div>
       </section>
@@ -182,6 +186,8 @@ const summary = [
           }
         </ul>
       </section>
+
+      <FollowUp />
 
       <section aria-labelledby="herramientas">
         <h2 id="herramientas" class="text-3xl font-bold">Herramientas utilizadas</h2>

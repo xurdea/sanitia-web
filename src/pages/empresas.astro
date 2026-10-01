@@ -14,20 +14,20 @@ const adaptation = [
 
 const formats = [
   {
-    title: 'Formación para equipos',
-    text: 'Programas para departamentos y equipos que necesitan una base común para aplicar la IA en su trabajo.',
+    title: 'Enfermería',
+    text: 'Búsqueda y contraste de información, materiales educativos, protocolos y organización de documentación.',
   },
   {
-    title: 'Programas personalizados',
-    text: 'Itinerarios diseñados a partir de los perfiles, procesos y objetivos de la organización.',
+    title: 'Farmacia',
+    text: 'Fuentes oficiales, documentación de medicamentos, síntesis de información y comunicación profesional.',
   },
   {
-    title: 'Talleres',
-    text: 'Sesiones centradas en un caso de uso o una necesidad concreta, con un resultado práctico.',
+    title: 'Gestión y administración',
+    text: 'Informes, hojas de cálculo, comunicaciones y tareas repetitivas con revisión humana.',
   },
   {
-    title: 'Sesiones prácticas',
-    text: 'Trabajo aplicado sobre situaciones reales del equipo, con acompañamiento.',
+    title: 'Equipos multidisciplinares',
+    text: 'Un programa compartido con ejercicios diferenciados según las funciones y responsabilidades de cada participante.',
   },
 ];
 
@@ -35,7 +35,7 @@ const steps = [
   { title: 'Conversación inicial', text: 'Entendemos el contexto, los perfiles y los objetivos.' },
   { title: 'Propuesta', text: 'Diseñamos un programa ajustado a las necesidades detectadas.' },
   { title: 'Formación', text: 'Impartimos el programa con un enfoque práctico.' },
-  { title: 'Seguimiento', text: 'Revisamos la aplicación de lo aprendido en el trabajo diario.' },
+  { title: 'Seguimiento', text: 'Tras el curso, seis meses de tutoría y novedades de IA en el canal de Discord de SanitIA.' },
 ];
 ---
 
@@ -46,7 +46,7 @@ const steps = [
   <PageHero
     eyebrow="Empresas y organizaciones"
     title="Formación en IA adaptada a tu organización"
-    intro="Diseñamos programas de formación para equipos del sector salud, adaptados al perfil de los participantes, sus procesos de trabajo, su nivel de conocimiento y los objetivos de la organización."
+    intro="Programas a medida de 10 horas en 5 sesiones online en directo. Adaptamos el Método SanitIA a las funciones del equipo y acompañamos su aplicación durante seis meses a través de Discord."
   >
     <div class="mt-10 flex flex-col gap-3 sm:flex-row">
       <Button href="/contacto" size="lg" arrow>Solicitar una propuesta</Button>
@@ -61,7 +61,7 @@ const steps = [
           <p class="eyebrow mb-4">Adaptación</p>
           <h2 id="adaptacion-title" class="text-h2">Cada equipo parte de un punto distinto</h2>
           <p class="text-lead text-muted mt-5">
-            Por eso cada programa se diseña a partir de cuatro variables.
+            Por eso cada programa parte de sus tareas reales. Seguimos las fases del <a href="/metodo-sanitia" class="text-brand underline underline-offset-4">Método SanitIA</a>: comprender, seleccionar, practicar e integrar.
           </p>
         </div>
       </div>
@@ -87,7 +87,7 @@ const steps = [
     <div class="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-4">
         <p class="eyebrow mb-4">Formatos</p>
-        <h2 id="formatos-title" class="text-h2">Qué podemos hacer con tu equipo</h2>
+        <h2 id="formatos-title" class="text-h2">Formación a medida por perfil</h2>
       </div>
       <ol class="border-line border-t lg:col-span-8">
         {
@@ -129,7 +129,7 @@ const steps = [
 
   <CTASection
     title="Lleva la IA a tu equipo"
-    text="Cuéntanos qué necesita tu organización y preparamos una propuesta adaptada."
+    text="Cuéntanos qué necesita tu organización y preparamos un programa de 10 horas en 5 sesiones, con seis meses de seguimiento en Discord."
     primary={{ label: 'Solicitar una propuesta', href: '/contacto' }}
     secondary={{ label: 'Ver formación', href: '/formacion' }}
   />

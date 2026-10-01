@@ -14,19 +14,26 @@ export const site = {
   lang: 'es',
   year: 2026,
   /** Correo público de contacto (contacto, pie y páginas legales). */
-  contactEmail: 'info@sanitia.es' as string | null,
+  contactEmail: 'info@sanitia.es',
   social: {
     linkedin: 'https://www.linkedin.com/company/sanitia/' as string | null,
     /** PENDIENTE: invitación a Discord cuando proceda. */
     discord: null as string | null,
   },
-  /** PENDIENTE: datos legales del titular. No inventar. */
+  /** Datos legales del titular, confirmados por el titular. No inventar información legal. */
   legal: {
-    owner: '[PENDIENTE: nombre o razón social del titular]',
-    taxId: '[PENDIENTE: NIF/CIF]',
-    address: '[PENDIENTE: domicilio]',
+    owner: 'Jorge Álvarez Rodríguez',
+    ownerType: 'Persona física',
+    taxId: '11438705T',
+    address: 'Calle Pintor El Greco, s/n, 03110 Mutxamiel (Alicante)',
     email: 'info@sanitia.es',
-    registry: '[PENDIENTE: datos registrales, si aplican]',
+    domain: 'www.sanitia.es',
+    hosting: 'Netlify',
+    hostingPrivacyUrl: 'https://www.netlify.com/gdpr-ccpa/',
+    emailProvider: 'IONOS',
+    emailProviderPrivacyUrl: 'https://www.ionos.es/ayuda/proteccion-de-datos/',
+    /** Plazo de conservación de consultas que no dan lugar a contratación. */
+    retention: '12 meses desde el último contacto',
   },
 } as const;
 

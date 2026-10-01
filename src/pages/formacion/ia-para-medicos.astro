@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import CTASection from '../../components/CTASection.astro';
+import { medicalCourse } from '../../data/content';
+
+const outcomes = [
+  'Formular preguntas de búsqueda y localizar fuentes clínicas y científicas pertinentes.',
+  'Comprobar las referencias, la actualidad y el alcance de la información que devuelve una herramienta de IA.',
+  'Trabajar con documentación y datos en Excel sin dar por buenos resultados no verificados.',
+  'Preparar materiales y presentaciones con referencias trazables y revisión profesional.',
+] as const;
+
+const program = [
+  {
+    title: 'Fundamentos y uso responsable',
+    text: 'Qué puede aportar la IA generativa al trabajo médico, cuáles son sus límites y cómo proteger la información sensible.',
+  },
+  {
+    title: 'Búsqueda de información clínica',
+    text: 'Cómo plantear preguntas, localizar guías, artículos y otras fuentes pertinentes, y volver siempre al documento original.',
+  },
+  {
+    title: 'Contraste y síntesis de evidencia',
+    text: 'Comparar resultados, identificar su fecha y procedencia, detectar afirmaciones sin respaldo y resumir con cautela.',
+  },
+  {
+    title: 'Excel y trabajo con documentación',
+    text: 'Organizar tablas, revisar fórmulas y extraer información de documentos con ejemplos sin datos identificativos de pacientes.',
+  },
+  {
+    title: 'Presentaciones y aplicación al trabajo',
+    text: 'Preparar materiales formativos o profesionales, citar las fuentes y revisar cada resultado antes de compartirlo.',
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Curso de IA para médicos: información clínica y productividad"
+  description="Curso de IA para médicos: 10 horas en 5 sesiones online en directo. Busca y verifica información clínica y trabaja con Excel y presentaciones."
+>
+  <PageHero
+    eyebrow="Formación para médicos"
+    title="Curso de IA para médicos"
+    intro={medicalCourse.summary}
+    breadcrumb={[{ label: 'Inicio', href: '/' }, { label: 'Formación', href: '/formacion' }]}
+  >
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <Button href="/contacto" size="lg" arrow>Solicitar información</Button>
+      <Button href="#programa" size="lg" variant="secondary">Ver programa</Button>
+    </div>
+  </PageHero>
+
+  <div class="container-site grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-12">
+    <div class="space-y-16 lg:col-span-8">
+      <section aria-labelledby="enfoque">
+        <h2 id="enfoque" class="text-3xl font-bold">IA aplicada al trabajo médico, con criterio clínico</h2>
+        <div class="prose-sanitia text-muted mt-6">
+          <p>
+            Este curso para personal médico se dirige a profesionales que quieren utilizar la inteligencia artificial
+            para buscar información, trabajar con documentación y preparar materiales profesionales. El foco está en
+            distinguir una respuesta bien redactada de otra respaldada por fuentes clínicas fiables.
+          </p>
+          <p>
+            Se practican tareas como formular una pregunta de búsqueda, comprobar una referencia en su fuente original,
+            ordenar datos en Excel y preparar una presentación. La IA es una ayuda para el proceso; la interpretación de
+            la evidencia y las decisiones clínicas siguen bajo responsabilidad profesional.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="destinatarios">
+        <h2 id="destinatarios" class="text-3xl font-bold">A quién se dirige</h2>
+        <p class="text-muted mt-5 text-lg leading-relaxed">
+          A médicos de distintas especialidades que quieran incorporar herramientas de IA a la búsqueda de información,
+          la docencia, el análisis de documentación y otras tareas de su actividad profesional.
+        </p>
+      </section>
+
+      <section aria-labelledby="objetivos">
+        <h2 id="objetivos" class="text-3xl font-bold">Qué aprenderás a hacer</h2>
+        <ul class="mt-7 grid gap-4 sm:grid-cols-2">
+          {outcomes.map((item) => (
+            <li class="border-line flex gap-3 rounded-xl border bg-white p-5">
+              <Icon name="check" size={20} class="text-accent-strong mt-1 shrink-0" />
+              <span class="leading-relaxed">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="metodologia">
+        <h2 id="metodologia" class="text-3xl font-bold">Metodología</h2>
+        <p class="text-muted mt-5 text-lg leading-relaxed">
+          Cinco sesiones online en directo de dos horas. Se combinan explicaciones, demostraciones y ejercicios
+          relacionados con el trabajo médico. En cada caso se revisa cómo se obtuvo la respuesta, qué dicen las fuentes
+          originales y qué límites tiene el resultado generado por la IA.
+        </p>
+        <p class="text-muted mt-4">
+          El programa sigue el <a href="/metodo-sanitia" class="text-brand underline underline-offset-4">Método SanitIA</a>:
+          comprender, seleccionar, practicar e integrar.
+        </p>
+      </section>
+
+      <section aria-labelledby="programa-title" id="programa" class="scroll-mt-28">
+        <h2 id="programa-title" class="text-3xl font-bold">Programa</h2>
+        <p class="text-muted mt-4 text-lg">Cinco bloques de trabajo práctico:</p>
+        <ol class="border-line mt-7 border-t">
+          {program.map((block, i) => (
+            <li class="border-line grid gap-2 border-b py-6 sm:grid-cols-[6.5rem_1fr]">
+              <span class="font-display text-accent-strong pt-0.5 text-sm font-bold tracking-[0.1em] whitespace-nowrap">
+                Bloque {i + 1}
+              </span>
+              <div>
+                <h3 class="text-lg font-bold">{block.title}</h3>
+                <p class="text-muted mt-1 leading-relaxed">{block.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="text-muted mt-4 text-sm">Programa orientativo; el contenido detallado se confirma en cada edición.</p>
+      </section>
+
+      <section aria-labelledby="seguridad">
+        <h2 id="seguridad" class="text-3xl font-bold">Verificación y privacidad en cada ejercicio</h2>
+        <p class="text-muted mt-5 text-lg leading-relaxed">
+          Se revisan las fuentes originales, las fechas y los límites de cada resultado. No se utilizan datos de pacientes
+          ni información confidencial en herramientas que no estén autorizadas por la organización. El curso no enseña a
+          delegar el diagnóstico ni las decisiones terapéuticas en una herramienta de IA.
+        </p>
+        <p class="text-muted mt-5">
+          Para consultar las fuentes originales, resultan útiles recursos como las <a href="https://portal.guiasalud.es/" rel="noopener" class="text-brand underline underline-offset-4">guías de práctica clínica de GuíaSalud</a> y la base bibliográfica <a href="https://pubmed.ncbi.nlm.nih.gov/" rel="noopener" class="text-brand underline underline-offset-4">PubMed</a>. Una respuesta de IA no sustituye la lectura y valoración de esos documentos.
+        </p>
+        <p class="text-muted mt-5">
+          Puedes empezar por la guía <a href="/recursos/buscar-verificar-informacion-clinica-ia" class="text-brand underline underline-offset-4">cómo buscar y verificar información clínica con IA</a> y consultar después un ejemplo de uso de <a href="/recursos/perplexity-investigacion-cientifica" class="text-brand underline underline-offset-4">Perplexity en investigación científica</a>.
+        </p>
+      </section>
+    </div>
+
+    <aside class="lg:col-span-4" aria-label="Resumen del curso">
+      <div class="border-line shadow-soft rounded-card border bg-white p-7 lg:sticky lg:top-28">
+        <p class="font-display text-brand-deep text-lg font-bold">Datos del curso</p>
+        <dl class="mt-6 space-y-5">
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Destinatarios</dt>
+            <dd class="text-ink mt-1">Médicos</dd>
+          </div>
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Duración</dt>
+            <dd class="text-ink mt-1">{medicalCourse.duration}</dd>
+          </div>
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Modalidad</dt>
+            <dd class="text-ink mt-1">{medicalCourse.modality}</dd>
+          </div>
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Enfoque</dt>
+            <dd class="text-ink mt-1">Información clínica, Excel y presentaciones</dd>
+          </div>
+          <div>
+            <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">Fechas</dt>
+            <dd class="text-ink mt-1">Se informan en cada edición</dd>
+          </div>
+        </dl>
+        <Button href="/contacto" arrow class="mt-8 w-full">Solicitar información</Button>
+      </div>
+    </aside>
+  </div>
+
+  <CTASection
+    title="¿Quieres este curso para tu equipo?"
+    text="El programa puede adaptarse a los perfiles y necesidades de una organización sanitaria."
+    primary={{ label: 'Solicitar una propuesta', href: '/contacto' }}
+    secondary={{ label: 'Explorar formación', href: '/formacion' }}
+  />
+</BaseLayout>

@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
-import MediaFrame from '../../components/MediaFrame.astro';
 import CTASection from '../../components/CTASection.astro';
 import { featuredCourse } from '../../data/content';
 
@@ -45,6 +44,16 @@ const methodology = [
   },
 ] as const;
 
+/** Casos prácticos confirmados por el propietario (presentación del curso). Sin reparto por sesión. */
+const practice = [
+  { icon: 'lightbulb', text: 'Mejorar prompts a partir de ejemplos reales de trabajo.' },
+  { icon: 'search', text: 'Buscar artículos científicos, revisiones y ensayos clínicos con apoyo de la IA.' },
+  { icon: 'chart', text: 'Comparar información científica de distintas fuentes.' },
+  { icon: 'briefcase', text: 'Preparar una visita médica con ayuda de la IA.' },
+  { icon: 'presentation', text: 'Crear una presentación a partir de contenido técnico.' },
+  { icon: 'file-text', text: 'Revisar datos y documentos, contrastando lo que genera la IA.' },
+] as const;
+
 /**
  * Programa orientativo. Duración confirmada: 10 horas en 5 sesiones de 2 horas.
  * PENDIENTE: confirmar contenido detallado y fechas por edición (sin reparto de módulos por sesión definido).
@@ -62,6 +71,7 @@ const program = [
 const summary = [
   { icon: 'clock', label: 'Duración', value: '10 horas' },
   { icon: 'layers', label: 'Sesiones', value: '5 sesiones de 2 horas' },
+  { icon: 'calendar', label: 'Ritmo', value: '1 sesión por semana · 5 semanas' },
   { icon: 'video', label: 'Modalidad', value: 'Online en directo' },
   { icon: 'message', label: 'Acompañamiento', value: 'Tutorías personalizadas' },
   { icon: 'users', label: 'Comunidad', value: 'Comunidad SanitIA' },
@@ -71,8 +81,8 @@ const summary = [
 ---
 
 <BaseLayout
-  title={featuredCourse.title}
-  description="Programa práctico de SanitIA para incorporar la inteligencia artificial a la preparación de visitas, la investigación, el análisis de información, las presentaciones y la productividad del visitador médico."
+  title="Curso de IA para visitadores médicos: aplicación práctica"
+  description="Curso de IA para visitadores médicos: 10 horas en 5 sesiones online en directo. Preparación de visitas, búsqueda de información y trabajo con documentación."
 >
   <PageHero
     eyebrow="Formación destacada"
@@ -104,13 +114,6 @@ const summary = [
             mejorar, cómo hacerlo y con qué criterios.
           </p>
         </div>
-        <MediaFrame
-          alt="Profesional de la visita médica revisando información antes de una reunión"
-          placeholder="Fotografía: profesional de la visita médica revisando información"
-          aspect="16 / 9"
-          sizes="(min-width: 1024px) 60vw, 100vw"
-          class="border-line mt-10 border"
-        />
       </section>
 
       <section aria-labelledby="destinatarios">
@@ -139,6 +142,25 @@ const summary = [
             ))
           }
         </ol>
+      </section>
+
+      <section aria-labelledby="casos-practicos">
+        <h2 id="casos-practicos" class="text-3xl font-bold">Qué practicarás</h2>
+        <p class="text-muted mt-4 max-w-2xl text-lg leading-relaxed">
+          Durante el curso se trabaja sobre tareas concretas de la visita médica. Algunos de los casos prácticos:
+        </p>
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+          {
+            practice.map((item) => (
+              <li class="border-line flex gap-4 rounded-xl border bg-white p-5">
+                <span class="bg-accent-wash text-brand inline-flex size-10 shrink-0 items-center justify-center rounded-lg">
+                  <Icon name={item.icon} size={20} />
+                </span>
+                <p class="text-ink leading-relaxed">{item.text}</p>
+              </li>
+            ))
+          }
+        </ul>
       </section>
 
       <section aria-labelledby="metodologia">

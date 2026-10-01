@@ -9,16 +9,25 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class:list={['border-line flex items-center gap-5 rounded-xl border bg-white p-5 sm:p-6', className]}>
-  <MediaFrame
-    src={founder.photo}
-    alt={`Retrato de ${founder.name}`}
-    placeholder="Retrato"
-    aspect="1 / 1"
-    sizes="96px"
-    class="w-20 shrink-0 rounded-full! sm:w-24 [&_[data-caption]]:hidden"
-  />
-  <div>
+<div
+  class:list={[
+    'border-line flex items-center gap-5 rounded-xl border bg-white p-5 sm:p-6',
+    !founder.photo && 'border-l-accent border-l-4',
+    className,
+  ]}
+>
+  {
+    founder.photo && (
+      <MediaFrame
+        src={founder.photo}
+        alt={`Retrato de ${founder.name}`}
+        aspect="1 / 1"
+        sizes="96px"
+        class="w-20 shrink-0 rounded-full! sm:w-24"
+      />
+    )
+  }
+  <div class="min-w-0">
     <p class="font-display text-brand-deep text-lg font-bold">{founder.name}</p>
     <p class="text-muted mt-1 text-[0.9375rem] leading-relaxed">{founder.role}</p>
   </div>

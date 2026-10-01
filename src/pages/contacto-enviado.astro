@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Consulta enviada"
+  description="Gracias por contactar con SanitIA. Hemos recibido tu consulta."
+  noindex
+>
+  <PageHero eyebrow="Contacto" title="Gracias por escribirnos" />
+  <section class="section-y">
+    <div class="container-site max-w-3xl">
+      <p class="text-muted text-lg">Hemos recibido tu consulta y te responderemos por correo electrónico.</p>
+      <p class="text-muted mt-4">
+        Si necesitas añadir algo, puedes escribirnos a <a href={`mailto:${site.contactEmail}`} class="text-brand underline underline-offset-4">{site.contactEmail}</a>.
+      </p>
+      <Button href="/" class="mt-8">Volver al inicio</Button>
+    </div>
+  </section>
+</BaseLayout>

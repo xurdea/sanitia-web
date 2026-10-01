@@ -19,7 +19,7 @@ export const getStaticPaths = (async () => {
 
 const { entry, related } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, category, date, readingTime, image, imageAlt, imagePlaceholder, demo } = entry.data;
+const { title, summary, category, date, readingTime, image, imageAlt, demo } = entry.data;
 ---
 
 <BaseLayout title={title} description={summary} type="article">
@@ -55,14 +55,17 @@ const { title, summary, category, date, readingTime, image, imageAlt, imagePlace
     </header>
 
     <div class="container-site py-14 md:py-20">
-      <MediaFrame
-        src={image}
-        alt={imageAlt ?? ''}
-        placeholder={imagePlaceholder ?? 'Imagen del recurso'}
-        aspect="21 / 9"
-        sizes="(min-width: 1216px) 1136px, 100vw"
-        class="border-line mb-14 border"
-      />
+      {
+        image && (
+          <MediaFrame
+            src={image}
+            alt={imageAlt ?? ''}
+            aspect="21 / 9"
+            sizes="(min-width: 1216px) 1136px, 100vw"
+            class="border-line mb-14 border"
+          />
+        )
+      }
       <div class="prose-sanitia mx-auto">
         <Content />
       </div>

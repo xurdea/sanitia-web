@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
-import MediaFrame from '../components/MediaFrame.astro';
 import CTASection from '../components/CTASection.astro';
 
 const adaptation = [
@@ -56,36 +55,31 @@ const steps = [
   </PageHero>
 
   <section class="section-y" aria-labelledby="adaptacion-title">
-    <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-      <div class="lg:col-span-5">
-        <MediaFrame
-          alt="Equipo de una organización sanitaria en una sesión de formación"
-          placeholder="Fotografía: equipo en una sesión de trabajo"
-          aspect="4 / 5"
-          sizes="(min-width: 1024px) 40vw, 100vw"
-          class="border-line border"
-        />
+    <div class="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-4">
+        <div class="lg:sticky lg:top-28">
+          <p class="eyebrow mb-4">Adaptación</p>
+          <h2 id="adaptacion-title" class="text-h2">Cada equipo parte de un punto distinto</h2>
+          <p class="text-lead text-muted mt-5">
+            Por eso cada programa se diseña a partir de cuatro variables.
+          </p>
+        </div>
       </div>
-      <div class="lg:col-span-6 lg:col-start-7">
-        <p class="eyebrow mb-4">Adaptación</p>
-        <h2 id="adaptacion-title" class="text-h2">Cada equipo parte de un punto distinto</h2>
-        <p class="text-lead text-muted mt-5">
-          Por eso cada programa se diseña a partir de cuatro variables.
-        </p>
-        <ul class="mt-10 grid gap-8 sm:grid-cols-2">
-          {
-            adaptation.map((item) => (
-              <li>
-                <span class="bg-accent-wash text-brand inline-flex size-11 items-center justify-center rounded-lg">
-                  <Icon name={item.icon} size={22} />
-                </span>
-                <h3 class="mt-4 text-lg font-bold">{item.title}</h3>
-                <p class="text-muted mt-2 leading-relaxed">{item.text}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <ul
+        class="border-line bg-line grid gap-px overflow-hidden rounded-xl border sm:grid-cols-2 lg:col-span-8"
+      >
+        {
+          adaptation.map((item) => (
+            <li class="bg-white p-6 sm:p-8">
+              <span class="bg-accent-wash text-brand inline-flex size-11 items-center justify-center rounded-lg">
+                <Icon name={item.icon} size={22} />
+              </span>
+              <h3 class="mt-5 text-lg font-bold">{item.title}</h3>
+              <p class="text-muted mt-2 leading-relaxed">{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 

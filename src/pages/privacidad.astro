@@ -7,32 +7,128 @@ const { legal } = site;
 <LegalLayout title="Política de privacidad" description="Política de privacidad y protección de datos del sitio web de SanitIA.">
   <h2>Responsable del tratamiento</h2>
   <ul>
-    <li><strong>Responsable:</strong> {legal.owner}</li>
-    <li><strong>NIF/CIF:</strong> {legal.taxId}</li>
-    <li><strong>Domicilio:</strong> {legal.address}</li>
+    <li><strong>Responsable:</strong> {legal.owner} ({legal.ownerType.toLowerCase()})</li>
+    <li><strong>NIF:</strong> {legal.taxId}</li>
+    <li><strong>Domicilio profesional:</strong> {legal.address}</li>
     <li><strong>Correo electrónico:</strong> {legal.email}</li>
   </ul>
 
   <h2>Datos que se tratan</h2>
   <p>
-    Este sitio web no dispone actualmente de formularios ni de áreas de registro, y no utiliza herramientas de analítica
-    ni de publicidad. Solo se tratarán los datos personales que la persona usuaria facilite voluntariamente al contactar
-    con SanitIA a través de los canales indicados.
+    Este sitio web dispone de un formulario de contacto, no tiene áreas de registro y no utiliza herramientas de
+    analítica ni de publicidad. Se pueden tratar los siguientes datos:
+  </p>
+  <ul>
+    <li>
+      <strong>Datos del formulario o de los mensajes enviados a {legal.email}.</strong> Podemos recibir tu nombre,
+      dirección de correo, motivo de la consulta, mensaje y los demás datos que facilites voluntariamente. En el
+      formulario también se registra si has marcado la opción de recibir novedades sobre cursos. Te pedimos que no
+      incluyas datos de salud ni otros datos especialmente protegidos, propios o de terceros.
+    </li>
+    <li>
+      <strong>Datos técnicos de acceso.</strong> Al visitar la web, el proveedor de alojamiento ({legal.hosting}) puede
+      tratar datos técnicos de la conexión, como la dirección IP, el tipo de navegador o la fecha y hora de la
+      solicitud, en la medida necesaria para servir las páginas y proteger el sitio frente a usos indebidos.
+    </li>
+  </ul>
+
+  <h2>Finalidades</h2>
+  <p>Los datos se utilizan para:</p>
+  <ul>
+    <li>Responder a las consultas que la persona usuaria envíe.</li>
+    <li>
+      Preparar y enviar, cuando la persona usuaria lo solicite, propuestas de formación o de servicios adaptadas a su
+      consulta.
+    </li>
+    <li>
+      Enviar información sobre nuevos cursos únicamente a quienes lo hayan solicitado o autorizado expresamente, en los
+      términos indicados más abajo.
+    </li>
+    <li>Servir el sitio web y mantener su seguridad (datos técnicos de acceso).</li>
+  </ul>
+
+  <h2>Comunicaciones sobre cursos</h2>
+  <p>
+    Enviar una consulta <strong>no</strong> implica autorización para recibir comunicaciones comerciales, y quienes
+    contactan con SanitIA no se incorporan automáticamente a ninguna lista de envío. SanitIA solo enviará información
+    sobre nuevos cursos a quienes marquen voluntariamente la casilla correspondiente del formulario o lo soliciten o
+    autoricen expresamente por correo electrónico.
+  </p>
+  <p>
+    Puedes retirar esa autorización en cualquier momento, de forma sencilla y gratuita, escribiendo a {legal.email}.
+    Cada comunicación recordará cómo hacerlo.
   </p>
 
-  <h2>Finalidad y base jurídica</h2>
-  <p>[PENDIENTE: finalidades del tratamiento y base jurídica aplicable a cada una].</p>
+  <h2>Base jurídica</h2>
+  <ul>
+    <li>
+      <strong>Respuesta a consultas generales:</strong> interés legítimo del responsable en atender los mensajes que
+      recibe (art. 6.1.f del Reglamento General de Protección de Datos, RGPD).
+    </li>
+    <li>
+      <strong>Preparación y envío de propuestas solicitadas:</strong> aplicación, a petición de la persona interesada,
+      de medidas precontractuales (art. 6.1.b RGPD).
+    </li>
+    <li>
+      <strong>Envío de información sobre nuevos cursos:</strong> consentimiento de la persona interesada (art. 6.1.a
+      RGPD), que puede retirarse en cualquier momento sin que ello afecte a la licitud del tratamiento anterior.
+    </li>
+    <li>
+      <strong>Datos técnicos de acceso:</strong> interés legítimo en el funcionamiento y la seguridad del sitio web
+      (art. 6.1.f RGPD).
+    </li>
+  </ul>
+  <p>
+    Facilitar los datos solicitados en el formulario o por correo electrónico es voluntario, pero sin el nombre, una
+    dirección de correo válida y la consulta no es posible responder. La casilla para recibir novedades es opcional.
+  </p>
 
   <h2>Conservación</h2>
-  <p>[PENDIENTE: plazos de conservación de los datos].</p>
+  <ul>
+    <li>
+      Las consultas que no den lugar a una contratación se conservan durante {legal.retention} y, transcurrido ese
+      plazo, se suprimen, salvo que deban conservarse para cumplir una obligación legal.
+    </li>
+    <li>
+      Los datos usados para enviar información sobre nuevos cursos, incluida la constancia de la autorización, se
+      conservan mientras no se retire la autorización, sin perjuicio de su conservación posterior cuando sea necesaria
+      para acreditar el cumplimiento de obligaciones legales.
+    </li>
+    <li>
+      Los datos técnicos de acceso se conservan según las condiciones del proveedor de alojamiento.
+    </li>
+  </ul>
 
   <h2>Destinatarios</h2>
-  <p>[PENDIENTE: destinatarios y encargados del tratamiento, incluido el proveedor de alojamiento web].</p>
+  <p>
+    No se ceden datos personales a terceros, salvo obligación legal. Para prestar el servicio, SanitIA se apoya en los
+    siguientes proveedores, que pueden tratar datos por cuenta del responsable:
+  </p>
+  <ul>
+    <li>
+      <strong>{legal.emailProvider}</strong>, proveedor del servicio de correo electrónico. Más información en su
+      <a href={legal.emailProviderPrivacyUrl} rel="noopener">documentación de protección de datos</a>.
+    </li>
+    <li>
+      <strong>{legal.hosting}</strong>, proveedor de alojamiento del sitio web y de gestión del formulario. Las consultas
+      enviadas mediante el formulario quedan almacenadas en su panel de administración y pueden enviarse por correo a
+      SanitIA mediante sus notificaciones. Más información en su
+      <a href={legal.hostingPrivacyUrl} rel="noopener">documentación de privacidad</a>.
+    </li>
+  </ul>
+  <p>
+    Estos proveedores disponen de documentación propia sobre privacidad y acuerdos de tratamiento de datos. Si alguno de
+    ellos tratara datos fuera del Espacio Económico Europeo, las garantías aplicables se describen en dicha
+    documentación.
+  </p>
 
   <h2>Derechos</h2>
   <p>
     Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y
-    portabilidad dirigiéndote a {legal.email}. También tienes derecho a presentar una reclamación ante la Agencia
-    Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">www.aepd.es</a>).
+    portabilidad, así como retirar tu consentimiento, dirigiéndote a {legal.email}. También tienes derecho a presentar
+    una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener"
+      >www.aepd.es</a
+    >).
   </p>
+  <p>No se toman decisiones automatizadas ni se elaboran perfiles con los datos recibidos.</p>
 </LegalLayout>

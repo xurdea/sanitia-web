@@ -3,9 +3,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Netlify inyecta `URL` en el build con la URL principal del sitio.
-// En local se usa localhost. Cuando exista dominio definitivo, puede fijarse con SITE_URL.
-const site = process.env.SITE_URL ?? process.env.URL ?? 'http://localhost:4321';
+// Dominio público confirmado. SITE_URL permite usar otro dominio de forma explícita si cambia.
+const site = process.env.SITE_URL ?? 'https://www.sanitia.es';
 
 export default defineConfig({
   site,
@@ -13,7 +12,12 @@ export default defineConfig({
   build: {
     format: 'file',
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // La página de confirmación del formulario lleva noindex y no debe figurar en el sitemap.
+      filter: (page) => new URL(page).pathname.replace(/\/$/, '') !== '/contacto-enviado',
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

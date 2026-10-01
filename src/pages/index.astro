@@ -9,12 +9,37 @@ import Method from '../components/home/Method.astro';
 import Organizations from '../components/home/Organizations.astro';
 import CTASection from '../components/CTASection.astro';
 import { homeSeo, finalCta } from '../data/home';
+import { site } from '../data/site';
+
+const origin = new URL('/', Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${origin}#organization`,
+      name: site.name,
+      url: origin,
+      logo: new URL('/icon-192.png', origin).href,
+      email: site.contactEmail,
+      founder: { '@type': 'Person', name: site.legal.owner },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${origin}#website`,
+      name: site.name,
+      url: origin,
+      publisher: { '@id': `${origin}#organization` },
+      inLanguage: site.lang,
+    },
+  ],
+};
 
 // La sección de recursos (components/home/Resources.astro) no se renderiza
 // mientras sus contenidos están en revisión editorial.
 ---
 
-<BaseLayout title={homeSeo.title} description={homeSeo.description}>
+<BaseLayout title={homeSeo.title} description={homeSeo.description} structuredData={structuredData}>
   <Hero />
   <UseCases />
   <FeaturedCourse />

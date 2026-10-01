@@ -10,19 +10,22 @@ interface Props {
 }
 
 const { entry, headingLevel: Heading = 'h3' } = Astro.props;
-const { title, summary, category, date, readingTime, image, imageAlt, imagePlaceholder } = entry.data;
+const { title, summary, category, date, readingTime, image, imageAlt } = entry.data;
 ---
 
 <article class="group relative flex flex-col">
-  <MediaFrame
-    src={image}
-    alt={imageAlt ?? ''}
-    placeholder={imagePlaceholder ?? 'Imagen del recurso'}
-    aspect="16 / 10"
-    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-    class="border-line border"
-  />
-  <div class="mt-6 flex items-center gap-3 text-sm">
+  {
+    image && (
+      <MediaFrame
+        src={image}
+        alt={imageAlt ?? ''}
+        aspect="16 / 10"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        class="border-line border"
+      />
+    )
+  }
+  <div class:list={['flex items-center gap-3 text-sm', image ? 'mt-6' : 'border-line border-t pt-6']}>
     <span class="text-accent-strong font-semibold">{category}</span>
     <span aria-hidden="true" class="bg-line-strong size-1 rounded-full"></span>
     <span class="text-muted inline-flex items-center gap-1.5">

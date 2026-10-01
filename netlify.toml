@@ -5,6 +5,13 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Los despliegues de prueba no deben competir con el dominio público en buscadores.
+[context.deploy-preview.environment]
+  SITE_NOINDEX = "true"
+
+[context.branch-deploy.environment]
+  SITE_NOINDEX = "true"
+
 # Cabeceras de seguridad básicas y caché larga para assets con hash.
 [[headers]]
   for = "/*"

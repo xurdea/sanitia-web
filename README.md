@@ -100,10 +100,30 @@ se generan a partir del mismo símbolo.
 Contenedor nginx con el build estático (`Dockerfile`, `docker-compose.yml`, `docker/`).
 Guía completa: [`DESPLIEGUE.md`](DESPLIEGUE.md).
 
-## Despliegue en Netlify (alternativa)
+## Despliegue público en Netlify
 
-`netlify.toml` define build (`npm run build`), directorio (`dist`) y Node 22. La URL canónica y el sitemap usan la variable
-`URL` que Netlify inyecta en el build. Cuando exista dominio definitivo puede fijarse `SITE_URL`.
+`netlify.toml` define build (`npm run build`), directorio (`dist`) y Node 22. La URL canónica y el sitemap usan
+`https://www.sanitia.es` por defecto; `SITE_URL` permite cambiarla explícitamente.
+
+El formulario de `/contacto` utiliza Netlify Forms. Antes de probarlo, activar **Forms > Enable form detection** en el
+sitio de Netlify y desplegar esta versión. Después, en **Forms > Submission notifications**, añadir una notificación
+por correo para el formulario `contacto` dirigida a `info@sanitia.es`. Hacer un envío de prueba desde la URL de Netlify,
+comprobar que aparece en **Forms** y que llega el aviso al buzón; revisar también la carpeta de correo no deseado.
+El formulario no procesa envíos en `astro preview` ni en el contenedor Docker, que sirven solo para previsualizarlo.
+
+Las consultas sin contratación deben borrarse a los 12 meses del último contacto, tanto del correo como del panel de
+Netlify. La casilla de novedades del formulario es opcional: no añadir a envíos comerciales a quienes no la hayan
+marcado o no hayan dado autorización expresa por otro medio.
+
+## SEO al publicar
+
+- Configurar `www.sanitia.es` como dominio principal en Netlify y comprobar que la otra variante redirige a él.
+- Confirmar que la versión pública no lleva `SITE_NOINDEX=true`, que `robots.txt` permite el rastreo y que las URL
+  canónicas y `sitemap-index.xml` usan `https://www.sanitia.es`.
+- Verificar el dominio en Google Search Console y enviar `https://www.sanitia.es/sitemap-index.xml`.
+- Inspeccionar la portada, `/formacion` y las dos fichas de curso en Search Console tras el despliegue.
+- Revisar mensualmente consultas, impresiones, clics y contactos procedentes de búsqueda; ampliar el contenido según
+  las necesidades reales de médicos y otros perfiles. No publicar fichas de cursos ni acreditaciones no confirmadas.
 
 ## Pendiente de información real
 

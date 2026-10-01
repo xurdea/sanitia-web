@@ -9,15 +9,15 @@ import { methodSteps } from './content';
 
 export const homeSeo = {
   /** BaseLayout compone "título | SanitIA". */
-  title: 'Formación en IA para el sector sanitario',
+  title: 'Cursos de IA para profesionales sanitarios',
   description:
-    'Formación práctica en IA para profesionales y organizaciones del sector sanitario. Programas especializados, metodología aplicada y formación adaptada a cada contexto.',
+    'Formación práctica en inteligencia artificial para médicos y otros profesionales sanitarios. Cursos por perfil y programas adaptados a equipos y organizaciones.',
 };
 
 /* ---------- 1. Hero ---------- */
 export const hero = {
   eyebrow: 'Formación en IA para profesionales y organizaciones sanitarias',
-  text: 'Aprende a aplicar la Inteligencia Artificial a tareas reales de tu actividad profesional: buscar y contrastar información, trabajar con documentación, preparar materiales y analizar datos, con criterios de verificación y un uso responsable de las herramientas.',
+  text: 'Formación en inteligencia artificial para médicos, enfermería, farmacia, visita médica y equipos de gestión. Aprende a buscar y contrastar información, trabajar con documentación y preparar materiales con revisión profesional y un uso responsable de las herramientas.',
   primary: { label: 'Ver formación', href: '/formacion' },
   secondary: { label: 'Formación para organizaciones', href: '/empresas' },
   approach: ['Casos de uso reales', 'Verificación de resultados', 'Uso responsable'],

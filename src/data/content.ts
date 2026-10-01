@@ -128,5 +128,16 @@ export const featuredCourse = {
    * Herramientas de ejemplo. PENDIENTE: confirmar el listado definitivo por edición.
    * Nunca deben presentarse como la propuesta principal de valor.
    */
-  tools: ['ChatGPT', 'Claude', 'Perplexity', 'NotebookLM', 'Gamma'],
+  tools: ['ChatGPT', 'Claude', 'Perplexity', 'Gemini Notebook', 'Gamma'],
 };
+
+/** Programa para médicos confirmado por el titular: 10 horas, 5 sesiones online en directo. */
+export const medicalCourse = {
+  href: '/formacion/ia-para-medicos',
+  title: 'IA para médicos: información clínica y productividad',
+  summary:
+    'Formación práctica para localizar y contrastar información clínica fiable y aplicar la IA al trabajo con Excel, documentación y presentaciones.',
+  applications: ['Información clínica', 'Verificación de fuentes', 'Excel y datos', 'Presentaciones'],
+  duration: '10 horas · 5 sesiones de 2 horas',
+  modality: 'Online en directo',
+} as const;

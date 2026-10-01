@@ -1,7 +1,7 @@
 ---
 import Button from '../Button.astro';
 import Icon from '../Icon.astro';
-import { featuredCourse } from '../../data/content';
+import { featuredCourse, medicalCourse } from '../../data/content';
 import { training } from '../../data/home';
 ---
 
@@ -58,5 +58,8 @@ import { training } from '../../data/home';
         </div>
       </article>
     </div>
+    <p class="text-muted mt-6 text-[0.9375rem]" data-reveal>
+      ¿Eres médico? Conoce el <a href={medicalCourse.href} class="text-brand font-semibold underline underline-offset-4">curso de IA para médicos</a>, centrado en la búsqueda y verificación de información clínica.
+    </p>
   </div>
 </section>

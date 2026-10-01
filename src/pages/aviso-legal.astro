@@ -7,15 +7,15 @@ const { legal } = site;
 <LegalLayout title="Aviso legal" description="Aviso legal del sitio web de SanitIA.">
   <h2>Datos identificativos</h2>
   <p>
-    En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio
-    Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:
+    Conforme al artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de
+    Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:
   </p>
   <ul>
-    <li><strong>Titular:</strong> {legal.owner}</li>
-    <li><strong>NIF/CIF:</strong> {legal.taxId}</li>
-    <li><strong>Domicilio:</strong> {legal.address}</li>
+    <li><strong>Titular:</strong> {legal.owner} ({legal.ownerType.toLowerCase()})</li>
+    <li><strong>NIF:</strong> {legal.taxId}</li>
+    <li><strong>Domicilio profesional:</strong> {legal.address}</li>
+    <li><strong>Sitio web:</strong> {legal.domain}</li>
     <li><strong>Correo electrónico:</strong> {legal.email}</li>
-    <li><strong>Datos registrales:</strong> {legal.registry}</li>
   </ul>
 
   <h2>Objeto</h2>
@@ -46,6 +46,8 @@ const { legal } = site;
   <h2>Enlaces externos</h2>
   <p>El titular no se responsabiliza del contenido de sitios web de terceros a los que se pueda acceder mediante enlaces.</p>
 
-  <h2>Legislación aplicable</h2>
-  <p>[PENDIENTE: legislación y jurisdicción aplicables, a revisar por un profesional jurídico].</p>
+  <h2>Protección de datos</h2>
+  <p>
+    El tratamiento de datos personales se describe en la <a href="/privacidad">política de privacidad</a>.
+  </p>
 </LegalLayout>

@@ -3,60 +3,72 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
-import MediaFrame from '../../components/MediaFrame.astro';
 import CTASection from '../../components/CTASection.astro';
-import { featuredCourse, ecosystem } from '../../data/content';
+import { featuredCourse, medicalCourse, ecosystem } from '../../data/content';
 ---
 
 <BaseLayout
-  title="Formación"
-  description="Programas prácticos de inteligencia artificial para profesionales del sector sanitario, adaptados a funciones y perfiles concretos."
+  title="Cursos de IA para médicos y profesionales sanitarios"
+  description="Cursos de inteligencia artificial para médicos y visitadores médicos: programas prácticos de 10 horas y formación a medida para equipos sanitarios."
 >
   <PageHero
     eyebrow="Formación"
-    title="Formación práctica en IA para el sector sanitario"
-    intro="Programas adaptados a funciones y perfiles concretos del ámbito de la salud, centrados en tareas reales y en un uso útil y responsable de la inteligencia artificial."
+    title="Cursos de IA para profesionales sanitarios"
+    intro="Programas para médicos y visitadores médicos, además de formación a medida para otros perfiles y equipos del sector salud. Tareas reales, verificación de resultados y uso responsable de la IA."
   />
 
   <section class="section-y" aria-labelledby="programas-title">
     <div class="container-site">
       <h2 id="programas-title" class="text-h2">Programas disponibles</h2>
 
-      <article class="border-line rounded-card mt-10 grid overflow-hidden border bg-white lg:grid-cols-12">
-        <div class="relative lg:col-span-5">
-          <MediaFrame
-            alt="Profesional de la visita médica preparando una reunión con su portátil"
-            placeholder="Fotografía: profesional de la visita médica"
-            aspect="4 / 3"
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            class="rounded-none! lg:absolute! lg:inset-0 lg:aspect-auto!"
-          />
+      <article class="border-line rounded-card mt-10 border bg-white p-6 sm:p-10 lg:p-12">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Formación para médicos</p>
+          <h3 class="mt-4 text-3xl font-bold">{medicalCourse.title}</h3>
+          <p class="text-lead text-muted mt-4">{medicalCourse.summary}</p>
         </div>
-        <div class="p-7 sm:p-10 lg:col-span-7 lg:p-12">
-          <p class="eyebrow">Formación destacada · Industria farmacéutica</p>
+        <div class="border-line mt-8 border-t pt-8">
+          <p class="text-brand-deep font-semibold">{medicalCourse.duration} · {medicalCourse.modality}</p>
+          <ul class="mt-5 flex flex-wrap gap-2" aria-label="Áreas de práctica del curso">
+            {medicalCourse.applications.map((item) => (
+              <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button href={medicalCourse.href} arrow>Ver programa para médicos</Button>
+          <Button href="/contacto" variant="secondary">Solicitar información</Button>
+        </div>
+      </article>
+
+      <article class="border-line rounded-card mt-6 border bg-white p-6 sm:p-10 lg:p-12">
+        <div class="max-w-3xl">
+          <p class="eyebrow">Visita médica · Industria farmacéutica</p>
           <h3 class="mt-4 text-3xl font-bold">{featuredCourse.title}</h3>
           <p class="text-lead text-muted mt-4">{featuredCourse.summary}</p>
-          <ul class="mt-8 flex flex-wrap gap-2">
+        </div>
+        <div class="border-line mt-8 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:gap-10">
+          <ul class="flex flex-wrap content-start gap-2 lg:col-span-7">
             {
               featuredCourse.applications.map((item) => (
                 <li class="bg-surface-alt text-brand-deep rounded-full px-3.5 py-1.5 text-sm font-medium">{item}</li>
               ))
             }
           </ul>
-          <ul class="text-muted mt-8 grid gap-3 text-[0.9375rem] sm:grid-cols-2">
+          <ul class="text-muted lg:border-line grid gap-3 text-[0.9375rem] sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:border-l lg:pl-10">
             {
               featuredCourse.features.slice(0, 4).map((item) => (
                 <li class="flex items-center gap-2.5">
-                  <Icon name={item.icon} size={18} class="text-accent-strong" />
+                  <Icon name={item.icon} size={18} class="text-accent-strong shrink-0" />
                   {item.label}
                 </li>
               ))
             }
           </ul>
-          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Button href={featuredCourse.href} arrow>Ver programa completo</Button>
-            <Button href="/contacto" variant="secondary">Solicitar información</Button>
-          </div>
+        </div>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href={featuredCourse.href} arrow>Ver programa completo</Button>
+          <Button href="/contacto" variant="secondary">Solicitar información</Button>
         </div>
       </article>
     </div>

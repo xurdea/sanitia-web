@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import FounderCard from '../components/FounderCard.astro';
-import MediaFrame from '../components/MediaFrame.astro';
 import Icon from '../components/Icon.astro';
 import CTASection from '../components/CTASection.astro';
 
@@ -25,29 +24,22 @@ const values = [
   />
 
   <section class="section-y" aria-labelledby="proposito-title">
-    <div class="container-site grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-      <div class="lg:col-span-6">
+    <div class="container-site grid gap-8 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-5">
         <p class="eyebrow mb-4">Propósito</p>
         <h2 id="proposito-title" class="text-h2">La marca debe sobrevivir al cambio de herramientas</h2>
-        <div class="prose-sanitia text-muted mt-6">
-          <p>
-            La inteligencia artificial avanza deprisa y las herramientas cambian constantemente. Lo que permanece es la
-            capacidad de identificar dónde aporta valor, aplicarla con criterio y hacerlo de forma responsable.
-          </p>
-          <p>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <p class="text-lead text-muted">
+          La inteligencia artificial avanza deprisa y las herramientas cambian constantemente. Lo que permanece es la
+          capacidad de identificar dónde aporta valor, aplicarla con criterio y hacerlo de forma responsable.
+        </p>
+        <div class="border-accent mt-8 border-l-4 pl-5 sm:pl-6">
+          <p class="text-ink text-[1.0625rem] leading-relaxed">
             SanitIA trabaja con todo el ecosistema sanitario: perfiles asistenciales y no asistenciales, gestión, industria,
             investigación y tecnología. Su especialización es la salud, no una profesión concreta.
           </p>
         </div>
-      </div>
-      <div class="lg:col-span-5 lg:col-start-8">
-        <MediaFrame
-          alt="Profesionales de distintos ámbitos de la salud en una reunión de trabajo"
-          placeholder="Fotografía: profesionales de distintos ámbitos de la salud"
-          aspect="4 / 5"
-          sizes="(min-width: 1024px) 40vw, 100vw"
-          class="border-line border"
-        />
       </div>
     </div>
   </section>

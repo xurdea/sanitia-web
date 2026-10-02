@@ -5,6 +5,8 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
 import FollowUp from '../../components/FollowUp.astro';
+import { Image } from 'astro:assets';
+import courseImage from '../../assets/course/visita-medica.webp';
 import { featuredCourse } from '../../data/content';
 
 const audience = [
@@ -101,6 +103,17 @@ const summary = [
 
   <div class="container-site grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-12">
     <div class="space-y-20 lg:col-span-8">
+      <figure class="border-line overflow-hidden rounded-card border bg-white">
+        <Image
+          src={courseImage}
+          alt="Profesional de visita médica revisando fuentes científicas y notas de trabajo junto a un portátil"
+          widths={[480, 800, 1200, 1400]}
+          sizes="(min-width: 1024px) 66vw, 100vw"
+          loading="eager"
+          class="aspect-[3/2] w-full object-cover"
+        />
+        <figcaption class="text-muted px-4 py-2 text-xs">Imagen ilustrativa generada con IA</figcaption>
+      </figure>
       <section aria-labelledby="descripcion">
         <h2 id="descripcion" class="text-3xl font-bold">Descripción</h2>
         <div class="prose-sanitia text-muted mt-6">

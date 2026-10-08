@@ -33,16 +33,7 @@ const methodology = [
     title: 'Práctica sobre situaciones reales',
     text: 'Ejercicios basados en tareas habituales de la visita médica.',
   },
-  {
-    icon: 'message',
-    title: 'Tutoría durante seis meses',
-    text: 'Un canal de Discord para plantear dudas al aplicar lo aprendido después del curso.',
-  },
-  {
-    icon: 'users',
-    title: 'Comunidad de seguimiento',
-    text: 'Novedades relevantes sobre IA compartidas desde SanitIA durante el seguimiento.',
-  },
+  // El seguimiento en Discord (tutoría y novedades) se explica en el bloque FollowUp, justo debajo.
 ] as const;
 
 /** Casos prácticos confirmados por el propietario (presentación del curso). Sin reparto por sesión. */
@@ -232,12 +223,13 @@ const summary = [
         <dl class="mt-6 space-y-5">
           {
             summary.map((item) => (
-              <div class="flex gap-3">
-                <Icon name={item.icon} size={20} class="text-accent-strong mt-0.5" />
-                <div>
-                  <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">{item.label}</dt>
-                  <dd class="text-ink mt-1 text-[0.9375rem]">{item.value}</dd>
-                </div>
+              <div class="relative pl-8">
+                {/* Un único div por pareja dt/dd (HTML válido en <dl>); el icono es decorativo y va dentro del dt. */}
+                <dt class="text-muted text-xs font-semibold tracking-[0.1em] uppercase">
+                  <Icon name={item.icon} size={20} class="text-accent-strong absolute top-0.5 left-0" />
+                  {item.label}
+                </dt>
+                <dd class="text-ink mt-1 text-[0.9375rem]">{item.value}</dd>
               </div>
             ))
           }

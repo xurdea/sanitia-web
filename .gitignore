@@ -24,3 +24,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 !.vscode/tasks.json
+
+# Configuración local de Claude Code (skills, agentes, settings.local.json)
+.claude/

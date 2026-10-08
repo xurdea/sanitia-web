@@ -9,8 +9,9 @@ import { hero } from '../../data/home';
 /**
  * Para añadir una fotografía real: colocarla en src/assets/home/ e importarla aquí, p. ej.
  *   import heroImage from '../../assets/home/hero.jpg';
- * Mientras no exista, en escritorio se muestra el panel de los cursos disponibles
- * (sin placeholder fotográfico). En móvil la columna visual no se muestra.
+ * Mientras no exista, desde tableta (768 px) se muestra el panel de los cursos disponibles
+ * (sin placeholder fotográfico): en tableta bajo el texto y con los cursos en dos columnas,
+ * en escritorio a la derecha. En móvil la columna visual no se muestra.
  */
 const heroImage = undefined;
 ---
@@ -42,7 +43,7 @@ const heroImage = undefined;
       </div>
     </div>
 
-    <div class="relative hidden lg:col-span-5 lg:block">
+    <div class:list={['relative hidden lg:col-span-5 lg:block', !heroImage && 'md:block']}>
       {
         heroImage ? (
           <>
@@ -67,16 +68,16 @@ const heroImage = undefined;
             </div>
           </>
         ) : (
-          <div class="border-line rounded-card shadow-lift relative ml-auto max-w-md border bg-white p-8 xl:p-10">
+          <div class="border-line rounded-card shadow-lift relative border bg-white p-8 lg:ml-auto lg:max-w-md xl:p-10">
             <div aria-hidden="true" class="bg-accent absolute top-0 left-8 h-1 w-16 xl:left-10" />
             <p class="eyebrow">Cursos disponibles</p>
-            <ul class="mt-5 space-y-6" aria-label="Cursos disponibles">
+            <ul class="mt-5 space-y-6 md:grid md:grid-cols-2 md:gap-8 md:space-y-0 lg:block lg:space-y-6" aria-label="Cursos disponibles">
               <li>
                 <a href={medicalCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">IA para médicos</a>
                 <p class="text-muted mt-1 text-sm">Información clínica, Excel y presentaciones</p>
                 <CourseFacts label="Datos del curso de IA para médicos" compact />
               </li>
-              <li class="border-line border-t pt-6">
+              <li class="border-line border-t pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8 lg:border-t lg:border-l-0 lg:pt-6 lg:pl-0">
                 <a href={featuredCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">{featuredCourse.title}</a>
                 <p class="text-muted mt-1 text-sm">Preparación de visitas y trabajo con información</p>
                 <CourseFacts label="Datos del curso de visita médica" compact />

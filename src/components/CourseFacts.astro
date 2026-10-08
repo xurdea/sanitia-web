@@ -5,7 +5,10 @@ interface Props {
 }
 
 const { label, compact = false } = Astro.props;
-const facts = ['10 horas', '5 sesiones de 2 horas', 'Online en directo', '6 meses de tutoría en Discord'];
+const allFacts = ['10 horas', '5 sesiones de 2 horas', 'Online en directo', '6 meses de tutoría en Discord'];
+// La versión compacta (panel del hero) omite la tutoría: el panel lista dos cursos seguidos y
+// el seguimiento ya se repite en las tarjetas de Formación y en la sección de continuidad.
+const facts = compact ? allFacts.slice(0, 3) : allFacts;
 ---
 
 <ul class:list={['flex flex-wrap', compact ? 'mt-3 gap-1.5' : 'mt-6 gap-2']} aria-label={label}>

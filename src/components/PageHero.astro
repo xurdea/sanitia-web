@@ -20,11 +20,11 @@ const { eyebrow, title, intro, breadcrumb } = Astro.props;
   <div class="container-site relative pt-14 pb-16 md:pt-20 md:pb-24">
     {
       breadcrumb && (
-        <nav aria-label="Ruta de navegación" class="text-muted mb-8 text-sm">
+        <nav aria-label="Ruta de navegación" class="text-muted mb-5 text-sm md:mb-8">
           <ol class="flex flex-wrap items-center gap-2">
             {breadcrumb.map((item) => (
               <li class="flex items-center gap-2">
-                <a href={item.href} class="hover:text-brand-deep underline-offset-4 hover:underline">
+                <a href={item.href} class="hover:text-brand-deep inline-flex min-h-11 items-center underline-offset-4 hover:underline md:min-h-0">
                   {item.label}
                 </a>
                 <span aria-hidden="true" class="text-line-strong">

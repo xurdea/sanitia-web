@@ -1,5 +1,5 @@
 import type { IconName } from '../lib/icons';
-import { methodSteps } from './content';
+import { featuredCourse, medicalCourse } from './content';
 
 /**
  * Textos específicos de la Home.
@@ -16,11 +16,32 @@ export const homeSeo = {
 
 /* ---------- 1. Hero ---------- */
 export const hero = {
-  eyebrow: 'Formación en IA para profesionales y organizaciones sanitarias',
-  text: 'Dos cursos prácticos para médicos y visita médica, y formación a medida para otros equipos sanitarios. Aprende a incorporar la IA con criterio y mantente al día después del curso con seis meses de tutoría en la comunidad SanitIA.',
-  primary: { label: 'Ver formación', href: '/formacion' },
+  eyebrow: 'Formación en IA para el sector sanitario',
+  title: 'Inteligencia artificial aplicada al trabajo real en sanidad',
+  /** Fragmento del título que se subraya (debe aparecer literalmente en `title`). */
+  titleEmphasis: 'trabajo real',
+  lead: 'Cursos prácticos para médicos, visita médica y equipos sanitarios. Tareas reales, resultados contrastados y tu criterio profesional al mando.',
+  primary: { label: 'Ver cursos', href: '/formacion' },
   secondary: { label: 'Formación para organizaciones', href: '/empresas' },
-  approach: ['Casos de uso reales', 'Verificación de resultados', 'Uso responsable'],
+  /** Enlace discreto a los dos cursos, sin repetir sus datos (ya están en la sección Formación). */
+  courses: [
+    { label: 'IA para médicos', href: medicalCourse.href },
+    { label: featuredCourse.title, href: featuredCourse.href },
+  ],
+  /** Fotografía pendiente: hasta tenerla se muestra un hueco reservado con esta descripción. */
+  photoBrief: 'Fotografía real: profesional sanitario revisando un documento en el ordenador',
+  photoAlt: 'Profesional sanitario revisando documentación en el ordenador',
+  /** Ejemplo ilustrativo de una tarea trabajada con el método (no es un dato ni un resultado real). */
+  example: {
+    label: 'Ejemplo de tarea',
+    task: 'Resumir una guía clínica para una sesión de servicio',
+    checks: [
+      { text: 'Fuente original localizada', done: true },
+      { text: 'Resumen generado con IA', done: true },
+      { text: 'Contrastado con el documento', done: true },
+      { text: 'Revisión profesional', done: false },
+    ],
+  },
 };
 
 /* ---------- 2. Aplicaciones ---------- */
@@ -84,11 +105,41 @@ export const credibility = {
 };
 
 /* ---------- 6. Método ---------- */
+/** Papel de un paso del recorrido. Sin `kind`, es un paso normal. */
+export type FlowKind = 'verify' | 'result';
+
+export interface FlowStep {
+  name: string;
+  text: string;
+  /** 'verify' = paso de contraste (único protagonista); 'result' = cierre neutro. */
+  kind?: FlowKind;
+}
+
+/**
+ * La Home muestra el recorrido de una tarea (la "línea de verificación") y enlaza a las
+ * cuatro fases oficiales, que viven en /metodo-sanitia (fuente única: methodSteps en content.ts).
+ */
 export const method = {
-  title: 'Cómo aprenderás a aplicar la IA en tu trabajo',
-  /** Misma secuencia y definiciones que la página del método (content.ts). */
-  steps: methodSteps.map((step) => ({ name: step.name, text: step.summary })),
+  eyebrow: 'Método SanitIA',
+  title: 'Del problema real al resultado verificado',
+  intro:
+    'No enseñamos herramientas. Partimos de una necesidad de tu trabajo y terminamos en un resultado que puedes revisar, explicar y utilizar.',
+  flow: <FlowStep[]>[
+    {
+      name: 'Necesidad real',
+      text: 'Una tarea concreta de tu actividad: preparar una sesión, revisar documentación o analizar datos.',
+    },
+    { name: 'Aplicación de IA', text: 'Eliges la herramienta y las fuentes adecuadas para esa tarea.' },
+    {
+      name: 'Contraste y verificación',
+      text: 'Comparas el resultado con las fuentes y detectas errores, omisiones o datos inventados.',
+      kind: 'verify',
+    },
+    { name: 'Criterio profesional', text: 'Decides qué se utiliza, qué se corrige y qué se descarta.' },
+    { name: 'Resultado', text: 'Un trabajo útil, revisado y aplicable a tu actividad.', kind: 'result' },
+  ],
   cta: { label: 'Conocer el Método SanitIA', href: '/metodo-sanitia' },
+  phasesLink: { label: 'Conoce las fases completas del Método SanitIA', href: '/metodo-sanitia' },
 };
 
 /* ---------- 7. Organizaciones ---------- */

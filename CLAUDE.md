@@ -308,7 +308,9 @@ Fases vigentes, aprobadas por el propietario (sustituyen a la secuencia anterior
 4. **Integrar**
    Aplicar lo aprendido de forma responsable en la actividad profesional.
 
-Fuente única: `methodSteps` en `src/data/content.ts` (nombre, `summary` y `detail` de cada fase). La Home y la página `/metodo-sanitia` deben leer de ahí; no duplicar ni redefinir las fases en otros archivos. Si cambian las definiciones, actualizar `methodSteps` y este apartado a la vez.
+Fuente única: `methodSteps` en `src/data/content.ts` (nombre, `summary` y `detail` de cada fase). Cualquier página que muestre las fases (`/metodo-sanitia`, fichas de curso…) debe leer de ahí; no duplicar ni redefinir las fases en otros archivos. Si cambian las definiciones, actualizar `methodSteps` y este apartado a la vez.
+
+En la Home, la sección del Método no repite las cuatro fases: muestra el recorrido de una tarea (Necesidad real → Aplicación de IA → Contraste y verificación → Criterio profesional → Resultado; `method.flow` en `src/data/home.ts`) y enlaza a `/metodo-sanitia` para las fases completas. «Contraste y verificación» es el único paso destacado (`kind: 'verify'`). Aprobado por el propietario (octubre de 2026).
 
 Mostrar como proceso visual claro. Evitar presentarlo como metodología académica rígida.
 

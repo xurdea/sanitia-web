@@ -19,6 +19,11 @@ interface Props {
   sizes?: string;
   /** Posición de la etiqueta del placeholder. */
   captionPosition?: 'top' | 'bottom';
+  /**
+   * Placeholder plano: sin cuadrícula, halos ni tinte; solo una reserva de composición neutra con su etiqueta.
+   * Por defecto (false) se mantiene el placeholder actual.
+   */
+  plain?: boolean;
   class?: string;
 }
 
@@ -31,6 +36,7 @@ const {
   priority = false,
   sizes = '(min-width: 1024px) 50vw, 100vw',
   captionPosition = 'bottom',
+  plain = false,
   class: className,
 } = Astro.props;
 ---
@@ -54,11 +60,13 @@ const {
       <div
         class:list={[
           'absolute inset-0',
-          tone === 'deep' ? 'bg-brand-deep' : 'bg-surface-alt',
+          plain ? 'bg-surface' : tone === 'deep' ? 'bg-brand-deep' : 'bg-surface-alt',
         ]}
         role="img"
         aria-label={`Espacio reservado: ${placeholder}`}
       >
+        {!plain && (
+          <>
         <div
           class="absolute inset-0"
           style={`--g: ${tone === 'deep' ? 'rgb(255 255 255 / 0.05)' : 'rgb(18 59 109 / 0.06)'}; background-image: linear-gradient(var(--g) 1px, transparent 1px), linear-gradient(90deg, var(--g) 1px, transparent 1px); background-size: 28px 28px;`}
@@ -75,6 +83,8 @@ const {
             tone === 'deep' ? 'bg-brand/60' : 'bg-white/80',
           ]}
         />
+          </>
+        )}
         <span
           data-caption
           aria-hidden="true"

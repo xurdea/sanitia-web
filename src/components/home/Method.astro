@@ -1,44 +1,351 @@
 ---
+/**
+ * Método SanitIA en la Home: el recorrido operativo de una tarea (method.flow) sobre la "línea de verificación".
+ * Las cuatro fases oficiales viven en /metodo-sanitia: aquí solo se enlazan.
+ *
+ * Jerarquía (todo por datos, nada por posición):
+ * - kind 'verify': único nodo relleno de turquesa, con check y más grande (check + relleno = verificación).
+ * - kind 'result': cierre neutro, nodo blanco con borde azul marino y sin check.
+ * - Resto: anillo turquesa sin relleno.
+ * Maquetación: columnas = nº de pasos (--steps); en escritorio, filas compartidas (subgrid) para que un
+ * título de dos líneas no desalinee los textos. Carril gris siempre visible y relleno turquesa progresivo
+ * (rangos --p0/--p1 calculados desde los datos).
+ * Movimiento: mejora progresiva con animation-timeline: view(). Sin soporte o con movimiento reducido,
+ * la línea está completa y todo es visible (estado final por defecto).
+ */
 import Button from '../Button.astro';
+import Icon from '../Icon.astro';
 import { method } from '../../data/home';
+
+const steps = method.flow;
+const last = steps.length - 1;
+// Con un solo paso no hay carril: evita divisiones entre 0 en los rangos del relleno.
+const progress = (i: number) => (last > 0 ? i / last : 0);
 ---
 
-<section class="bg-brand-deep relative isolate overflow-hidden py-12 sm:py-16 lg:py-24" aria-labelledby="metodo-title">
-  <div
-    aria-hidden="true"
-    class="absolute inset-0 -z-10"
-    style="background-image: linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to right, transparent, black 60%);"
-  >
-  </div>
-
+<section class="py-12 sm:py-16 lg:py-24" aria-labelledby="metodo-title">
   <div class="container-site">
-    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10" data-reveal>
-      <div class="max-w-2xl">
-        <p class="eyebrow text-accent! mb-4">Método SanitIA</p>
-        <h2 id="metodo-title" class="text-h2 text-white">{method.title}</h2>
+    <!-- Cabecera: una idea, contada en grande, y el único botón de la sección -->
+    <header class="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow">{method.eyebrow}</p>
+        <h2 id="metodo-title" class="method-title mt-4">{method.title}</h2>
       </div>
-      <Button href={method.cta.href} variant="outline-light" arrow class="self-start md:self-auto">
-        {method.cta.label}
-      </Button>
+      <div class="lg:col-span-5 lg:pb-2">
+        <p class="text-lead text-muted">{method.intro}</p>
+        <Button href={method.cta.href} variant="secondary" arrow class="mt-6">{method.cta.label}</Button>
+      </div>
+    </header>
+
+    <!-- Recorrido: panel elevado con la línea de verificación -->
+    <div class="flow-panel mt-10 sm:mt-14">
+      <ol class="flow" style={`--steps: ${steps.length}`}>
+        {
+          steps.map((step, i) => (
+            <li
+              class:list={['flow-step', step.kind && `is-${step.kind}`]}
+              style={`--p0: ${progress(i)}; --p1: ${progress(i + 1)};`}
+            >
+              {i < last && (
+                <span aria-hidden="true" class="flow-rail">
+                  <span class="flow-fill" />
+                </span>
+              )}
+              <span aria-hidden="true" class="flow-mark">
+                <span class="flow-node">
+                  {step.kind === 'verify' && <Icon name="check" size={16} class="flow-check" />}
+                  {step.kind === 'result' && <span class="flow-dot" />}
+                </span>
+              </span>
+              <div class="flow-body">
+                <span aria-hidden="true" class="flow-index">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="flow-name">{step.name}</h3>
+                <p class="flow-text text-muted text-[0.9375rem] leading-relaxed">{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
     </div>
 
-    <ol
-      class="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-8 lg:mt-14 lg:grid-cols-4 lg:before:absolute lg:before:inset-x-0 lg:before:top-5 lg:before:h-px lg:before:bg-white/15 lg:before:content-[''] relative"
-      data-reveal
-    >
-      {
-        method.steps.map((step, i) => (
-          <li class="flex gap-4 lg:flex-col lg:gap-0">
-            <span class="bg-accent text-brand-ink font-display ring-brand-deep relative z-10 inline-flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold lg:ring-8">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <div class="lg:mt-5">
-              <h3 class="text-xl font-bold text-white">{step.name}</h3>
-              <p class="mt-1.5 leading-relaxed text-slate-300">{step.text}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
+    <!-- Referencia discreta: las fases completas viven en su página -->
+    <p class="mt-5 sm:mt-7">
+      {/* inline-block: si el texto se parte en móvil, la flecha sigue a la última palabra. py-3 = área táctil de 44 px. */}
+      <a href={method.phasesLink.href} class="phases-link text-brand-deep hover:text-brand inline-block py-3 text-[0.9375rem] leading-5 font-semibold">
+        {method.phasesLink.label}<Icon name="arrow-right" size={16} class="phases-arrow text-accent-strong ml-1.5 inline-block align-[-0.2em]" />
+      </a>
+    </p>
   </div>
 </section>
+
+<style>
+  .method-title {
+    font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+
+  /* ---------- Panel del recorrido (nivel 2: elevado) ---------- */
+  .flow-panel {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    padding: 1.75rem 1.25rem;
+  }
+
+  @media (width >= 40rem) {
+    .flow-panel {
+      padding: 2.5rem 2.25rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .flow-panel {
+      padding: 3rem 2.5rem 2.75rem;
+    }
+  }
+
+  .flow {
+    /* --slot: hueco común de todos los nodos (el de verificación es el más grande); los nodos se centran en él
+       y el carril une los centros, sea cual sea el tamaño de cada nodo. */
+    --slot: 2.25rem;
+    --node: 1.5rem;
+    --node-verify: 2.25rem;
+    --line: 2px;
+    /* Tramo del scroll en el que se rellena la línea (móvil). */
+    --r0: 10%;
+    --r1: 48%;
+    view-timeline: --flow block;
+  }
+
+  .flow-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--slot) minmax(0, 1fr);
+    column-gap: 1rem;
+    align-content: start;
+    align-items: start;
+    padding-bottom: 1.75rem;
+  }
+
+  .flow-step:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Carril (gris, siempre visible) y relleno turquesa. Móvil: vertical, de centro a centro de nodo. */
+  .flow-rail {
+    position: absolute;
+    left: calc(var(--slot) / 2 - var(--line) / 2);
+    top: calc(var(--slot) / 2);
+    width: var(--line);
+    height: 100%;
+    background: var(--color-line);
+    overflow: hidden;
+  }
+
+  .flow-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    transform-origin: top center;
+  }
+
+  .flow-mark {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--slot);
+    height: var(--slot);
+  }
+
+  /* Paso normal: anillo turquesa sin relleno (progreso, no verificación). */
+  .flow-node {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--node);
+    height: var(--node);
+    border-radius: 999px;
+    background: var(--color-white);
+    border: var(--line) solid var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Verificación: protagonista. Único nodo relleno, con check y más grande. */
+  .is-verify .flow-node {
+    width: var(--node-verify);
+    height: var(--node-verify);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-brand-ink);
+  }
+
+  .flow-node :global(.flow-check) {
+    stroke-width: 2.5;
+  }
+
+  /* Resultado: cierre neutro (estructura en azul marino), sin relleno ni check. */
+  .is-result .flow-node {
+    border-color: var(--color-brand-deep);
+    color: var(--color-brand-deep);
+  }
+
+  .flow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .flow-index {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    line-height: var(--slot);
+  }
+
+  .flow-name {
+    font-size: 1.1875rem;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-top: 0.125rem;
+  }
+
+  .is-verify .flow-name {
+    color: var(--color-accent-strong);
+  }
+
+  .flow-text {
+    margin-top: 0.5rem;
+  }
+
+  /* Escritorio: recorrido horizontal, una columna por paso y filas compartidas (subgrid). */
+  @media (width >= 64rem) {
+    .flow {
+      --r0: 12%;
+      --r1: 34%;
+      display: grid;
+      grid-template-columns: repeat(var(--steps), minmax(0, 1fr));
+      grid-template-rows: repeat(4, auto);
+    }
+
+    .flow-step {
+      grid-row: span 4;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: subgrid;
+      padding-bottom: 0;
+      padding-right: 1.75rem;
+    }
+
+    /* Índice, nombre y texto pasan a ser filas del subgrid: los textos arrancan a la misma altura. */
+    .flow-body {
+      display: contents;
+    }
+
+    .flow-index {
+      margin-top: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .flow-rail {
+      top: calc(var(--slot) / 2 - var(--line) / 2);
+      left: calc(var(--slot) / 2);
+      width: 100%;
+      height: var(--line);
+    }
+
+    .flow-fill {
+      transform-origin: left center;
+    }
+  }
+
+  /* ---------- Referencia a las fases ---------- */
+  .phases-link {
+    transition: color 200ms ease, opacity 120ms ease-out;
+  }
+
+  /* Respuesta inmediata al tocar (sin movimiento: válida también con movimiento reducido). */
+  .phases-link:active {
+    opacity: 0.7;
+  }
+
+  :global(.phases-arrow) {
+    transition: transform 200ms var(--ease-out-soft);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .phases-link:hover :global(.phases-arrow) {
+      transform: translateX(2px);
+    }
+  }
+
+  /* ---------- Progresión ligada al scroll (mejora progresiva) ---------- */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .flow-fill {
+        animation: fill-y linear both;
+        animation-timeline: --flow;
+        animation-range: cover calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p0)) cover
+          calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p1));
+      }
+
+      /* Cada nodo se activa cuando el relleno llega a él. */
+      .flow-node {
+        animation: node-on linear both;
+        animation-timeline: --flow;
+        animation-range: cover calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p0) - 1%) cover
+          calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p0) + 1%);
+      }
+
+      /* El nombre del paso de verificación se activa a la vez que su nodo. */
+      .is-verify .flow-name {
+        animation: name-on linear both;
+        animation-timeline: --flow;
+        animation-range: cover calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p0) - 1%) cover
+          calc(var(--r0) + (var(--r1) - var(--r0)) * var(--p0) + 1%);
+      }
+
+      @media (width >= 64rem) {
+        .flow-fill {
+          animation-name: fill-x;
+        }
+      }
+    }
+  }
+
+  @keyframes fill-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes fill-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  /* Estado inactivo: gris de texto secundario (contraste suficiente), no el gris de línea. */
+  @keyframes node-on {
+    from {
+      background: var(--color-white);
+      border-color: var(--color-muted);
+      color: var(--color-muted);
+    }
+  }
+
+  @keyframes name-on {
+    from {
+      color: var(--color-brand-deep);
+    }
+  }
+</style>

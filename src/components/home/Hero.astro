@@ -1,41 +1,41 @@
 ---
+/**
+ * Hero de la Home: titular protagonista, una foto documental y la tarjeta "Ejemplo de tarea".
+ * No repite los datos de los cursos (están en Formación); solo los enlaza.
+ *
+ * Movimiento: el texto (H1 incluido) es estático desde el primer fotograma.
+ * Solo se mueven el subrayado de "trabajo real" (se dibuja una vez) y la tarjeta de ejemplo.
+ */
 import Button from '../Button.astro';
-import MediaFrame from '../MediaFrame.astro';
 import Icon from '../Icon.astro';
-import CourseFacts from '../CourseFacts.astro';
-import { featuredCourse, medicalCourse } from '../../data/content';
+import MediaFrame from '../MediaFrame.astro';
+import ExampleTask from './ExampleTask.astro';
 import { hero } from '../../data/home';
 
 /**
- * Para añadir una fotografía real: colocarla en src/assets/home/ e importarla aquí, p. ej.
- *   import heroImage from '../../assets/home/hero.jpg';
- * Mientras no exista, desde tableta (768 px) se muestra el panel de los cursos disponibles
- * (sin placeholder fotográfico): en tableta bajo el texto y con los cursos en dos columnas,
- * en escritorio a la derecha. En móvil la columna visual no se muestra.
+ * Fotografía pendiente. Para sustituir el hueco reservado por la foto real:
+ *   1. Guardarla en src/assets/home/ (p. ej. hero-documento.jpg, vertical, ≥ 1600 px de alto).
+ *   2. Importarla aquí:  import heroImage from '../../assets/home/hero-documento.jpg';
+ *   3. Borrar la línea `const heroImage = undefined;`.
+ * La proporción la decide --hero-photo-aspect (16/9 en móvil y tableta, 4/5 en escritorio).
  */
 const heroImage = undefined;
+
+// Separa el titular para unir y subrayar "trabajo real" sin reescribir el texto.
+const [titleBefore, titleAfter = ''] = hero.title.split(hero.titleEmphasis);
 ---
 
-<section class="border-line relative overflow-hidden border-b bg-white">
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-0"
-    style="background-image: linear-gradient(rgb(18 59 109 / 0.035) 1px, transparent 1px), linear-gradient(90deg, rgb(18 59 109 / 0.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse 70% 80% at 80% 20%, black, transparent 75%);"
-  >
-  </div>
+<section class="hero border-line relative border-y bg-white" aria-labelledby="hero-title">
+  <div class="container-site grid items-center gap-y-10 pt-10 pb-16 sm:pt-14 lg:grid-cols-12 lg:grid-rows-[1fr_auto] lg:gap-x-12 lg:pt-20 lg:pb-24 xl:gap-x-16">
+    <!-- Texto: estático (sin animación de entrada) -->
+    <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:self-end">
+      <p class="eyebrow">{hero.eyebrow}</p>
 
-  <div class="container-site relative grid items-center gap-12 pt-10 pb-14 sm:pt-14 sm:pb-16 lg:grid-cols-12 lg:gap-10 lg:pt-24 lg:pb-28">
-    <div class="lg:col-span-7">
-      <p class="eyebrow mb-5 flex items-start gap-3 sm:mb-6 sm:items-center">
-        <span aria-hidden="true" class="bg-accent mt-[0.55em] h-px w-6 shrink-0 sm:mt-0 sm:w-8"></span>
-        {hero.eyebrow}
-      </p>
-
-      <h1 class="text-display max-w-[15ch]">
-        Cursos de IA para <span class="text-brand">profesionales sanitarios</span>
+      <h1 id="hero-title" class="hero-title mt-5 sm:mt-6">
+        {titleBefore}<span class="hero-emphasis">{hero.titleEmphasis}</span>{titleAfter}
       </h1>
 
-      <p class="text-lead text-muted mt-6 max-w-xl sm:mt-7">{hero.text}</p>
+      <p class="text-lead text-muted mt-6 max-w-[34rem] sm:mt-8">{hero.lead}</p>
 
       <div class="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
         <Button href={hero.primary.href} size="lg" arrow>{hero.primary.label}</Button>
@@ -43,55 +43,146 @@ const heroImage = undefined;
       </div>
     </div>
 
-    <div class:list={['relative hidden lg:col-span-5 lg:block', !heroImage && 'md:block']}>
-      {
-        heroImage ? (
-          <>
-            <MediaFrame
-              src={heroImage}
-              alt="Profesionales del sector sanitario trabajando con documentación y ordenador"
-              aspect="4 / 5"
-              priority
-              sizes="40vw"
-              class="border-line border"
-            />
-            <div class="border-line shadow-lift absolute -bottom-6 -left-10 max-w-[17rem] rounded-xl border bg-white p-5">
-              <p class="text-brand-deep font-display text-sm font-bold">El enfoque SanitIA</p>
-              <ul class="text-muted mt-3 space-y-2 text-sm">
-                {hero.approach.map((item) => (
-                  <li class="flex items-center gap-2">
-                    <Icon name="check" size={16} class="text-accent-strong" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        ) : (
-          <div class="border-line rounded-card shadow-lift relative border bg-white p-8 lg:ml-auto lg:max-w-md xl:p-10">
-            <div aria-hidden="true" class="bg-accent absolute top-0 left-8 h-1 w-16 xl:left-10" />
-            <p class="eyebrow">Cursos disponibles</p>
-            <ul class="mt-5 space-y-6 md:grid md:grid-cols-2 md:gap-8 md:space-y-0 lg:block lg:space-y-6" aria-label="Cursos disponibles">
-              <li>
-                <a href={medicalCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">IA para médicos</a>
-                <p class="text-muted mt-1 text-sm">Información clínica, Excel y presentaciones</p>
-                <CourseFacts label="Datos del curso de IA para médicos" compact />
-              </li>
-              <li class="border-line border-t pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-8 lg:border-t lg:border-l-0 lg:pt-6 lg:pl-0">
-                <a href={featuredCourse.href} class="font-display text-brand-deep hover:text-brand block text-xl font-bold leading-tight">{featuredCourse.title}</a>
-                <p class="text-muted mt-1 text-sm">Preparación de visitas y trabajo con información</p>
-                <CourseFacts label="Datos del curso de visita médica" compact />
-              </li>
-            </ul>
-            <div class="border-line mt-7 border-t pt-4">
-              <a href="/formacion" class="text-brand hover:text-brand-deep inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold transition-colors">
-                Ver ambos programas
-                <Icon name="arrow-right" size={18} />
-              </a>
-            </div>
-          </div>
-        )
-      }
+    <!-- Visual: fotografía documental + ejemplo de tarea (también en móvil) -->
+    <div class="hero-visual relative lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
+      <MediaFrame
+        src={heroImage}
+        alt={hero.photoAlt}
+        placeholder={hero.photoBrief}
+        aspect="var(--hero-photo-aspect)"
+        priority
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        captionPosition="top"
+        plain
+        class="border-line border"
+      />
+      <ExampleTask class="hero-example" />
     </div>
+
+    <!-- Acceso discreto a los dos cursos, sin repetir sus datos -->
+    <ul class="border-line flex flex-col border-t pt-1.5 sm:flex-row sm:gap-8 lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:self-start">
+      {
+        hero.courses.map((course) => (
+          <li>
+            <a href={course.href} class="course-link text-brand-deep hover:text-brand group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold">
+              {course.label}
+              <Icon name="arrow-right" size={16} class="course-arrow text-accent-strong" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
+
+<style>
+  .hero-title {
+    /*
+     * "aplicada al trabajo real" mide ~10,1em (≈16ch). Con 16,5ch de ancho máximo, el ajuste línea a
+     * línea da "Inteligencia artificial / aplicada al trabajo real / en sanidad". `balance` no sirve
+     * aquí: iguala líneas y elige "… / artificial aplicada al / trabajo real en sanidad".
+     * `pretty` conserva esa composición y evita palabras huérfanas en los anchos más estrechos.
+     */
+    max-width: 16.5ch;
+    /* Por debajo de ~375 px, 8,6vw mantiene "aplicada al trabajo real" en una sola línea. */
+    font-size: min(clamp(2rem, 1.1rem + 3.1vw, 3.75rem), 8.6vw);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    color: var(--color-brand-deep);
+    text-wrap: pretty;
+  }
+
+  /* "trabajo real" nunca se parte; su subrayado es la línea de verificación (turquesa = señal). */
+  .hero-emphasis {
+    position: relative;
+    white-space: nowrap;
+    color: var(--color-brand);
+  }
+
+  .hero-emphasis::after {
+    content: '';
+    position: absolute;
+    left: 0.02em;
+    right: 0.02em;
+    /* Bajo la línea base: no roza el descendente de la «j». */
+    bottom: -0.05em;
+    height: 0.07em;
+    min-height: 3px;
+    border-radius: 2px;
+    background: var(--color-accent);
+    transform-origin: left center;
+  }
+
+  /* Proporción de la foto sin forzar estilos de MediaFrame. Mientras sea una reserva, en móvil y tableta
+     es apaisada (16/9) para no dominar el Hero; en escritorio, vertical. */
+  .hero-visual {
+    --hero-photo-aspect: 16 / 9;
+  }
+
+  .hero-visual :global(.hero-example) {
+    position: relative;
+    margin: -3.5rem 0.75rem 0;
+  }
+
+  @media (width >= 40rem) {
+    .hero-visual :global(.hero-example) {
+      max-width: 21rem;
+      margin: -5rem 0 0 1.5rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .hero-visual {
+      --hero-photo-aspect: 4 / 5;
+    }
+
+    /* La tarjeta flota sobre el borde izquierdo de la foto sin invadir el texto. */
+    .hero-visual :global(.hero-example) {
+      position: absolute;
+      left: -1.5rem;
+      bottom: -2rem;
+      width: 19.5rem;
+      margin: 0;
+    }
+  }
+
+  @media (width >= 80rem) {
+    .hero-visual :global(.hero-example) {
+      left: -2.5rem;
+    }
+  }
+
+  .course-link {
+    transition: color 200ms ease, opacity 120ms ease-out;
+  }
+
+  /* Respuesta inmediata al tocar (sin movimiento: válida también con movimiento reducido). */
+  .course-link:active {
+    opacity: 0.7;
+  }
+
+  :global(.course-arrow) {
+    transition: transform 200ms var(--ease-out-soft);
+  }
+
+  /* Hover solo en dispositivos con puntero fino: evita estados pegados en táctil. */
+  @media (hover: hover) and (pointer: fine) {
+    .course-link:hover :global(.course-arrow) {
+      transform: translateX(2px);
+    }
+  }
+
+  /* El subrayado se dibuja una sola vez; el texto ya es visible desde el inicio. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-emphasis::after {
+      animation: emphasis-draw 420ms cubic-bezier(0.23, 1, 0.32, 1) 250ms both;
+    }
+  }
+
+  @keyframes emphasis-draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+</style>

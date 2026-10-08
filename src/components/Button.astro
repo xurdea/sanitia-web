@@ -36,7 +36,7 @@ const sizes = {
 <a
   href={href}
   class:list={[
-    'group ease-out-soft inline-flex max-w-full shrink-0 flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-lg font-semibold text-center min-[20rem]:flex-nowrap min-[20rem]:whitespace-nowrap transition-[background-color,border-color,color,transform] duration-200 active:translate-y-px',
+    'btn group ease-out-soft inline-flex max-w-full shrink-0 flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-lg font-semibold text-center min-[20rem]:flex-nowrap min-[20rem]:whitespace-nowrap',
     variants[variant],
     sizes[size],
     className,
@@ -46,7 +46,46 @@ const sizes = {
   <span class="min-w-0 hyphens-auto min-[20rem]:min-w-auto"><slot /></span>
   {
     arrow && (
-      <Icon name="arrow-right" size={18} class="ease-out-soft transition-transform duration-200 group-hover:translate-x-0.5" />
+      <Icon name="arrow-right" size={18} class="btn-arrow" />
     )
   }
 </a>
+
+<style>
+  /* Color con transición suave (ease); respuesta al pulsar inmediata (escala .97 en 140 ms, curva de salida fuerte).
+     Es un control, no contenido: sin espera de doble toque ni selección del texto al mantener pulsado. */
+  .btn {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      opacity 120ms ease-out,
+      transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Flecha: se desplaza solo con hover real (puntero preciso); en táctil no queda desplazada tras tocar. */
+  :global(.btn-arrow) {
+    transition: transform 200ms var(--ease-out-soft);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover :global(.btn-arrow) {
+      transform: translateX(2px);
+    }
+  }
+
+  /* Movimiento reducido: la respuesta al pulsar se mantiene, pero sin movimiento (solo opacidad). */
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active {
+      transform: none;
+      opacity: 0.85;
+    }
+  }
+</style>

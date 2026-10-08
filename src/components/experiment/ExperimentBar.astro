@@ -3,12 +3,13 @@
  * EXPERIMENTO A/B: barra para alternar entre variantes. Solo en /experiment/*.
  */
 interface Props {
-  current: 'a' | 'b';
+  current: 'a' | 'b' | 'c';
 }
 const { current } = Astro.props;
 const links = [
   { id: 'a', label: 'Variante A · sin skill', href: '/experiment/a' },
   { id: 'b', label: 'Variante B · con apple-design', href: '/experiment/b' },
+  { id: 'c', label: 'Variante C · híbrida', href: '/experiment/c' },
   { id: 'home', label: 'Portada actual', href: '/' },
 ];
 ---

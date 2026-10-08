@@ -43,13 +43,23 @@ export const experimentHero = {
 };
 
 /* ---------- Método ---------- */
+/** Papel de un paso del recorrido. Sin `kind`, es un paso normal. */
+export type FlowKind = 'verify' | 'result';
+
+export interface FlowStep {
+  name: string;
+  text: string;
+  /** 'verify' = paso de contraste (protagonista, turquesa); 'result' = cierre (azul marino). */
+  kind?: FlowKind;
+}
+
 export const experimentMethod = {
   kicker: 'Método SanitIA',
   title: 'Del problema real al resultado verificado',
   intro:
     'No enseñamos herramientas. Partimos de una necesidad de tu trabajo y terminamos en un resultado que puedes revisar, explicar y utilizar.',
   /** Recorrido de una tarea: es la "línea de verificación". */
-  flow: [
+  flow: <FlowStep[]>[
     {
       name: 'Necesidad real',
       text: 'Una tarea concreta de tu actividad: preparar una sesión, revisar documentación o analizar datos.',
@@ -58,12 +68,15 @@ export const experimentMethod = {
     {
       name: 'Contraste y verificación',
       text: 'Comparas el resultado con las fuentes y detectas errores, omisiones o datos inventados.',
+      kind: 'verify',
     },
     { name: 'Criterio profesional', text: 'Decides qué se utiliza, qué se corrige y qué se descarta.' },
-    { name: 'Resultado', text: 'Un trabajo útil, revisado y aplicable a tu actividad.' },
+    { name: 'Resultado', text: 'Un trabajo útil, revisado y aplicable a tu actividad.', kind: 'result' },
   ],
   /** Las cuatro fases oficiales (fuente única: methodSteps en content.ts). */
   phasesLabel: 'Las cuatro fases del Método SanitIA',
   phases: methodSteps.map((step) => ({ name: step.name, text: step.summary })),
   cta: { label: 'Conocer el Método SanitIA', href: '/metodo-sanitia' },
+  /** Variante C: las fases viven en /metodo-sanitia; aquí solo se enlazan. */
+  phasesLink: { label: 'Conoce las fases completas del Método SanitIA', href: '/metodo-sanitia' },
 };

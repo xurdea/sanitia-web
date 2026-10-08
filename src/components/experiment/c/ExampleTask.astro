@@ -1,0 +1,164 @@
+---
+/**
+ * Variante C · Tarjeta "Ejemplo de tarea" del Hero (base: variante A).
+ * Ilustra el método, no es un dato real: etiqueta de borde discontinuo y tono neutro.
+ * Los pasos hechos se unen con la "línea de verificación" turquesa; el pendiente
+ * ("Revisión profesional") queda en gris discontinuo y nunca se anima: lo cierra el profesional.
+ *
+ * Movimiento (solo con prefers-reduced-motion: no-preference):
+ * - La tarjeta entra una vez: 8 px + fundido, 400 ms, cubic-bezier(.23,1,.32,1).
+ * - Los checks hechos aparecen en cascada (60 ms) solo con opacidad: sin desplazamientos anidados.
+ */
+import Icon from '../../Icon.astro';
+import { experimentHero } from '../../../data/experiment';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const { example } = experimentHero;
+const doneCount = example.checks.filter((check) => check.done).length;
+---
+
+<aside class:list={['example', className]} aria-labelledby="ejemplo-tarea-c-titulo">
+  <p class="example-label">
+    <span aria-hidden="true" class="example-label-dot"></span>
+    {example.label}
+  </p>
+  <p id="ejemplo-tarea-c-titulo" class="font-display text-brand-deep mt-3 text-[1.0625rem] leading-snug font-bold">
+    {example.task}
+  </p>
+
+  <ol class="mt-5" aria-label={`${doneCount} de ${example.checks.length} pasos completados`}>
+    {
+      example.checks.map((check, i) => (
+        <li
+          class:list={['check', check.done ? 'is-done' : 'is-pending', i === example.checks.length - 1 && 'is-last']}
+          style={`--i: ${i}`}
+        >
+          <span aria-hidden="true" class="check-node">
+            {check.done && <Icon name="check" size={12} class="check-icon" />}
+          </span>
+          <span class:list={['min-w-0 text-sm leading-snug', check.done ? 'text-ink' : 'text-muted']}>
+            {check.text}
+            {/* El icono es decorativo: el estado se anuncia en texto oculto. */}
+            <span class="sr-only">{check.done ? ' (hecho)' : ' (pendiente)'}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</aside>
+
+<style>
+  .example {
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-lift);
+    padding: 1.25rem 1.25rem 1.125rem;
+  }
+
+  /* Etiqueta de "ejemplo": borde discontinuo para que se lea como ilustración, no como dato. */
+  .example-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px dashed var(--color-line-strong);
+    border-radius: 999px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .example-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-muted);
+  }
+
+  .check {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-bottom: 0.875rem;
+  }
+
+  .check.is-last {
+    padding-bottom: 0;
+  }
+
+  .check-node {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+  }
+
+  .is-done .check-node {
+    background: var(--color-accent);
+    color: var(--color-brand-ink);
+  }
+
+  .is-done .check-node :global(.check-icon) {
+    stroke-width: 2.5;
+  }
+
+  /* Pendiente: borde en el gris de texto secundario (≈5:1 sobre blanco, supera el 3:1 de WCAG 1.4.11). */
+  .is-pending .check-node {
+    background: var(--color-white);
+    border: 1.5px dashed var(--color-muted);
+  }
+
+  /* Línea de verificación: tramo entre un paso y el siguiente. */
+  .check:not(.is-last)::before {
+    content: '';
+    position: absolute;
+    left: calc(0.625rem - 1px);
+    top: 1.25rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-accent);
+  }
+
+  /* El tramo que conduce al paso pendiente aún no está verificado. */
+  .check:has(+ .is-pending)::before {
+    background: repeating-linear-gradient(to bottom, var(--color-muted) 0 3px, transparent 3px 6px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .example {
+      animation: example-in 400ms cubic-bezier(0.23, 1, 0.32, 1) 150ms both;
+    }
+
+    /* Cascada: solo opacidad (la tarjeta ya se desplaza; no se anidan movimientos). */
+    .is-done {
+      animation: check-in 200ms ease-out both;
+      animation-delay: calc(350ms + var(--i) * 60ms);
+    }
+  }
+
+  @keyframes example-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  @keyframes check-in {
+    from {
+      opacity: 0;
+    }
+  }
+</style>

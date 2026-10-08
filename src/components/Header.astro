@@ -38,7 +38,8 @@ const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
       </ul>
     </nav>
 
-    <div class="flex items-center gap-2">
+    <!-- shrink-0 + nowrap: el grupo derecho conserva su ancho (como antes de la regla global de min-width: 0 en flex). -->
+    <div class="flex shrink-0 items-center gap-2 whitespace-nowrap">
       <a
         href="/contacto"
         aria-current={isActive('/contacto') ? 'page' : undefined}
@@ -61,7 +62,11 @@ const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
     </div>
   </div>
 
-  <div id="mobile-nav" class="border-line bg-surface hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t lg:hidden">
+  <!-- Capa fija bajo la cabecera: no ocupa espacio en la página, así abrir/cerrar no mueve el scroll.
+       La cabecera tiene backdrop-filter, que la convierte en el bloque contenedor de los position:fixed:
+       por eso la altura es explícita (100dvh − cabecera) y no bottom-0, que se mediría desde la cabecera.
+       overscroll-contain evita que el scroll del panel se encadene a la página de fondo. -->
+  <div id="mobile-nav" class="border-line bg-surface fixed inset-x-0 top-[4.5rem] hidden h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t lg:hidden">
     <nav aria-label="Principal móvil" class="container-site py-6">
       <ul class="divide-line divide-y">
         {
@@ -100,22 +105,58 @@ const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
 
   if (toggle && panel) {
     const label = toggle.querySelector('.sr-only');
+    // Todo lo que queda detrás del menú: se vuelve inerte (ni foco ni clic) mientras está abierto.
+    const background = [
+      document.querySelector<HTMLElement>('a[href="#contenido"]'),
+      document.querySelector<HTMLElement>('main'),
+      document.querySelector<HTMLElement>('body > footer'),
+    ].filter((el): el is HTMLElement => el !== null);
+    const focusables = () => [toggle, ...panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')];
+    let savedScroll = 0;
+
+    const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
     const setOpen = (open: boolean) => {
+      if (open === isOpen()) return;
+      if (open) savedScroll = window.scrollY;
       toggle.setAttribute('aria-expanded', String(open));
       panel.classList.toggle('hidden', !open);
       toggle.querySelector('.nav-icon-open')?.classList.toggle('hidden', open);
       toggle.querySelector('.nav-icon-close')?.classList.toggle('hidden', !open);
       if (label) label.textContent = open ? 'Cerrar menú' : 'Abrir menú';
+      background.forEach((el) => el.toggleAttribute('inert', open));
+      // Bloqueo del scroll de fondo; al cerrar se restaura exactamente la posición previa
+      // (instantáneo: html tiene scroll-behavior: smooth cuando se acepta movimiento).
       document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (!open) window.scrollTo({ top: savedScroll, behavior: 'instant' });
     };
 
-    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      if (!isOpen()) return;
+      if (e.key === 'Escape') {
         setOpen(false);
-        toggle.focus();
+        // preventScroll: el botón está en la cabecera sticky; enfocarlo no debe mover la página.
+        toggle.focus({ preventScroll: true });
+        return;
+      }
+      // Foco atrapado: Tab y Mayús+Tab circulan entre el botón del menú y los enlaces del panel.
+      if (e.key === 'Tab') {
+        const items = focusables();
+        const first = items[0];
+        const last = items[items.length - 1];
+        const current = document.activeElement as HTMLElement | null;
+        const inside = current !== null && items.includes(current);
+        if (e.shiftKey && (current === first || !inside)) {
+          e.preventDefault();
+          last.focus({ preventScroll: true });
+        } else if (!e.shiftKey && (current === last || !inside)) {
+          e.preventDefault();
+          first.focus({ preventScroll: true });
+        }
       }
     });
     window.matchMedia('(min-width: 64rem)').addEventListener('change', (e) => e.matches && setOpen(false));
+    // Al volver con el botón Atrás (bfcache) la página puede restaurarse con el menú abierto.
+    window.addEventListener('pageshow', (e) => e.persisted && setOpen(false));
   }
 </script>

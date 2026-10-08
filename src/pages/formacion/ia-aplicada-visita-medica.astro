@@ -118,7 +118,8 @@ const summary = [
             audience.map((item) => (
               <li class="flex gap-3 text-lg">
                 <Icon name="check" size={20} class="text-accent-strong mt-1" />
-                {item}
+                {/* span: el texto suelto en una fila flexible no puede encogerse y desbordaba con el texto ampliado. */}
+                <span>{item}</span>
               </li>
             ))
           }

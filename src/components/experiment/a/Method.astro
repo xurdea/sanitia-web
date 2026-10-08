@@ -1,0 +1,305 @@
+---
+/**
+ * EXPERIMENTO A/B · Variante A (sin skill) · Método
+ * Sección protagonista: el recorrido de una tarea (experimentMethod.flow) dibujado
+ * sobre la "línea de verificación". Turquesa = progreso y comprobación.
+ * Las cuatro fases oficiales (fuente única methodSteps) aparecen como nivel secundario.
+ *
+ * Movimiento: mejora progresiva con animation-timeline: view(). Sin soporte o con
+ * movimiento reducido, la línea está dibujada y todo es visible (estado final por defecto).
+ */
+import Button from '../../Button.astro';
+import Icon from '../../Icon.astro';
+import { experimentMethod as method } from '../../../data/experiment';
+
+// Índices con tratamiento propio dentro del recorrido.
+const verifyIndex = 2; // "Contraste y verificación"
+const resultIndex = method.flow.length - 1; // "Resultado"
+---
+
+<section class="method section-y" aria-labelledby="metodo-a-title">
+  <div class="container-site">
+    <!-- Cabecera: una idea, contada en grande -->
+    <header class="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow">{method.kicker}</p>
+        <h2 id="metodo-a-title" class="method-title mt-4">{method.title}</h2>
+      </div>
+      <p class="text-lead text-muted lg:col-span-5 lg:pb-2">{method.intro}</p>
+    </header>
+
+    <!-- Recorrido: panel elevado con la línea de verificación -->
+    <div class="flow-panel mt-10 sm:mt-14">
+      <ol class="flow">
+        {
+          method.flow.map((step, i) => (
+            <li
+              class:list={['flow-step', i === verifyIndex && 'is-verify', i === resultIndex && 'is-result']}
+              style={`--i: ${i}`}
+            >
+              <span aria-hidden="true" class="flow-node">
+                {i === verifyIndex || i === resultIndex ? <Icon name="check" size={14} class="flow-check" /> : <span class="flow-dot" />}
+              </span>
+              <div class="flow-body">
+                <span aria-hidden="true" class="flow-index">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="flow-name">{step.name}</h3>
+                <p class="text-muted mt-2 text-[0.9375rem] leading-relaxed">{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <!-- Nivel secundario: las cuatro fases oficiales + enlace -->
+    <div class="mt-14 grid gap-8 sm:mt-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-3">
+        <h3 class="font-display text-brand-deep text-lg leading-snug font-bold">{method.phasesLabel}</h3>
+        <Button href={method.cta.href} variant="secondary" arrow class="mt-6 hidden lg:inline-flex">{method.cta.label}</Button>
+      </div>
+      <ol class="phases lg:col-span-9">
+        {
+          method.phases.map((phase) => (
+            <li class="phase">
+              <h4 class="font-display text-brand-deep text-base font-bold">{phase.name}</h4>
+              <p class="text-muted mt-1 text-sm leading-relaxed">{phase.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <Button href={method.cta.href} variant="secondary" arrow class="justify-self-start lg:hidden">{method.cta.label}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .method-title {
+    font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    max-width: 16ch;
+  }
+
+  /* ---------- Panel del recorrido (nivel 2: elevado) ---------- */
+  .flow-panel {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    padding: 1.75rem 1.25rem;
+  }
+
+  @media (width >= 40rem) {
+    .flow-panel {
+      padding: 2.5rem 2.25rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .flow-panel {
+      padding: 3rem 2.5rem 2.75rem;
+    }
+  }
+
+  .flow {
+    --node: 1.75rem;
+    --line: 2px;
+    view-timeline-name: --flow;
+  }
+
+  .flow-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--node) 1fr;
+    column-gap: 1rem;
+    align-content: start;
+    align-items: start;
+    padding-bottom: 1.75rem;
+  }
+
+  .flow-step:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Línea de verificación (móvil: vertical). Cada tramo une un nodo con el siguiente. */
+  .flow-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--node) / 2 - var(--line) / 2);
+    top: calc(var(--node) / 2);
+    height: 100%;
+    width: var(--line);
+    background: var(--color-accent);
+    transform-origin: top;
+  }
+
+  .flow-node {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--node);
+    height: var(--node);
+    border-radius: 999px;
+    background: #fff;
+    border: var(--line) solid var(--color-accent);
+  }
+
+  .flow-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+  }
+
+  /* Comprobación: el nodo se rellena (turquesa = validación). */
+  .is-verify .flow-node {
+    background: var(--color-accent);
+    color: var(--color-brand-ink);
+  }
+
+  /* Resultado: cierre en azul marino (estructura), con la marca de verificación. */
+  .is-result .flow-node {
+    background: var(--color-brand-deep);
+    border-color: var(--color-brand-deep);
+    color: #fff;
+  }
+
+  .flow-node :global(.flow-check) {
+    stroke-width: 2.5;
+  }
+
+  .flow-index {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    line-height: var(--node);
+  }
+
+  .flow-name {
+    font-size: 1.1875rem;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-top: 0.125rem;
+  }
+
+  .is-verify .flow-name {
+    color: var(--color-accent-strong);
+  }
+
+  /* Escritorio: recorrido horizontal en cinco columnas. */
+  @media (width >= 64rem) {
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .flow-step {
+      grid-template-columns: 1fr;
+      padding-bottom: 0;
+      padding-right: 1.75rem;
+    }
+
+    .flow-step:not(:last-child)::before {
+      top: calc(var(--node) / 2 - var(--line) / 2);
+      left: calc(var(--node) / 2);
+      width: 100%;
+      height: var(--line);
+      transform-origin: left;
+    }
+
+    .flow-body {
+      margin-top: 1.25rem;
+    }
+
+    .flow-index {
+      line-height: 1.5;
+    }
+  }
+
+  /* ---------- Fases oficiales (nivel 1: plano, separadores finos) ---------- */
+  .phases {
+    display: grid;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .phase {
+    padding: 1.125rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  @media (width >= 40rem) {
+    .phases {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .phases {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 0;
+      column-gap: 0;
+    }
+
+    .phase {
+      padding: 0.25rem 1.5rem 0.25rem 1.5rem;
+      border-bottom: 0;
+      border-left: 1px solid var(--color-line);
+    }
+  }
+
+  /* ---------- Progresión ligada al scroll (mejora progresiva) ---------- */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .flow-step:not(:last-child)::before {
+        animation: draw-y linear both;
+        animation-timeline: --flow;
+        animation-range: cover calc(16% + var(--i) * 10%) cover calc(25% + var(--i) * 10%);
+      }
+
+      .flow-node {
+        animation: node-on linear both;
+        animation-timeline: --flow;
+        animation-range: cover calc(12% + var(--i) * 10%) cover calc(16% + var(--i) * 10%);
+      }
+
+      @media (width >= 64rem) {
+        .flow-step:not(:last-child)::before {
+          animation-name: draw-x;
+          animation-range: cover calc(12% + var(--i) * 6%) cover calc(17% + var(--i) * 6%);
+        }
+
+        .flow-node {
+          animation-range: cover calc(8% + var(--i) * 6%) cover calc(12% + var(--i) * 6%);
+        }
+      }
+    }
+  }
+
+  @keyframes draw-y {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @keyframes draw-x {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes node-on {
+    from {
+      border-color: var(--color-line-strong);
+      background: #fff;
+      color: transparent;
+    }
+  }
+</style>

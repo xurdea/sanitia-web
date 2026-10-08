@@ -1,0 +1,23 @@
+---
+/**
+ * EXPERIMENTO A/B: Variante A. Ruta temporal, noindex y fuera del sitemap.
+ * Solo cambian Hero y Método; el resto son las secciones actuales para ver el contexto.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExperimentBar from '../../components/experiment/ExperimentBar.astro';
+import Hero from '../../components/experiment/a/Hero.astro';
+import Method from '../../components/experiment/a/Method.astro';
+import UseCases from '../../components/home/UseCases.astro';
+import FeaturedCourse from '../../components/home/FeaturedCourse.astro';
+import CTASection from '../../components/CTASection.astro';
+import { finalCta } from '../../data/home';
+---
+
+<BaseLayout title="Experimento de diseño · Variante A" noindex>
+  <ExperimentBar current="a" />
+  <Hero />
+  <UseCases />
+  <FeaturedCourse />
+  <Method />
+  <CTASection title={finalCta.title} text={finalCta.text} primary={finalCta.primary} />
+</BaseLayout>

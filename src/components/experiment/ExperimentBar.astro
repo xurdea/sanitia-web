@@ -1,0 +1,31 @@
+---
+/**
+ * EXPERIMENTO A/B: barra para alternar entre variantes. Solo en /experiment/*.
+ */
+interface Props {
+  current: 'a' | 'b';
+}
+const { current } = Astro.props;
+const links = [
+  { id: 'a', label: 'Variante A · sin skill', href: '/experiment/a' },
+  { id: 'b', label: 'Variante B · con apple-design', href: '/experiment/b' },
+  { id: 'home', label: 'Portada actual', href: '/' },
+];
+---
+
+<nav aria-label="Experimento de diseño" class="bg-brand-ink text-[0.8125rem] text-slate-300">
+  <div class="container-site flex flex-wrap items-center gap-x-4 gap-y-1 py-2">
+    <span class="font-semibold text-white">Vista experimental</span>
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={link.id === current ? 'page' : undefined}
+          class="inline-flex min-h-8 items-center underline-offset-4 hover:text-white aria-[current=page]:text-accent aria-[current=page]:underline"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</nav>

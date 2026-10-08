@@ -15,7 +15,11 @@ export default defineConfig({
   integrations: [
     sitemap({
       // La página de confirmación del formulario lleva noindex y no debe figurar en el sitemap.
-      filter: (page) => new URL(page).pathname.replace(/\/$/, '') !== '/contacto-enviado',
+      // /experiment/* son vistas temporales del experimento A/B de diseño (rama design/apple-experiment).
+      filter: (page) => {
+        const path = new URL(page).pathname.replace(/\/$/, '');
+        return path !== '/contacto-enviado' && !path.startsWith('/experiment');
+      },
     }),
   ],
   vite: {

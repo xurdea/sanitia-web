@@ -5,6 +5,8 @@
  * El símbolo se extrajo del icono facilitado (src/assets/brand/sanitia-icon-original.jpg,
  * 249x231 px). PENDIENTE: sustituir por el original en SVG o PNG de alta resolución.
  * Sobre fondo oscuro va sobre una pastilla blanca: la cruz azul oscura no contrasta con el navy.
+ * Variante oscura (cabecera): tamaño con tope en vw. Desde 320 px coincide con el tamaño en rem, pero con el
+ * texto del navegador ampliado no se duplica, para que quepa junto al botón del menú en móviles estrechos.
  */
 import { Image } from 'astro:assets';
 import symbol from '../assets/brand/sanitia-symbol.png';
@@ -25,12 +27,12 @@ const { variant = 'dark', class: className } = Astro.props;
       height={variant === 'light' ? 26 : 32}
       densities={[1, 2]}
       loading="eager"
-      class={variant === 'light' ? 'h-[26px] w-auto' : 'h-8 w-auto'}
+      class={variant === 'light' ? 'h-[26px] w-auto' : 'h-[min(2rem,10vw)] w-auto'}
     />
   </span>
   <span
     class:list={[
-      'font-display text-[1.375rem] leading-none font-extrabold tracking-[-0.03em]',
+      'font-display text-[min(1.375rem,7vw)] leading-none font-extrabold tracking-[-0.03em]',
       variant === 'dark' ? 'text-brand-deep' : 'text-white',
     ]}
   >

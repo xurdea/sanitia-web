@@ -26,11 +26,11 @@ import { site, mainNav, legalNav } from '../data/site';
 
     <nav aria-label="Pie de página" class="md:col-span-8 lg:col-span-4">
       <p class="text-xs font-semibold tracking-[0.14em] text-slate-400 uppercase">SanitIA</p>
-      <ul class="mt-3 grid grid-cols-2 gap-x-6 text-[0.9375rem] md:mt-5 md:gap-y-3">
+      <ul class="mt-3 grid grid-cols-1 gap-x-6 text-[0.9375rem] min-[20rem]:grid-cols-2 md:mt-5 md:gap-y-3">
         {
           mainNav.map((item) => (
             <li>
-              <a href={item.href} class="min-h-11 inline-flex items-center md:min-h-0 whitespace-nowrap transition-colors hover:text-white">
+              <a href={item.href} class="min-h-11 inline-flex items-center md:min-h-0 md:whitespace-nowrap transition-colors hover:text-white">
                 {item.label}
               </a>
             </li>
@@ -45,7 +45,7 @@ import { site, mainNav, legalNav } from '../data/site';
         <li>
           {
             site.social.linkedin ? (
-              <a href={site.social.linkedin} rel="noopener" class="min-h-11 inline-flex items-center md:min-h-0 whitespace-nowrap transition-colors hover:text-white">
+              <a href={site.social.linkedin} rel="noopener" class="min-h-11 inline-flex items-center md:min-h-0 md:whitespace-nowrap transition-colors hover:text-white">
                 LinkedIn
               </a>
             ) : (
@@ -56,7 +56,7 @@ import { site, mainNav, legalNav } from '../data/site';
         {
           site.social.discord && (
             <li>
-              <a href={site.social.discord} rel="noopener" class="min-h-11 inline-flex items-center md:min-h-0 whitespace-nowrap transition-colors hover:text-white">
+              <a href={site.social.discord} rel="noopener" class="min-h-11 inline-flex items-center md:min-h-0 md:whitespace-nowrap transition-colors hover:text-white">
                 Discord
               </a>
             </li>
@@ -75,7 +75,7 @@ import { site, mainNav, legalNav } from '../data/site';
         {
           legalNav.map((item) => (
             <li>
-              <a href={item.href} class="min-h-11 inline-flex items-center md:min-h-0 whitespace-nowrap transition-colors hover:text-white">
+              <a href={item.href} class="min-h-11 inline-flex items-center md:min-h-0 md:whitespace-nowrap transition-colors hover:text-white">
                 {item.label}
               </a>
             </li>

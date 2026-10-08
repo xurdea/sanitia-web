@@ -46,6 +46,21 @@
     @apply bg-surface text-ink font-sans antialiased;
     font-feature-settings: 'cv11', 'ss01';
     text-rendering: optimizeLegibility;
+    /* Una palabra más ancha que su caja (texto al 200 %, móvil estrecho) se parte en vez de desbordar. */
+    overflow-wrap: break-word;
+  }
+
+  /*
+   * Reflow (WCAG 1.4.10): por defecto, los hijos de una rejilla no pueden encogerse por debajo del
+   * ancho de su contenido (min-width: auto) y una columna sin plantilla crece hasta ese ancho,
+   * arrastrando el desbordamiento hasta la página. Con min-width: 0 se ajustan a su columna.
+   * Lo mismo en las filas flexibles del contenido y del pie (texto junto a un icono, etiquetas…).
+   * La cabecera queda fuera: su reparto del espacio a 1024 px depende de que sus elementos no se encojan.
+   * :where() deja la especificidad a 0, así que cualquier min-w-* explícito sigue mandando.
+   */
+  :where(.grid) > *,
+  :where(main .flex, footer .flex) > * {
+    min-width: 0;
   }
 
   h1,

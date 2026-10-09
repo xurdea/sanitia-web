@@ -28,8 +28,10 @@ export const hero = {
     { label: 'IA para médicos', href: medicalCourse.href },
     { label: featuredCourse.title, href: featuredCourse.href },
   ],
-  /** Fotografía pendiente: hasta tenerla se muestra un hueco reservado con esta descripción. */
-  photoBrief: 'Fotografía real: profesional sanitario revisando un documento en el ordenador',
+  /** Apoyo textual del Hero (CLAUDE.md §8.1): ámbitos del sector sanitario a los que se dirige SanitIA. */
+  areasLabel: 'Para todo el sector sanitario',
+  areas: ['Asistencia', 'Gestión', 'Farmacia', 'Industria', 'Investigación', 'Tecnología'],
+  /** Texto alternativo para cuando exista la fotografía real del Hero (ver Hero.astro). */
   photoAlt: 'Profesional sanitario revisando documentación en el ordenador',
   /** Ejemplo ilustrativo de una tarea trabajada con el método (no es un dato ni un resultado real). */
   example: {

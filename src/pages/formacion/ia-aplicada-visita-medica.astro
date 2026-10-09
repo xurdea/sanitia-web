@@ -5,6 +5,8 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
 import FollowUp from '../../components/FollowUp.astro';
+import { Image } from 'astro:assets';
+import courseImage from '../../assets/course/visita-medica.webp';
 import { featuredCourse } from '../../data/content';
 
 const audience = [
@@ -92,6 +94,21 @@ const summary = [
 
   <div class="container-site grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-12">
     <div class="space-y-20 lg:col-span-8">
+      {/* Justo bajo el PageHero asoma en el primer pantallazo desde ~390 px de ancho: carga normal (eager), sin
+          prioridad alta para no competir con el titular. Original de 1400 × 933 px: no se generan anchos mayores. */}
+      <figure class="border-line rounded-card overflow-hidden border bg-white">
+        <Image
+          src={courseImage}
+          alt="Profesional de la visita médica tomando notas mientras revisa una publicación científica junto a un portátil"
+          widths={[480, 800, 1200, 1400]}
+          sizes="(min-width: 76rem) 752px, (min-width: 64rem) 62vw, 100vw"
+          loading="eager"
+          decoding="async"
+          class="aspect-[3/2] w-full object-cover"
+        />
+        <figcaption class="text-muted px-4 py-2.5 text-xs">Imagen ilustrativa generada con IA.</figcaption>
+      </figure>
+
       <section aria-labelledby="descripcion">
         <h2 id="descripcion" class="text-3xl font-bold">Descripción</h2>
         <div class="prose-sanitia text-muted mt-6">

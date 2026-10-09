@@ -176,47 +176,67 @@ El header debe ser limpio, responsive y preferiblemente sticky con comportamient
 
 ## 8. Home — estructura obligatoria
 
+Orden actual de la Home (`src/pages/index.astro`; textos en `src/data/home.ts`):
+
+1. Hero (§8.1)
+2. Aplicaciones (§8.7)
+3. Formación: dos cursos y formación a medida (§8.5)
+4. Continuidad: seguimiento de seis meses en Discord (§8.5)
+5. Perfiles (§8.2)
+6. Credibilidad (§8.8)
+7. Método SanitIA (§8.6)
+8. Organizaciones (§8.9)
+9. CTA final (§8.11)
+
+Los apartados §8.3, §8.4 y §8.10 no se muestran hoy como secciones propias; cada uno indica dónde se recoge su mensaje o por qué está oculto. Si se cambia la estructura de la Home, actualizar esta lista y el apartado correspondiente a la vez.
+
 ### 8.1 Hero
 
-H1:
-**Inteligencia Artificial aplicada al sector sanitario**
+H1 aprobado por el propietario (octubre de 2026; sustituye al anterior «Inteligencia Artificial aplicada al sector sanitario», que no debe restaurarse como H1):
+**Inteligencia artificial aplicada al trabajo real en sanidad**
 
-Texto:
-**Formación práctica para profesionales, equipos y organizaciones que quieren incorporar la IA a su trabajo real.**
+«trabajo real» va subrayado en turquesa (la línea de verificación).
+
+El descriptor de marca «Inteligencia Artificial aplicada al sector sanitario» (§2) se mantiene como descriptor (`site.descriptor`, título por defecto y textos institucionales); no es el H1 de la Home.
+
+Texto (entradilla):
+**Cursos prácticos para médicos, visita médica y equipos sanitarios. Tareas reales, resultados contrastados y tu criterio profesional al mando.**
 
 Apoyo visual o textual:
 **Asistencia · Gestión · Farmacia · Industria · Investigación · Tecnología**
 
 CTA principal:
-**Explorar formación**
+**Ver cursos** (a `/formacion`)
 
 CTA secundario:
-**Formación para empresas**
+**Formación para organizaciones** (a `/empresas`)
+
+Columna visual: tarjeta «Ejemplo de tarea» (ilustrativa, no es un dato real). Mientras no haya fotografía real del Hero, se muestra un panel editorial terminado con los ámbitos del sector y la tarjeta integrada; nunca un rótulo de «fotografía pendiente».
+
+Fuente de los textos: `hero` en `src/data/home.ts`.
 
 Objetivo: explicar SanitIA en menos de cinco segundos.
 
 No usar herramientas como ChatGPT, Claude o Perplexity en el hero.
 
-### 8.2 Ecosistema sanitario
+### 8.2 Ecosistema sanitario — sección «Perfiles»
 
-Título:
-**La IA puede aportar valor en todo el ecosistema de la salud**
+En la Home se resuelve con la sección **Perfiles** (`profiles` en `home.ts`) y con los ámbitos del panel del Hero (§8.1).
 
-Texto:
-SanitIA trabaja con profesionales de diferentes ámbitos y funciones, adaptando la aplicación de la inteligencia artificial a las necesidades reales de cada actividad.
+Título actual:
+**Una formación pensada para diferentes perfiles del sector sanitario**
 
-Áreas visuales sugeridas:
-- Asistencia
-- Gestión
-- Industria
-- Investigación
-- Tecnología
+Perfiles mostrados: Medicina, Enfermería, Farmacia, Visita médica, Gestión sanitaria y Personal no asistencial, cada uno con una línea sobre sus tareas. Nota final: además de los dos cursos, se diseña formación a medida para estos perfiles.
+
+El mapa completo de áreas (Asistencia, Gestión, Industria, Investigación, Tecnología) vive en `ecosystem` (`src/data/content.ts`) y se usa en otras páginas.
 
 Debe quedar claro que cualquier perfil profesional del sector salud puede encajar en SanitIA.
 
 ### 8.3 Diferenciación
 
-Título:
+**No se muestra como sección propia en la Home actual.** Su mensaje («no enseñamos herramientas, enseñamos a aplicarlas al trabajo») se recoge en la entradilla del Método (§8.6) y en la sección Continuidad (§8.5). Se conserva como referencia de mensaje:
+
+Título de referencia:
 **Aprender IA no consiste en aprender herramientas**
 
 Texto base:
@@ -239,7 +259,9 @@ Cierre:
 
 ### 8.4 Qué hacemos
 
-Título:
+**No se muestra como sección propia en la Home actual.** Las líneas de actividad se recogen así: formación para profesionales y para organizaciones en la sección Formación (§8.5) y en Organizaciones (§8.9); el conocimiento SanitIA, en `/recursos` (§8.10). Se conserva como referencia de mensaje:
+
+Título de referencia:
 **Convertimos la IA en una herramienta de trabajo**
 
 Tres líneas:
@@ -255,13 +277,29 @@ Tres líneas:
 
 Evitar un diseño de “tres cards genéricas” si puede resolverse de forma editorial y más premium.
 
-### 8.5 Formación destacada
+### 8.5 Formación — dos cursos y formación a medida
 
-Etiqueta:
-**FORMACIÓN DESTACADA**
+La Home presenta **dos programas** al mismo nivel, más la formación a medida (componente `FeaturedCourse`; textos en `training` de `home.ts` y en `medicalCourse` / `featuredCourse` de `content.ts`).
+
+Etiqueta: **FORMACIÓN**
 
 Título:
-**IA aplicada a la visita médica**
+**Dos cursos disponibles y formación a medida**
+
+Tarjetas de curso (mismo formato, cada una con `CourseFacts` y CTA **Ver programa**):
+
+1. **IA para médicos: información clínica y productividad** (`/formacion/ia-para-medicos`). Etiqueta «Para médicos». Información clínica, verificación de fuentes, Excel y datos, presentaciones.
+2. **IA aplicada a la visita médica** (`/formacion/ia-aplicada-visita-medica`). Etiqueta «Para visita médica». Detalle a continuación.
+
+Datos comunes de los dos cursos (`CourseFacts`, fuente única para Hero, Home y `/formacion`): **10 horas · 5 sesiones de 2 horas · Online en directo · 6 meses de tutoría en Discord**.
+
+Bloque **Formación a medida**: adaptación del Método SanitIA a enfermería, farmacia, gestión y personal no asistencial, con programas de 10 horas en 5 sesiones online en directo. CTA **Cuéntanos qué necesitas** (a `/contacto`).
+
+Tras esta sección va **Continuidad** (`Continuity.astro`): «La IA cambia. Tu forma de trabajar también puede hacerlo.», con los seis meses de tutoría en Discord y CTA **Explorar cursos**.
+
+#### Curso «IA aplicada a la visita médica»
+
+Su ficha mantiene la etiqueta **FORMACIÓN DESTACADA**.
 
 Texto:
 Programa práctico para incorporar inteligencia artificial a las principales tareas de la actividad del visitador médico.
@@ -277,8 +315,8 @@ Aplicaciones:
 Características:
 - Duración: 10 horas, en 5 sesiones de 2 horas
 - Online en directo
-- Tutorías personalizadas
-- Comunidad SanitIA
+- 6 meses de seguimiento y tutoría en el canal de Discord de SanitIA (bloque `FollowUp`)
+- Novedades de IA en la comunidad SanitIA
 - Contenido práctico
 - Grabaciones disponibles durante un periodo definido en cada edición
 
@@ -314,34 +352,41 @@ En la Home, la sección del Método no repite las cuatro fases: muestra el recor
 
 Mostrar como proceso visual claro. Evitar presentarlo como metodología académica rígida.
 
-### 8.7 Casos de uso
+### 8.7 Casos de uso — sección «Aplicaciones»
+
+Componente `UseCases`; textos en `applications` de `home.ts`. Va justo después del Hero.
+
+Etiqueta: **APLICACIONES**
 
 Título:
-**¿Qué puedes hacer con IA?**
+**IA aplicada a tareas concretas de tu trabajo**
 
-Casos iniciales:
+Casos actuales:
 
-- Investigar mejor
-- Trabajar con documentación
-- Analizar información y datos
-- Crear contenidos
-- Automatizar tareas
-- Gestionar conocimiento
+- Búsqueda y contraste de información
+- Análisis y resumen de documentación
+- Presentaciones y materiales profesionales
+- Datos y Excel
+- Organización del conocimiento
+- Automatización de tareas profesionales
 
 Explicar beneficios, no herramientas.
 
 ### 8.8 Credibilidad
 
-Título:
-**Tecnología sanitaria, IA y experiencia profesional**
+Componente `Credibility`; textos en `credibility` de `home.ts` (fundador y testimonios futuros en `src/data/credibility.ts`).
 
-Texto base:
-SanitIA nace de la experiencia profesional en tecnología sanitaria, sistemas de información y transformación digital, combinada con la aplicación práctica de herramientas de inteligencia artificial en entornos profesionales.
+Etiqueta: **QUIÉN ESTÁ DETRÁS**
 
-Incluir un bloque breve de fundador:
+Título actual:
+**Experiencia sanitaria aplicada a la formación en IA**
 
-**Jorge Álvarez**
-Ingeniero informático y consultor especializado en tecnología sanitaria e inteligencia artificial aplicada.
+Bloque de fundador:
+
+**Jorge Álvarez Rodríguez**, fundador de SanitIA.
+Ingeniero informático y consultor especializado en tecnología sanitaria, transformación digital e inteligencia artificial aplicada al sector salud.
+
+Destacados actuales: «20+ años · Tecnología sanitaria», «Sector salud · Experiencia en proyectos reales», «IA aplicada · Formación especializada en sanidad». Sin fotografía, se muestra un monograma con las iniciales.
 
 No convertir la marca en una web personal.
 
@@ -356,25 +401,24 @@ Dejar el componente preparado para añadir en el futuro:
 
 ### 8.9 SanitIA para organizaciones
 
-Título:
-**Lleva la IA a tu equipo**
+Componente `Organizations`; textos en `organizations` de `home.ts`. La propuesta completa para organizaciones está en `/empresas`.
+
+Etiqueta: **ORGANIZACIONES**
+
+Título actual:
+**Formación en IA para organizaciones sanitarias**
 
 Texto:
-Diseñamos programas de formación adaptados al perfil de los participantes, sus procesos de trabajo, nivel de conocimiento y objetivos de la organización.
+Programas de 10 horas en 5 sesiones, adaptados a las funciones y necesidades del equipo, con seis meses de tutoría y actualizaciones en la comunidad SanitIA en Discord.
 
-Servicios iniciales:
-- Formación para equipos
-- Programas personalizados
-- Talleres
-- Sesiones prácticas
+Tipos de organización mostrados: Hospitales, Colegios profesionales, Asociaciones, Industria farmacéutica, Entidades sanitarias y Equipos profesionales.
 
-CTA principal:
-**Solicitar una propuesta**
-
-CTA secundario:
-**Hablar con SanitIA**
+CTA (único en la Home):
+**Formación para mi organización** (a `/empresas`)
 
 ### 8.10 Recursos
+
+**Oculta en la Home actual** (`Resources.astro` existe pero no se renderiza mientras los contenidos están en revisión editorial; ver comentario en `src/pages/index.astro`). La sección `/recursos` sigue publicada. Al reactivarla, seguir estas pautas:
 
 Título:
 **Conocimiento para aplicar IA a la salud**
@@ -399,18 +443,16 @@ Usar Astro Content Collections para esta parte si encaja con la versión estable
 
 ### 8.11 CTA final
 
-Título:
-**La IA ya forma parte del trabajo**
+Componente `CTASection`; textos en `finalCta` de `home.ts`.
 
-Subtítulo:
-**La diferencia está en saber utilizarla.**
+Título actual:
+**¿Hablamos sobre formación en IA?**
 
 Texto:
-SanitIA te ayuda a convertir la inteligencia artificial en una herramienta útil para tu actividad profesional.
+Cuéntanos tu perfil o las necesidades de tu organización y estudiaremos qué tipo de formación puede encajar mejor.
 
-CTA:
-- Explorar formación
-- Contactar con SanitIA
+CTA (único):
+**Contactar con SanitIA** (a `/contacto`)
 
 ## 9. Footer
 
@@ -516,6 +558,8 @@ Implementar desde la primera versión:
 
 Base de título de Home:
 **SanitIA | Inteligencia Artificial aplicada al sector sanitario**
+
+> **DECISIÓN PENDIENTE (octubre de 2026):** la Home publica hoy otro título y otra descripción (`homeSeo` en `src/data/home.ts`): «Cursos de IA para profesionales sanitarios | SanitIA» y «Cursos prácticos de IA para médicos y visita médica, y formación a medida para equipos sanitarios. 10 horas, 5 sesiones y 6 meses de tutoría en Discord.». El propietario debe decidir cuál es el vigente. Hasta entonces, no cambiar ni el código ni este apartado.
 
 Meta description inicial:
 **Formación práctica en inteligencia artificial para profesionales, equipos y organizaciones del sector sanitario. Aprende a aplicar la IA a situaciones y procesos de trabajo reales.**

@@ -15,8 +15,9 @@ const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
   id="site-header"
   class="border-line/0 bg-surface/95 ease-out-soft sticky top-0 z-50 border-b transition-[border-color,background-color] duration-300 supports-[backdrop-filter]:bg-surface/85 supports-[backdrop-filter]:backdrop-blur-md data-[scrolled=true]:border-line"
 >
-  <div class="container-site flex h-[4.5rem] items-center justify-between gap-6">
-    <a href="/" class="-m-1 rounded p-1" aria-label="SanitIA, ir a inicio">
+  <!-- A 1024 px el espacio es justo: logo sin encoger, enlaces sin partir y separaciones algo menores hasta xl. -->
+  <div class="container-site flex h-[4.5rem] items-center justify-between gap-6 lg:gap-4 xl:gap-6">
+    <a href="/" class="-m-1 shrink-0 rounded p-1" aria-label="SanitIA, ir a inicio">
       <Logo />
     </a>
 
@@ -28,7 +29,7 @@ const desktopNav = mainNav.filter((item) => item.href !== '/contacto');
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                class="hover:text-brand-deep aria-[current=page]:text-brand-deep relative rounded-md px-3 py-2 text-[0.9375rem] font-medium text-slate-600 transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:scale-x-0 after:bg-accent after:transition-transform aria-[current=page]:after:scale-x-100"
+                class="hover:text-brand-deep aria-[current=page]:text-brand-deep relative rounded-md px-2 py-2 text-[0.9375rem] font-medium whitespace-nowrap text-slate-600 transition-colors after:absolute after:inset-x-2 after:-bottom-0.5 xl:px-3 xl:after:inset-x-3 after:h-px after:scale-x-0 after:bg-accent after:transition-transform aria-[current=page]:after:scale-x-100"
               >
                 {item.label}
               </a>

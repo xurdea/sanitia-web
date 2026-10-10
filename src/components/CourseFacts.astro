@@ -2,19 +2,63 @@
 interface Props {
   label: string;
   compact?: boolean;
+  /**
+   * chips: etiquetas sobre fondo turquesa pálido (tarjetas de curso).
+   * spec: línea de ficha técnica entre filetes, sin fondo (cabecera editorial de la ficha de curso).
+   */
+  variant?: 'chips' | 'spec';
 }
 
-const { label, compact = false } = Astro.props;
+const { label, compact = false, variant = 'chips' } = Astro.props;
 const allFacts = ['10 horas', '5 sesiones de 2 horas', 'Online en directo', '6 meses de tutoría en Discord'];
 // La versión compacta (panel del hero) omite la tutoría: el panel lista dos cursos seguidos y
 // el seguimiento ya se repite en las tarjetas de Formación y en la sección de continuidad.
 const facts = compact ? allFacts.slice(0, 3) : allFacts;
 ---
 
-<ul class:list={['flex flex-wrap', compact ? 'mt-3 gap-1.5' : 'mt-6 gap-2']} aria-label={label}>
-  {facts.map((fact) => (
-    <li class:list={['bg-accent-wash text-brand-deep rounded-md font-medium', compact ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-sm']}>
-      {fact}
-    </li>
-  ))}
-</ul>
+{
+  variant === 'spec' ? (
+    <ul class="spec" aria-label={label}>
+      {facts.map((fact) => (
+        <li>{fact}</li>
+      ))}
+    </ul>
+  ) : (
+    <ul class:list={['flex flex-wrap', compact ? 'mt-3 gap-1.5' : 'mt-6 gap-2']} aria-label={label}>
+      {facts.map((fact) => (
+        <li class:list={['bg-accent-wash text-brand-deep rounded-md font-medium', compact ? 'px-2 py-1 text-xs' : 'px-3 py-1.5 text-sm']}>
+          {fact}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  /* Ficha técnica: dos columnas en móvil y una sola línea con separadores finos desde tableta. */
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.625rem 1.5rem;
+    margin-top: 1.75rem;
+    border-block: 1px solid var(--color-line);
+    padding-block: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  @media (width >= 48rem) {
+    .spec {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0;
+    }
+
+    .spec li + li {
+      border-left: 1px solid var(--color-line-strong);
+      margin-left: 1rem;
+      padding-left: 1rem;
+    }
+  }
+</style>

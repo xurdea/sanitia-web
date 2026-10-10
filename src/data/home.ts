@@ -16,7 +16,6 @@ export const homeSeo = {
 
 /* ---------- 1. Hero ---------- */
 export const hero = {
-  eyebrow: 'Formación en IA para el sector sanitario',
   title: 'Inteligencia artificial aplicada al trabajo real en sanidad',
   /** Fragmento del título que se subraya (debe aparecer literalmente en `title`). */
   titleEmphasis: 'trabajo real',
@@ -51,14 +50,15 @@ export const applications = {
   title: 'IA aplicada a tareas concretas de tu trabajo',
   intro:
     'La formación parte de actividades profesionales reales y utiliza la IA como herramienta de apoyo, manteniendo siempre la revisión y el criterio profesional.',
+  /** Lista editorial: solo texto (sin iconos), para que la tarea sea la protagonista. */
   items: [
-    { title: 'Búsqueda y contraste de información', icon: 'search' },
-    { title: 'Análisis y resumen de documentación', icon: 'file-text' },
-    { title: 'Presentaciones y materiales profesionales', icon: 'presentation' },
-    { title: 'Datos y Excel', icon: 'chart' },
-    { title: 'Organización del conocimiento', icon: 'book' },
-    { title: 'Automatización de tareas profesionales', icon: 'workflow' },
-  ] satisfies { title: string; icon: IconName }[],
+    'Búsqueda y contraste de información',
+    'Análisis y resumen de documentación',
+    'Presentaciones y materiales profesionales',
+    'Datos y Excel',
+    'Organización del conocimiento',
+    'Automatización de tareas profesionales',
+  ],
 };
 
 /* ---------- 3. Formación ---------- */

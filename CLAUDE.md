@@ -77,6 +77,7 @@ Mantener buen contraste WCAG. No abusar de degradados.
 ### Tipografías
 - Títulos: **Manrope**
 - Texto e interfaz: **Inter**
+- Titulares editoriales seleccionados: **Newsreader** (serif con tamaño óptico, peso 500). **En prueba (rama `preview/sanitia-editorial-2026-10-10`, dirección de arte «Editorial de verificación»)**: solo en el H1 de la Home, el H2 y la lista de Aplicaciones, la nota de ejemplo del Hero y el H1 de la ficha «IA para médicos». El resto de títulos sigue en Manrope. Si la prueba se aprueba, ampliar y redefinir este apartado; si no, retirar Newsreader.
 
 Cargar las fuentes de forma eficiente. Si se utilizan Google Fonts, minimizar variantes y pesos.
 
@@ -211,7 +212,7 @@ CTA principal:
 CTA secundario:
 **Formación para organizaciones** (a `/empresas`)
 
-Columna visual: tarjeta «Ejemplo de tarea» (ilustrativa, no es un dato real). Mientras no haya fotografía real del Hero, se muestra un panel editorial terminado con los ámbitos del sector y la tarjeta integrada; nunca un rótulo de «fotografía pendiente».
+Columna visual: tarjeta «Ejemplo de tarea» (ilustrativa, no es un dato real). Mientras no haya fotografía real del Hero, se muestra una pieza editorial terminada; nunca un rótulo de «fotografía pendiente». En la prueba editorial (rama `preview/sanitia-editorial-2026-10-10`) esa pieza es una hoja «Documento original» con pasajes marcados en turquesa (`SourceSheet.astro`, decorativa y sin contenido clínico) y, superpuesta, la nota de revisión con el ejemplo; debajo, la frase de ámbitos del sector (oculta en móvil). Sin antetítulo sobre el H1.
 
 Fuente de los textos: `hero` en `src/data/home.ts`.
 

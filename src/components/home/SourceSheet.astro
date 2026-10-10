@@ -1,0 +1,150 @@
+---
+/**
+ * Hoja de «Documento original» del Hero: ilustración tipográfica de una fuente en revisión.
+ * Decorativa (aria-hidden): el texto se representa con líneas, sin datos ni contenido clínico.
+ * La información accesible está en la nota de revisión (ExampleTask) que se superpone a la hoja.
+ *
+ * Dos pasajes llevan la marca de quien revisa: subrayado turquesa y una señal en el margen.
+ * Es el único uso del turquesa en la pieza: marca lo verificado, no decora.
+ *
+ * Movimiento (solo con prefers-reduced-motion: no-preference): las marcas se trazan una vez,
+ * de izquierda a derecha, como un rotulador; la hoja y su texto ya están visibles desde el inicio.
+ */
+import Icon from '../Icon.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Ancho de cada línea de texto (en %) y, si está marcada, el tramo subrayado (inicio y ancho en %).
+// `check`: señal en el margen al comienzo de cada pasaje (un pasaje puede ocupar dos líneas).
+// Dos párrafos; los pasajes marcados quedan en la mitad superior, visibles por encima de la nota.
+type Line = { w: number; mark?: [number, number]; check?: boolean };
+const paragraphs: Line[][] = [
+  [{ w: 96 }, { w: 100 }, { w: 91, mark: [18, 82], check: true }, { w: 98, mark: [0, 47] }, { w: 58 }],
+  [{ w: 100 }, { w: 94, mark: [30, 52], check: true }, { w: 99 }, { w: 88 }, { w: 97 }, { w: 64 }],
+];
+---
+
+<div class:list={['sheet', className]} aria-hidden="true">
+  <p class="sheet-label">Documento original</p>
+  <span class="title-bar" style="--w: 82%"></span>
+  <span class="title-bar" style="--w: 54%"></span>
+
+  {
+    paragraphs.map((lines) => (
+      <div class="para">
+        {lines.map((line) => (
+          <span class:list={['line', line.mark && 'is-marked']} style={`--w: ${line.w}%`}>
+            {line.check && (
+              <span class="margin-check">
+                <Icon name="check" size={11} />
+              </span>
+            )}
+            {line.mark && <span class="mark" style={`--x: ${line.mark[0]}%; --mw: ${line.mark[1]}%`} />}
+          </span>
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  /* Papel: superficie apenas tintada, filete fino y una sombra con desplazamiento real (sin halo). */
+  .sheet {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    padding: 1.5rem 1.75rem 2rem 2.75rem;
+    box-shadow: 0 1px 2px rgb(8 40 74 / 0.04), 0 22px 40px -28px rgb(8 40 74 / 0.22);
+  }
+
+  .sheet-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  /* Título del documento: dos trazos algo más gruesos que el texto, en el azul de la tinta, sin llegar a bloque. */
+  .title-bar {
+    display: block;
+    width: var(--w);
+    height: 0.4375rem;
+    margin-top: 0.625rem;
+    border-radius: 2px;
+    background: var(--color-brand);
+    opacity: 0.55;
+  }
+
+  .title-bar:first-of-type {
+    margin-top: 0.875rem;
+  }
+
+  .para {
+    margin-top: 1.375rem;
+  }
+
+  .line {
+    position: relative;
+    display: block;
+    width: var(--w);
+    height: 0.3125rem;
+    border-radius: 2px;
+    background: var(--color-line-strong);
+  }
+
+  .line + .line {
+    margin-top: 0.75rem;
+  }
+
+  /* Pasaje verificado: el texto se oscurece y queda subrayado por debajo, como con un rotulador fino. */
+  .line.is-marked {
+    background: color-mix(in srgb, var(--color-brand) 55%, var(--color-line-strong));
+  }
+
+  .mark {
+    position: absolute;
+    left: var(--x);
+    width: var(--mw);
+    bottom: -0.3125rem;
+    height: 0.1875rem;
+    border-radius: 2px;
+    background: var(--color-accent);
+    transform-origin: left center;
+  }
+
+  /* Señal en el margen izquierdo, a la altura del pasaje marcado. */
+  .margin-check {
+    position: absolute;
+    left: -1.875rem;
+    top: 50%;
+    display: inline-flex;
+    width: 1.125rem;
+    height: 1.125rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-brand-ink);
+    transform: translateY(-50%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mark {
+      animation: mark-draw 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+      animation-delay: 380ms;
+    }
+
+    .para + .para .mark {
+      animation-delay: 560ms;
+    }
+  }
+
+  @keyframes mark-draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+</style>

@@ -56,6 +56,8 @@ const sizes = {
      Es un control, no contenido: sin espera de doble toque ni selección del texto al mantener pulsado. */
   .btn {
     touch-action: manipulation;
+    /* Sin el destello gris del navegador al tocar: la respuesta es la escala de :active. */
+    -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     user-select: none;
     transition:

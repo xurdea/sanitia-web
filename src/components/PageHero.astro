@@ -5,18 +5,23 @@ interface Props {
   title: string;
   intro?: string;
   breadcrumb?: { label: string; href: string }[];
+  /** Dirección editorial (prueba): H1 en serif y sin el degradado decorativo de fondo. */
+  editorial?: boolean;
 }
 
-const { eyebrow, title, intro, breadcrumb } = Astro.props;
+const { eyebrow, title, intro, breadcrumb, editorial = false } = Astro.props;
 ---
 
 <section class="border-line relative overflow-hidden border-b bg-white">
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-60 lg:block"
-    style="background-image: radial-gradient(circle at 80% 30%, var(--color-accent-wash), transparent 60%);"
-  >
-  </div>
+  {
+    !editorial && (
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 opacity-60 lg:block"
+        style="background-image: radial-gradient(circle at 80% 30%, var(--color-accent-wash), transparent 60%);"
+      />
+    )
+  }
   <div class="container-site relative pt-14 pb-16 md:pt-20 md:pb-24">
     {
       breadcrumb && (
@@ -41,7 +46,15 @@ const { eyebrow, title, intro, breadcrumb } = Astro.props;
     }
     <div class="max-w-3xl">
       {eyebrow && <p class="eyebrow mb-5">{eyebrow}</p>}
-      <h1 class="text-[clamp(2.25rem,1.6rem+2.6vw,3.75rem)] leading-[1.06] font-bold tracking-[-0.032em]">{title}</h1>
+      {
+        editorial ? (
+          <h1 class="font-serif text-[clamp(2.5rem,1.55rem+3.4vw,4.25rem)] leading-[1.03] font-medium tracking-[-0.02em] [font-optical-sizing:auto]">
+            {title}
+          </h1>
+        ) : (
+          <h1 class="text-[clamp(2.25rem,1.6rem+2.6vw,3.75rem)] leading-[1.06] font-bold tracking-[-0.032em]">{title}</h1>
+        )
+      }
       {intro && <p class="text-lead text-muted mt-6 max-w-2xl">{intro}</p>}
       <slot />
     </div>

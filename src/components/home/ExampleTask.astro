@@ -14,19 +14,42 @@ import { hero } from '../../data/home';
 
 interface Props {
   class?: string;
+  /**
+   * card: tarjeta flotante (sobre la fotografía del Hero, cuando exista).
+   * note: nota al margen editorial, sin tarjeta, borde ni sombra (dirección editorial).
+   * slip: nota de revisión en papel, superpuesta a la hoja «Documento original» (desde 40rem);
+   *       en móvil se comporta como `note`.
+   */
+  variant?: 'card' | 'note' | 'slip';
 }
 
-const { class: className } = Astro.props;
+const { class: className, variant = 'card' } = Astro.props;
 const { example } = hero;
 const doneCount = example.checks.filter((check) => check.done).length;
+const isNote = variant !== 'card';
 ---
 
-<aside class:list={['example', className]} aria-labelledby="ejemplo-tarea-titulo">
-  <p class="example-label">
-    <span aria-hidden="true" class="example-label-dot"></span>
-    {example.label}
-  </p>
-  <p id="ejemplo-tarea-titulo" class="font-display text-brand-deep mt-3 text-[1.0625rem] leading-snug font-bold">
+<aside
+  class:list={['example', isNote && 'is-note', variant === 'slip' && 'is-slip', className]}
+  aria-labelledby="ejemplo-tarea-titulo"
+>
+  {
+    isNote ? (
+      <p class="note-caption">{example.label}</p>
+    ) : (
+      <p class="example-label">
+        <span aria-hidden="true" class="example-label-dot" />
+        {example.label}
+      </p>
+    )
+  }
+  <p
+    id="ejemplo-tarea-titulo"
+    class:list={[
+      'text-brand-deep',
+      isNote ? 'note-task' : 'font-display mt-3 text-[1.0625rem] leading-snug font-bold',
+    ]}
+  >
     {example.task}
   </p>
 
@@ -58,6 +81,42 @@ const doneCount = example.checks.filter((check) => check.done).length;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-lift);
     padding: 1.25rem 1.25rem 1.125rem;
+  }
+
+  /* Nota al margen: sin superficie propia; la línea de verificación es el único elemento gráfico. */
+  .example.is-note {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* Nota de revisión: papel blanco sobre la hoja tintada, esquinas casi rectas y sombra con desplazamiento real. */
+  @media (width >= 40rem) {
+    .example.is-slip {
+      background: var(--color-white);
+      border: 1px solid var(--color-line);
+      border-radius: 3px;
+      padding: 1.25rem 1.375rem 1.375rem;
+      box-shadow: 0 2px 4px rgb(8 40 74 / 0.05), 0 26px 48px -24px rgb(8 40 74 / 0.32);
+    }
+  }
+
+  /* Pie de nota en minúscula de frase (no antetítulo en mayúsculas): indica que es un ejemplo, no un dato. */
+  .note-caption {
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+
+  .note-task {
+    margin-top: 0.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    text-wrap: balance;
   }
 
   /* Etiqueta de "ejemplo": borde discontinuo para que se lea como ilustración, no como dato. */

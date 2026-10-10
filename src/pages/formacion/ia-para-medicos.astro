@@ -5,6 +5,7 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTASection from '../../components/CTASection.astro';
 import FollowUp from '../../components/FollowUp.astro';
+import CourseFacts from '../../components/CourseFacts.astro';
 import { Image } from 'astro:assets';
 import courseImage from '../../assets/course/ia-medicos.webp';
 import { medicalCourse } from '../../data/content';
@@ -45,12 +46,14 @@ const program = [
   description="Curso de IA para médicos: 10 horas en 5 sesiones online en directo. Busca y verifica información clínica y trabaja con Excel y presentaciones."
 >
   <PageHero
-    eyebrow="Formación para médicos"
     title="Curso de IA para médicos"
     intro={medicalCourse.summary}
     breadcrumb={[{ label: 'Inicio', href: '/' }, { label: 'Formación', href: '/formacion' }]}
+    editorial
   >
-    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+    {/* Datos del curso en la cabecera: en móvil, la ficha lateral queda casi al final de la página. */}
+    <CourseFacts label="Datos del curso de IA para médicos" variant="spec" />
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
       <Button href="/contacto" size="lg" arrow>Solicitar información</Button>
       <Button href="#programa" size="lg" variant="secondary">Ver programa</Button>
     </div>

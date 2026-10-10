@@ -3,9 +3,9 @@
  * Hero de la Home: titular protagonista, columna visual y la tarjeta "Ejemplo de tarea".
  * No repite los datos de los cursos (están en Formación); solo los enlaza.
  *
- * Columna visual:
- * - Sin fotografía (estado actual): panel editorial en azul profundo con los ámbitos del sector
- *   sanitario (CLAUDE.md §8.1) y la tarjeta de ejemplo integrada. Es un diseño terminado, no una reserva.
+ * Columna de margen:
+ * - Sin fotografía (estado actual): notas al margen editoriales. Una frase con los ámbitos del sector
+ *   (CLAUDE.md §8.1) y el ejemplo de tarea como lista de verificación, sin tarjeta. Es un diseño terminado.
  * - Con fotografía: foto documental con la tarjeta de ejemplo flotando sobre su borde.
  *
  * Movimiento: el texto (H1 incluido) es estático desde el primer fotograma.
@@ -16,6 +16,7 @@ import Button from '../Button.astro';
 import Icon from '../Icon.astro';
 import MediaFrame from '../MediaFrame.astro';
 import ExampleTask from './ExampleTask.astro';
+import SourceSheet from './SourceSheet.astro';
 import { hero } from '../../data/home';
 
 /**
@@ -29,15 +30,17 @@ const heroImage: ImageMetadata | undefined = undefined;
 
 // Separa el titular para unir y subrayar "trabajo real" sin reescribir el texto.
 const [titleBefore, titleAfter = ''] = hero.title.split(hero.titleEmphasis);
+
+// Apoyo textual de §8.1 como frase de nota al margen: "Para todo el sector sanitario: asistencia, …, y tecnología."
+const areaWords = hero.areas.map((area) => area.toLowerCase());
+const areasSentence = `${hero.areasLabel}: ${areaWords.slice(0, -1).join(', ')} y ${areaWords.at(-1)}.`;
 ---
 
-<section class="hero border-line relative border-y bg-white" aria-labelledby="hero-title">
-  <div class="container-site grid items-center gap-y-10 pt-10 pb-16 sm:pt-14 lg:grid-cols-12 lg:grid-rows-[1fr_auto] lg:gap-x-12 lg:pt-20 lg:pb-24 xl:gap-x-16">
-    <!-- Texto: estático (sin animación de entrada) -->
-    <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:self-end">
-      <p class="eyebrow">{hero.eyebrow}</p>
-
-      <h1 id="hero-title" class="hero-title mt-5 sm:mt-6">
+<section class="hero border-line relative border-b bg-white" aria-labelledby="hero-title">
+  <div class="container-site grid gap-y-8 pt-8 pb-8 sm:gap-y-10 sm:pt-16 sm:pb-16 lg:grid-cols-12 lg:gap-x-12 lg:pt-24 lg:pb-24 xl:gap-x-16">
+    <!-- Texto: estático (sin animación de entrada). Sin antetítulo: el titular se presenta solo. -->
+    <div class="lg:col-span-7 lg:self-center">
+      <h1 id="hero-title" class="hero-title">
         {titleBefore}<span class="hero-emphasis">{hero.titleEmphasis}</span>{titleAfter}
       </h1>
 
@@ -47,66 +50,64 @@ const [titleBefore, titleAfter = ''] = hero.title.split(hero.titleEmphasis);
         <Button href={hero.primary.href} size="lg" arrow>{hero.primary.label}</Button>
         <Button href={hero.secondary.href} size="lg" variant="secondary">{hero.secondary.label}</Button>
       </div>
+
+      <!-- Acceso discreto a los dos cursos, sin repetir sus datos -->
+      <ul class="mt-4 flex flex-col sm:mt-8 sm:flex-row sm:gap-8" aria-label="Cursos">
+        {
+          hero.courses.map((course) => (
+            <li>
+              <a href={course.href} class="course-link text-brand-deep hover:text-brand group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold">
+                {course.label}
+                <Icon name="arrow-right" size={16} class="course-arrow text-accent-strong" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <!-- Visual (también en móvil): foto + ejemplo flotante, o panel editorial con el ejemplo integrado -->
-    <div class="hero-visual relative lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:self-center">
-      {
-        heroImage ? (
-          <>
-            <MediaFrame
-              src={heroImage}
-              alt={hero.photoAlt}
-              aspect="var(--hero-photo-aspect)"
-              priority
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              class="border-line border"
-            />
-            <ExampleTask class="hero-example" />
-          </>
-        ) : (
-          <div class="hero-panel">
-            <span aria-hidden="true" class="hero-panel-bar" />
-            <p id="hero-areas-label" class="hero-panel-label">{hero.areasLabel}</p>
-            <ul class="hero-areas" aria-labelledby="hero-areas-label">
-              {hero.areas.map((area) => <li>{area}</li>)}
-            </ul>
-            <ExampleTask class="hero-panel-example" />
+    <!-- Columna visual: foto + ejemplo flotante (cuando exista la foto) o pieza editorial de revisión de una fuente -->
+    {
+      heroImage ? (
+        <div class="hero-visual relative lg:col-span-5 lg:col-start-8 lg:self-center">
+          <MediaFrame
+            src={heroImage}
+            alt={hero.photoAlt}
+            aspect="var(--hero-photo-aspect)"
+            priority
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            class="border-line border"
+          />
+          <ExampleTask class="hero-example" />
+        </div>
+      ) : (
+        <div class="hero-review lg:col-span-5 lg:col-start-8 lg:self-center">
+          <div class="review">
+            <SourceSheet class="review-source" />
+            <ExampleTask variant="slip" class="review-slip" />
           </div>
-        )
-      }
-    </div>
-
-    <!-- Acceso discreto a los dos cursos, sin repetir sus datos -->
-    <ul class="border-line flex flex-col border-t pt-1.5 sm:flex-row sm:gap-8 lg:col-span-7 lg:col-start-1 lg:row-start-2 lg:self-start">
-      {
-        hero.courses.map((course) => (
-          <li>
-            <a href={course.href} class="course-link text-brand-deep hover:text-brand group inline-flex min-h-11 items-center gap-1.5 text-[0.9375rem] font-semibold">
-              {course.label}
-              <Icon name="arrow-right" size={16} class="course-arrow text-accent-strong" />
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+          <p class="hero-areas-note">{areasSentence}</p>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
+  /*
+   * Titular editorial en Newsreader (serif con tamaño óptico): peso medio, sin el tracking extremo de la sans.
+   * "aplicada al trabajo real" mide ~9,6em: con 10em de ancho máximo la composición es
+   * "Inteligencia artificial / aplicada al trabajo real / en sanidad" desde 390 px. En escritorio
+   * el tamaño se limita (ver la media query de 64rem) para que esos 10em quepan en la columna de 7/12.
+   */
   .hero-title {
-    /*
-     * "aplicada al trabajo real" mide ~10,1em (≈16ch). Con 16,5ch de ancho máximo, el ajuste línea a
-     * línea da "Inteligencia artificial / aplicada al trabajo real / en sanidad". `balance` no sirve
-     * aquí: iguala líneas y elige "… / artificial aplicada al / trabajo real en sanidad".
-     * `pretty` conserva esa composición y evita palabras huérfanas en los anchos más estrechos.
-     */
-    max-width: 16.5ch;
-    /* Por debajo de ~375 px, 8,6vw mantiene "aplicada al trabajo real" en una sola línea. */
-    font-size: min(clamp(2rem, 1.1rem + 3.1vw, 3.75rem), 8.6vw);
-    line-height: 1.04;
-    letter-spacing: -0.04em;
-    font-weight: 800;
+    max-width: 10em;
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-size: min(clamp(2.375rem, 1.2rem + 4vw, 3.5rem), 11vw);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    font-weight: 500;
     color: var(--color-brand-deep);
     text-wrap: pretty;
   }
@@ -171,117 +172,77 @@ const [titleBefore, titleAfter = ''] = hero.title.split(hero.titleEmphasis);
     }
   }
 
-  /* Panel editorial (sin fotografía): azul profundo, ámbitos del sector y la tarjeta de ejemplo dentro. */
-  .hero-panel {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-card);
-    background: var(--color-brand-deep);
-    padding: 1.75rem 1rem 1rem;
+  /*
+   * Pieza de revisión (sin fotografía): la hoja «Documento original» con pasajes marcados y, superpuesta en
+   * su esquina inferior izquierda, la nota de revisión con la tarea y sus comprobaciones.
+   * En móvil solo se muestra la nota (sin papel): la hoja alargaría el Hero sin añadir información.
+   */
+  .hero-review {
+    border-top: 1px solid var(--color-line);
+    padding-top: 1.25rem;
   }
 
-  /* Misma marca turquesa que las tarjetas destacadas de la web. */
-  .hero-panel-bar {
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    width: 4rem;
-    height: 4px;
-    background: var(--color-accent);
+  .review :global(.review-source) {
+    display: none;
   }
 
-  /* Cian claro sobre azul profundo: ≈ 11:1. */
-  .hero-panel-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent-soft);
-  }
-
-  /* Cada ámbito lleva su propio punto delante: al partirse la línea no queda ningún separador colgando. */
-  .hero-areas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.125rem;
-    margin-top: 0.875rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.125rem, 0.95rem + 0.9vw, 1.5rem);
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
-    color: var(--color-white);
-  }
-
-  .hero-areas li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    white-space: nowrap;
-  }
-
-  /* Punto decorativo (lo pinta CSS; los lectores de pantalla ya anuncian una lista). */
-  .hero-areas li::before {
-    content: '';
-    width: 0.375rem;
-    height: 0.375rem;
-    flex-shrink: 0;
-    border-radius: 999px;
-    background: var(--color-accent);
-  }
-
-  .hero-panel :global(.hero-panel-example) {
-    margin-top: 1.5rem;
+  /* En móvil no se muestra: alargaría el Hero y la sección Perfiles, justo después, detalla los mismos ámbitos. */
+  .hero-areas-note {
+    display: none;
+    max-width: 30rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-muted);
   }
 
   @media (width >= 40rem) {
-    .hero-panel {
-      padding: 2.25rem 1.75rem 1.75rem;
+    .hero-review {
+      border-top: 0;
+      padding-top: 0;
+      max-width: 34rem;
     }
 
-    .hero-panel-bar {
-      left: 1.75rem;
+    /* El relleno inferior fija cuánto baja la nota: tapa solo el último párrafo y deja ver los dos pasajes marcados. */
+    .review {
+      position: relative;
+      padding-bottom: 12rem;
     }
 
-    .hero-panel :global(.hero-panel-example) {
+    .review :global(.review-source) {
+      display: block;
+      width: 86%;
+      margin-left: auto;
+    }
+
+    /* La nota cubre la parte baja de la hoja y sobresale por la izquierda: se lee primero la fuente marcada. */
+    .review :global(.review-slip) {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: min(21rem, 78%);
+    }
+
+    .hero-areas-note {
+      display: block;
       margin-top: 2rem;
     }
   }
 
-  /* Tableta: el panel ocupa todo el ancho; ámbitos en columna a la izquierda y ejemplo a la derecha. */
-  @media (width >= 48rem) and (width < 64rem) {
-    .hero-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 22rem;
-      grid-template-rows: auto 1fr;
-      column-gap: 2rem;
-      align-items: start;
-    }
-
-    .hero-areas {
-      flex-direction: column;
-      gap: 0.375rem;
-      grid-column: 1;
-    }
-
-    .hero-panel :global(.hero-panel-example) {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      margin-top: 0;
+  @media (width >= 64rem) {
+    .hero-review {
+      max-width: none;
     }
   }
 
+  /* Escritorio: el titular cabe en 3 líneas dentro de la columna de 7/12 (10em ≤ ancho de columna). */
   @media (width >= 64rem) {
-    .hero-panel {
-      padding: 2.5rem 2rem 2rem;
-    }
-
-    .hero-panel-bar {
-      left: 2rem;
+    .hero-title {
+      font-size: min(4rem, 5.1vw);
     }
   }
 
   .course-link {
+    -webkit-tap-highlight-color: transparent;
     transition: color 200ms ease, opacity 120ms ease-out;
   }
 
